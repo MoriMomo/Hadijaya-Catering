@@ -2,7 +2,20 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/images/logo.png';
 
+// Navbar component
+// - `NavButton`: helper for rendering each navigation button with 3 variants:
+//     * isExit -> an exit/logout-style button (used by admin to leave admin view)
+//     * isCta  -> primary call-to-action (Reservasi) shown as a pill with shadow
+//     * default -> regular nav item; `active` toggles highlight/underline
+// - `Navbar` props:
+//     * role: 'customer' | 'admin'  (controls which nav items are shown)
+//     * currentView: string         (id of currently active view, used for active styling)
+//     * onViewChange(viewId): func  (called when a nav item is clicked)
+//     * onRoleChange(role): func    (used by the exit action to switch role)
+// Desktop shows inline nav items; on small screens a mobile menu toggle opens a full-screen overlay.
+
 const NavButton = ({ label, active, onClick, isCta, isExit }) => {
+    // isExit: special button used by admin to exit admin view
     if (isExit) {
         return (
             <button
@@ -13,20 +26,25 @@ const NavButton = ({ label, active, onClick, isCta, isExit }) => {
             </button>
         );
     }
+
+    // isCta: main call-to-action (Reservasi). Rendered as a prominent pill button.
     if (isCta) {
         return (
             <button
                 onClick={onClick}
-                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200 text-sm w-full md:w-auto"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200 text-sm w-full md:w-auto shadow-md"
             >
                 {label}
             </button>
         );
     }
+
+    // Default nav item: shows active state with underline and stronger color.
+    // `active` prop comes from comparing `currentView === item.id` in the parent.
     return (
         <button
             onClick={onClick}
-            className={`transition-colors duration-200 text-sm font-medium py-2 px-1 w-full md:w-auto text-left md:text-center ${active ? 'text-orange-600 font-semibold' : 'text-slate-600 hover:text-orange-600'
+            className={`transition-colors duration-200 text-sm font-medium py-2 px-1 w-full md:w-auto text-left md:text-center ${active ? 'text-orange-700 font-semibold border-b-2 border-orange-500 pb-2' : 'text-white hover:text-orange-600'
                 }`}
         >
             {label}
@@ -37,17 +55,22 @@ const NavButton = ({ label, active, onClick, isCta, isExit }) => {
 const Navbar = ({ role, currentView, onViewChange, onRoleChange }) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // Define nav items depending on the current `role`.
+    // For `customer` we show public pages + a CTA for Reservations.
+    // For `admin` we show owner tools and an exit button that calls onRoleChange.
     const navItems = role === 'customer'
         ? [
             { id: 'home', label: 'Beranda' },
             { id: 'menu', label: 'Menu & Harga' },
             { id: 'about', label: 'Tentang Kami' },
+            // `isCta: true` will render this using the CTA branch in NavButton
             { id: 'order', label: 'Reservasi', isCta: true }
         ]
         : [
             { id: 'dashboard', label: 'Dashboard' },
             { id: 'finance', label: 'Keuangan' },
             { id: 'orders', label: 'Data Pesanan' },
+            // `isExit: true` will render an exit-style button. `action` overrides default click behaviour.
             { id: 'exit', label: 'Keluar Admin', isExit: true, action: () => onRoleChange('customer') }
         ];
 
@@ -94,6 +117,9 @@ const Navbar = ({ role, currentView, onViewChange, onRoleChange }) => {
             </div>
 
             {/* Mobile Menu Overlay */}
+            {/* When `mobileMenuOpen` is true we render a full-screen (on small screens) list of the same nav items.
+                Each item uses NavButton so CTA/Exit/default styles remain consistent. Clicking an item closes the menu.
+            */}
             {mobileMenuOpen && (
                 <div className="md:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-100 pb-20">
                     <div className="px-6 py-6 space-y-4">
