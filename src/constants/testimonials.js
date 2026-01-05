@@ -11,7 +11,7 @@ export const TESTIMONIALS = [
         text: "Wehh Makanannya enak, menu yg variatif. Enak rasanya, tengkyu bakalan repeat order sih ini, yummyy",
         rating: 5
     },
-    // {
+    {
         id: 3,
         name: "Anisha Yossi",
         text: "Gokil ini sih sangat di rekomendasikan nasi box yang sangat khas rasa nusantara, packingnya bersih rapih.",
