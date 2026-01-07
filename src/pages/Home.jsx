@@ -38,7 +38,7 @@ const Home = () => {
                     <div className="relative order-1 md:order-2">
                         <div className="relative z-10 rounded-4xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-700 aspect-square md:aspect-auto md:h-125">
                             <img
-                                src="image_732b01.jpg"
+                                src="/images/home.jpg"
                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800'; }}
                                 className="object-cover w-full h-full"
                                 alt="Hadijaya Signature Dish"
@@ -50,8 +50,8 @@ const Home = () => {
                             </div>
                             <p className="text-sm font-bold text-slate-800 italic">"Rasa nasi uduknya benar-benar mengingatkan masakan rumah, tapi versi premium!"</p>
                             <div className="flex items-center gap-3 mt-4">
-                                <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">IB</div>
-                                <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Ibu Budi, Kemendikbud</p>
+                                <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold">IP</div>
+                                <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Ibu Putri, Kemendikbud</p>
                             </div>
                         </div>
                     </div>
