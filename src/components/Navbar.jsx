@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 const NavButton = ({ to, label, active, isCta }) => {
     if (isCta) {
@@ -45,11 +46,11 @@ const Navbar = () => {
                         to="/"
                         className="flex items-center gap-2 md:gap-3 cursor-pointer group"
                     >
-                        <img
-                            src="/images/logo.png"
+                        <OptimizedImage
+                            src="/images/logo.svg"
+                            fallback="/images/placeholder.svg"
                             alt="Hadijaya Catering Logo"
                             className="h-10 md:h-12"
-                            onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/logo.svg'; }}
                         />
                     </Link>
 

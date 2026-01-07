@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 const MenuCard = ({ item, featured = false }) => {
     const navigate = useNavigate();
@@ -12,9 +13,9 @@ const MenuCard = ({ item, featured = false }) => {
                 onClick={() => navigate('/order')}
             >
                 <div className="h-72 overflow-hidden relative">
-                    <img
+                    <OptimizedImage
                         src={item.img}
-                        onError={(e) => { e.target.onerror = null; e.target.src = item.fallbackImg; }}
+                        fallback={item.fallbackImg}
                         className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
                         alt={item.name}
                     />
@@ -37,9 +38,9 @@ const MenuCard = ({ item, featured = false }) => {
     return (
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex gap-5 hover:border-orange-200 transition group hover:shadow-lg">
             <div className="w-24 h-24 rounded-xl bg-slate-200 overflow-hidden shrink-0">
-                <img
+                <OptimizedImage
                     src={item.img}
-                    onError={(e) => { e.target.onerror = null; e.target.src = item.fallbackImg; }}
+                    fallback={item.fallbackImg}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
                     alt={item.name}
                 />

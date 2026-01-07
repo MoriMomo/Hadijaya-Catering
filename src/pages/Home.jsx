@@ -4,6 +4,7 @@ import { Star, Users, Clock, Award, ArrowRight } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 import MenuCard from '../components/MenuCard';
 import HomeShowcase from '../components/HomeShowcase';
+import OptimizedImage from '../components/OptimizedImage';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -37,9 +38,9 @@ const Home = () => {
                     </div>
                     <div className="relative order-1 md:order-2">
                         <div className="relative z-10 rounded-4xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-700 aspect-square md:aspect-auto md:h-125">
-                            <img
+                            <OptimizedImage
                                 src="/images/home.jpg"
-                                onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800'; }}
+                                fallback="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"
                                 className="object-cover w-full h-full"
                                 alt="Hadijaya Signature Dish"
                             />

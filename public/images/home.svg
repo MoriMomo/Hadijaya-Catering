@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <defs>
+    <linearGradient id="homeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#fed7aa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fdba74;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="plateGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:0.2" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="800" fill="url(#homeGradient)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="200" cy="200" r="150" fill="url(#plateGlow)" opacity="0.3"/>
+  <circle cx="600" cy="600" r="120" fill="#f97316" opacity="0.1"/>
+  <circle cx="700" cy="300" r="100" fill="#ea580c" opacity="0.1"/>
+  
+  <!-- Main plate -->
+  <ellipse cx="400" cy="420" rx="280" ry="260" fill="#fff" opacity="0.9"/>
+  <ellipse cx="400" cy="420" rx="260" ry="240" fill="url(#plateGlow)"/>
+  
+  <!-- Food items (decorative shapes) -->
+  <!-- Rice mound -->
+  <ellipse cx="400" cy="380" rx="120" ry="80" fill="#fef3c7"/>
+  <ellipse cx="400" cy="370" rx="100" ry="60" fill="#fde68a"/>
+  
+  <!-- Side dishes -->
+  <circle cx="320" cy="450" r="40" fill="#dc2626" opacity="0.8"/>
+  <circle cx="480" cy="450" r="35" fill="#059669" opacity="0.8"/>
+  <ellipse cx="400" cy="500" rx="50" ry="25" fill="#92400e" opacity="0.8"/>
+  
+  <!-- Garnish -->
+  <path d="M350 430 L360 440 L355 450 L345 445 Z" fill="#16a34a" opacity="0.7"/>
+  <path d="M450 430 L460 440 L455 450 L445 445 Z" fill="#16a34a" opacity="0.7"/>
+  
+  <!-- Text -->
+  <text x="400" y="680" font-family="'Playfair Display', serif" font-size="48" font-weight="700" fill="#92400e" text-anchor="middle">
+    Hadijaya Catering
+  </text>
+  <text x="400" y="720" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="500" fill="#ea580c" text-anchor="middle">
+    Authentic Indonesian Cuisine
+  </text>
+</svg>

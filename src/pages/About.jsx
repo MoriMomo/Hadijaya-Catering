@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from '../components/OptimizedImage';
 
 const About = () => (
     <div className="py-24 bg-slate-50 min-h-screen animate-fade-in">
@@ -6,7 +7,12 @@ const About = () => (
             <div className="grid md:grid-cols-3 gap-10 items-start">
                 <div className="md:col-span-1">
                     <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img src="./images/dapur.jpg" className="w-full h-64 object-cover" alt="Dapur" />
+                        <OptimizedImage
+                            src="/images/dapur.jpg"
+                            fallback="/images/placeholder.svg"
+                            className="w-full h-64 object-cover"
+                            alt="Dapur Hadijaya Catering"
+                        />
                     </div>
                     <div className="mt-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                         <h3 className="text-lg font-bold">Profil & Kontak</h3>

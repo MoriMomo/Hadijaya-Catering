@@ -19,7 +19,7 @@ const RAW_MENU_DATA = [
 
     // Ayam
     { id: 30, name: 'Ayam Goreng', category: 'ayam', price: 15000, desc: 'Ayam goreng renyah', featured: false },
-    { id: 31, name: 'Ayam Geprek', category: 'ayam', price: 15000, desc: 'Ayam geprek pedas', featured: false },
+    { id: 31, name: 'Ayam Geprek', category: 'ayam', price: 15000, desc: 'Ayam geprek pedas', featured: false, img: '/images/ayam-geprek.jpeg' },
     { id: 32, name: 'Ayam Bakar', category: 'ayam', price: 15000, desc: 'Ayam bakar manis', featured: false },
     { id: 33, name: 'Ayam Gulai', category: 'ayam', price: 15000, desc: 'Ayam gulai santan', featured: false },
     { id: 34, name: 'Ayam Rendang', category: 'ayam', price: 15000, desc: 'Ayam rendang empuk', featured: false },
@@ -53,13 +53,15 @@ const RAW_MENU_DATA = [
     { id: 77, name: 'Extra Buah', category: 'snack', price: 7000, desc: 'Porsi buah tambahan', featured: false }
 ];
 
-// Build image path from item name. Put your images at public/images/<slug>.jpg
-// Example: name "Nasi Uduk Ijo" -> /images/nasi-uduk-ijo.jpg
+// Build image path from item name. Uses SVG placeholders by default (zero 404s!)
+// To add real photos: place JPG/JPEG in public/images/ with same slug name
+// Example: add "nasi-uduk-ijo.jpg" and update this to try .jpg first for that item
 const toSlug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 export const MENU_DATA = RAW_MENU_DATA.map(item => {
     const slug = toSlug(item.name);
-    const img = item.img || `/images/${slug}.jpg`;
-    const fallbackImg = item.fallbackImg || '/images/placeholder.svg';
+    // Use SVG as primary (all exist), fallback to placeholder
+    const img = item.img || `/images/${slug}.svg`;
+    const fallbackImg = '/images/placeholder.svg';
     return { ...item, img, fallbackImg };
 });
 
