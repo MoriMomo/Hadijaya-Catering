@@ -39,8 +39,8 @@ const Home = () => {
                     <div className="relative order-1 md:order-2">
                         <div className="relative z-10 rounded-4xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-700 aspect-square md:aspect-auto md:h-125">
                             <OptimizedImage
-                                src="/images/home.jpg"
-                                fallback="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800"
+                                src="/images/home.svg"
+                                fallback="/images/placeholder.svg"
                                 className="object-cover w-full h-full"
                                 alt="Hadijaya Signature Dish"
                             />
