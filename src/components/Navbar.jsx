@@ -51,6 +51,8 @@ const Navbar = () => {
                             fallback="/images/placeholder.svg"
                             alt="Hadijaya Catering Logo"
                             className="h-10 md:h-12"
+                            width={48}
+                            height={48}
                         />
                     </Link>
 
