@@ -1,8 +1,17 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import OptimizedImage from '../components/OptimizedImage';
 
 const About = () => (
-    <div className="py-24 bg-slate-50 min-h-screen animate-fade-in">
+    <>
+        <Helmet>
+            <title>Tentang Kami - Hadijaya Catering</title>
+            <meta name="description" content="Hadijaya Catering telah melayani sejak 1999 dengan fokus pada kualitas dan kepuasan pelanggan. Spesialis Nasi Uduk Hijau untuk instansi pemerintah dan keluarga." />
+            <meta property="og:title" content="Tentang Kami - Hadijaya Catering" />
+            <meta property="og:description" content="Hadijaya Catering telah melayani sejak 1999 dengan fokus pada kualitas dan kepuasan pelanggan. Spesialis Nasi Uduk Hijau untuk instansi pemerintah dan keluarga." />
+            <meta property="og:type" content="website" />
+        </Helmet>
+        <div className="py-24 bg-slate-50 min-h-screen animate-fade-in">
         <div className="max-w-6xl mx-auto px-6">
             <div className="grid md:grid-cols-3 gap-10 items-start">
                 <div className="md:col-span-1">
@@ -86,6 +95,7 @@ const About = () => (
             </div>
         </div>
     </div>
+    </>
 );
 
 export default About;

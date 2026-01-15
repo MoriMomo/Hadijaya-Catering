@@ -19,7 +19,6 @@ const App = () => {
       <Router>
         <div className="font-sans antialiased text-slate-800 selection:bg-orange-200 selection:text-orange-900 overflow-x-hidden">
           <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
           .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
           .font-serif { font-family: 'Playfair Display', serif; }
           .hero-pattern {

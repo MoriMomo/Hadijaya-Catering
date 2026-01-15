@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Send, Plus } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 
@@ -123,7 +124,15 @@ const Order = () => {
     };
 
     return (
-        <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
+        <>
+            <Helmet>
+                <title>Pesan Katering - Hadijaya Catering</title>
+                <meta name="description" content="Pesan katering untuk acara Anda dengan mudah. Pilih menu favorit dan tentukan tanggal pengiriman. Minimal pemesanan 2 hari sebelum acara." />
+                <meta property="og:title" content="Pesan Katering - Hadijaya Catering" />
+                <meta property="og:description" content="Pesan katering untuk acara Anda dengan mudah. Pilih menu favorit dan tentukan tanggal pengiriman. Minimal pemesanan 2 hari sebelum acara." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
             <div className="max-w-3xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-serif font-bold text-slate-900">Reservasi Pesanan</h2>
@@ -208,7 +217,8 @@ const Order = () => {
                     </div>
                 </form>
             </div>
-        </div>
+            </div>
+        </>
     );
 };
 
