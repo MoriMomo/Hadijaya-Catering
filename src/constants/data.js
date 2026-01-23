@@ -53,14 +53,15 @@ const RAW_MENU_DATA = [
     { id: 77, name: 'Extra Buah', category: 'snack', price: 7000, desc: 'Porsi buah tambahan', featured: false }
 ];
 
-// Build image path from item name. Uses SVG placeholders by default (zero 404s!)
-// To add real photos: place JPG/JPEG in public/images/ with same slug name
-// Example: add "nasi-uduk-ijo.jpg" and update this to try .jpg first for that item
+// Build image path from item name.
+// Real photo priority: .jpg -> .jpeg -> .svg placeholder -> universal placeholder (handled in OptimizedImage)
+// To add real photos: place JPG/JPEG in public/images/ with the same slug name, e.g. "nasi-uduk-ijo.jpg"
 const toSlug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 export const MENU_DATA = RAW_MENU_DATA.map(item => {
     const slug = toSlug(item.name);
-    // Use SVG as primary (all exist), fallback to placeholder
-    const img = item.img || `/images/${slug}.svg`;
+    const basePath = `/images/${slug}`;
+    // Try real photo first; OptimizedImage will fall back to .jpeg, .svg, then placeholder
+    const img = item.img || `${basePath}.jpg`;
     const fallbackImg = '/images/placeholder.svg';
     return { ...item, img, fallbackImg };
 });
