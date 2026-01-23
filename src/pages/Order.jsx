@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Send, Plus } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 
