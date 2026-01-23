@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Star, Users, Clock, Award, ArrowRight } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
