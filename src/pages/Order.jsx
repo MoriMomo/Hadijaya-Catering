@@ -12,18 +12,25 @@ const Order = () => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const idCounterRef = useRef(1);
+
+    // Initialize orderLines with lazy initializer to avoid setState in effect
+    // eslint-disable-next-line react-hooks/refs
     const [orderLines, setOrderLines] = useState(() => {
-        const saved = localStorage.getItem('hadijaya-order-draft');
-        if (saved) {
-            try {
+        try {
+            const saved = localStorage.getItem('hadijaya-order-draft');
+            if (saved) {
                 const parsed = JSON.parse(saved);
                 idCounterRef.current = parsed.nextId || 1;
-                return parsed.lines || [{ id: idCounterRef.current, menuId: MENU_DATA[0].id, qty: 10 }];
-            } catch {
-                return [{ id: idCounterRef.current, menuId: MENU_DATA[0].id, qty: 10 }];
+                if (parsed.lines && parsed.lines.length > 0) {
+                    return parsed.lines;
+                }
             }
+        } catch (error) {
+            console.error("Error loading saved order:", error);
+            idCounterRef.current = 1;
         }
-        return [{ id: idCounterRef.current, menuId: MENU_DATA[0].id, qty: 10 }];
+        // Return default initial value
+        return [{ id: 1, menuId: MENU_DATA[0].id, qty: 10 }];
     });
 
     // Validation helpers
@@ -457,8 +464,8 @@ const Order = () => {
                             type="submit"
                             disabled={!isFormValid() || isSubmitting}
                             className={`w-full font-bold py-5 rounded-xl shadow-xl transition transform flex items-center justify-center gap-3 text-lg tracking-wide focus:outline-none focus:ring-4 focus:ring-orange-300 ${!isFormValid() || isSubmitting
-                                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                                    : 'bg-orange-600 hover:bg-orange-700 text-white hover:shadow-2xl hover:-translate-y-1'
+                                ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
+                                : 'bg-orange-600 hover:bg-orange-700 text-white hover:shadow-2xl hover:-translate-y-1'
                                 }`}
                         >
                             {isSubmitting ? (

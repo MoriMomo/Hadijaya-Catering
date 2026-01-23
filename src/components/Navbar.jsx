@@ -47,11 +47,11 @@ const Navbar = () => {
                         className="flex items-center gap-2 md:gap-3 cursor-pointer group"
                     >
                         <OptimizedImage
-                            src="/images/logo.svg"
+                            src="../images/hadijaya/makanan/hadijaya-catering-logo.jpeg"
                             fallback="/images/placeholder.svg"
                             alt="Hadijaya Catering Logo"
                             className="h-10 md:h-12"
-                            width={48}
+                            width={100}
                             height={48}
                         />
                     </Link>

@@ -39,10 +39,11 @@ const Home = () => {
                     <div className="relative order-1 md:order-2">
                         <div className="relative z-10 rounded-4xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition duration-700 aspect-square md:aspect-auto md:h-125">
                             <OptimizedImage
-                                src="/images/home.svg"
+                                src="/images/hadijaya/makanan/jumbotron-dish.jpeg"
                                 fallback="/images/placeholder.svg"
                                 className="object-cover w-full h-full"
                                 alt="Hadijaya Signature Dish"
+                                priority={true}
                             />
                         </div>
                         <div className="absolute -bottom-6 -left-6 z-20 bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-slate-100 animate-slide-up hidden md:block">
@@ -86,7 +87,7 @@ const Home = () => {
             </div>
 
             {/* Menu Highlight */}
-            <div className="py-24 bg-slate-100 hero-pattern">
+            <div className="py-18 bg-slate-100 hero-pattern">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                         <div>

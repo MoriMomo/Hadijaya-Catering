@@ -12,6 +12,7 @@ const OptimizedImage = ({
     sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
     width,
     height,
+    priority = false,
 }) => {
     const [imgSrc, setImgSrc] = useState(src);
     const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +70,8 @@ const OptimizedImage = ({
                     className={className}
                     onError={handleError}
                     onLoad={handleLoad}
-                    loading="lazy"
+                    loading={priority ? "eager" : "lazy"}
+                    fetchPriority={priority ? "high" : undefined}
                     decoding="async"
                     sizes={sizes}
                     width={width}
