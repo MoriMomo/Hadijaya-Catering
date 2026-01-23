@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { MENU_DATA } from '../constants/data';
 import MenuCard from '../components/MenuCard';
 
@@ -14,7 +15,15 @@ const Menu = () => {
         : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200";
 
     return (
-        <div className="pt-12 pb-24 bg-slate-50 min-h-screen animate-fade-in">
+        <>
+            <Helmet>
+                <title>Menu & Harga - Hadijaya Catering</title>
+                <meta name="description" content="Lihat menu lengkap Hadijaya Catering dengan harga terbaik. Paket catering, nasi uduk hijau, daging, ayam, dan snack untuk acara Anda." />
+                <meta property="og:title" content="Menu & Harga - Hadijaya Catering" />
+                <meta property="og:description" content="Lihat menu lengkap Hadijaya Catering dengan harga terbaik. Paket catering, nasi uduk hijau, daging, ayam, dan snack untuk acara Anda." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <div className="pt-12 pb-24 bg-slate-50 min-h-screen animate-fade-in">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-serif font-bold text-slate-900 mb-6">Menu & Harga</h2>
@@ -51,6 +60,7 @@ const Menu = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

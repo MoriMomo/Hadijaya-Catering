@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Plus, User, Phone, Calendar, CheckCircle, Minus, AlertCircle } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Send, Plus } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 
 const Order = () => {
@@ -252,7 +253,15 @@ const Order = () => {
     };
 
     return (
-        <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
+        <>
+            <Helmet>
+                <title>Pesan Katering - Hadijaya Catering</title>
+                <meta name="description" content="Pesan katering untuk acara Anda dengan mudah. Pilih menu favorit dan tentukan tanggal pengiriman. Minimal pemesanan 2 hari sebelum acara." />
+                <meta property="og:title" content="Pesan Katering - Hadijaya Catering" />
+                <meta property="og:description" content="Pesan katering untuk acara Anda dengan mudah. Pilih menu favorit dan tentukan tanggal pengiriman. Minimal pemesanan 2 hari sebelum acara." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
             <div className="max-w-3xl mx-auto px-6">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-serif font-bold text-slate-900">Reservasi Pesanan</h2>
@@ -482,42 +491,8 @@ const Order = () => {
                     </div>
                 </form>
             </div>
-
-            {/* Confirmation Modal */}
-            {showConfirm && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
-                    <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl animate-fade-in">
-                        <h3 id="confirm-title" className="text-2xl font-bold text-slate-900 mb-4">Konfirmasi Pesanan</h3>
-                        <p className="text-slate-600 mb-6">Yakin ingin mengirim pesanan ini ke WhatsApp?</p>
-                        <div className="flex gap-3">
-                            <button
-                                onClick={() => setShowConfirm(false)}
-                                className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-slate-400"
-                            >
-                                Batal
-                            </button>
-                            <button
-                                onClick={confirmSubmit}
-                                className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            >
-                                Ya, Kirim
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Success Toast */}
-            {showSuccess && (
-                <div className="fixed bottom-8 right-8 bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 animate-fade-in z-50" role="alert">
-                    <CheckCircle className="w-6 h-6" />
-                    <div>
-                        <p className="font-bold">Pesanan Terkirim!</p>
-                        <p className="text-sm">Tim kami akan menghubungi Anda segera.</p>
-                    </div>
-                </div>
-            )}
-        </div>
+            </div>
+        </>
     );
 };
 
