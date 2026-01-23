@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { MessageCircle } from 'lucide-react';
 
-// Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
-// Pages
-import Home from './pages/Home';
-import Menu from './pages/Menu';
-import Order from './pages/Order';
-import About from './pages/About';
+const Home = lazy(() => import('./pages/Home'));
+const Menu = lazy(() => import('./pages/Menu'));
+const Order = lazy(() => import('./pages/Order'));
+const About = lazy(() => import('./pages/About'));
+
+const Loader = () => (
+  <div className="py-16 text-center text-slate-500">
+    Memuat konten...
+  </div>
+);
 
 const App = () => {
   return (
@@ -30,20 +34,22 @@ const App = () => {
           .hover-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
         `}</style>
 
-          <div className="min-h-screen bg-stone-50">
+          <div className="min-h-screen bg-stone-50 flex flex-col">
             <Navbar />
 
-            <main>
-              <Routes>
-                {/* Customer Routes */}
-                <Route path="/" element={<Home />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/order" element={<Order />} />
-                <Route path="/about" element={<About />} />
+            <main className="flex-1">
+              <Suspense fallback={<Loader />}>
+                <Routes>
+                  {/* Customer Routes */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/order" element={<Order />} />
+                  <Route path="/about" element={<About />} />
 
-                {/* Catch all - redirect to home */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
+                  {/* Catch all - redirect to home */}
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+              </Suspense>
             </main>
 
             <Footer />

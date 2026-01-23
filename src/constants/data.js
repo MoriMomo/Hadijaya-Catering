@@ -53,16 +53,71 @@ const RAW_MENU_DATA = [
     { id: 77, name: 'Extra Buah', category: 'snack', price: 7000, desc: 'Porsi buah tambahan', featured: false }
 ];
 
-// Build image path from item name. Uses SVG placeholders by default (zero 404s!)
-// To add real photos: place JPG/JPEG in public/images/ with same slug name
-// Example: add "nasi-uduk-ijo.jpg" and update this to try .jpg first for that item
+// Map categories to their folder paths and image filename mappings
+const CATEGORY_PATH_MAP = {
+    'paket': { folder: 'paket', format: '.webp' },
+    'nasi': { folder: 'nasi', format: '.webp' },
+    'daging': { folder: 'daging', format: '.webp' },
+    'ayam': { folder: 'ayam', format: '.webp' },
+    'telur': { folder: 'telur', format: '.webp' },
+    'tahu-tempe': { folder: 'tahutempe', format: '.webp' },
+    'sambel': { folder: 'sambal', format: '.webp' },
+    'snack': { folder: 'snack', format: '.webp' }
+};
+
+// Image filename mappings for items with different names or missing files
+const IMAGE_NAME_OVERRIDES = {
+    'paket-a-nasi-uduk-ijo-ayam-rendang': 'paket-a-nasi-uduk-ijo-ayam-rendang',
+    'paket-a-nasi-uduk-ijo-daging-semur': 'paket-a-nasi-uduk-ijo-daging-semur',
+    'paket-b-nasi-uduk-ijo-daging-dengdeng': 'paket-b-nasi-uduk-ijo-daging-dengdeng',
+    'paket-c-nasi-uduk-ijo-ayam-goreng': 'paket-c-nasi-uduk-ijo-ayam-goreng',
+    'paket-d-nasi-uduk-ijo-ayam-rendang': 'paket-d-nasi-uduk-ijo-+-ayam-rendang',
+    'nasi-uduk-ijo': 'nasi-uduk-ijo',
+    'nasi-uduk-kuning': 'nasi-kuning',
+    'nasi-uduk-putih': 'nasi-uduk-putih',
+    'nasi-biasa': 'nasi-biasa',
+    'ayam-bakar': 'ayan-bakar',
+    'ayam-gulai': 'ayam-guali',
+    'telur-balado': 'telur-balado',
+    'tahu-tempe-goreng-spesial': 'tempe-goreng',
+    'tahu-tempe-semur': 'tahu-semur',
+    'tahu-tempe-masak-kari': 'tempe-kari',
+    'tempe-orek': 'tempe-orek',
+    'tahu-orek-balado': 'tahu-orek',
+    'sambel-mangga': 'sambal-mangga',
+    'sambel-kacang': 'sambal-kacang',
+    'sambel-goreng': 'sambal-goreng'
+};
+
 const toSlug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
 export const MENU_DATA = RAW_MENU_DATA.map(item => {
     const slug = toSlug(item.name);
-    // Use SVG as primary (all exist), fallback to placeholder
-    const img = item.img || `/images/${slug}.svg`;
+    const categoryPath = CATEGORY_PATH_MAP[item.category];
+
+    if (!categoryPath) {
+        // Fallback if category not found
+        const fallbackImg = '/images/placeholder.svg';
+        return { ...item, img: `/images/${slug}.jpg`, fallbackImg };
+    }
+
+    // Check if there's a custom name override
+    let imageName = Object.prototype.hasOwnProperty.call(IMAGE_NAME_OVERRIDES, slug)
+        ? IMAGE_NAME_OVERRIDES[slug]
+        : slug;
+
+    // If imageName is null, use only fallback
+    const img = imageName
+        ? `/images/hadijaya/makanan/${categoryPath.folder}/${imageName}${categoryPath.format}`
+        : null;
+
     const fallbackImg = '/images/placeholder.svg';
-    return { ...item, img, fallbackImg };
+
+    return {
+        ...item,
+        img: img || fallbackImg,
+        fallbackImg
+    };
 });
 
 export const ORDER_HISTORY = [

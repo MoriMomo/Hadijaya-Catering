@@ -39,24 +39,16 @@ export const TESTIMONIALS = [
 
 export const TRUSTED_PARTNERS = {
     companies: [
-        { name: "Pertamina", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=Pertamina" },
-        { name: "BCA", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=BCA" },
-        { name: "Telkom Indonesia", logo: "https://via.placeholder.com/120x40/e5e7eb/666?text=Telkom" },
-        { name: "Mandiri", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=Mandiri" },
-        { name: "BNI", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=BNI" },
-        { name: "PLN", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=PLN" },
-        { name: "AWS", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=AWS" },
-        { name: "Arkadia", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=Arkadia" },
-        { name: "Astra Financial", logo: "https://via.placeholder.com/100x40/e5e7eb/666?text=Astra" }
+        { name: "AIESEC", logo: "/images/hadijaya/iklan/aiesec.webp" },
+        { name: "BINUS", logo: "/images/hadijaya/iklan/binus.webp" },
+        { name: "Matahari", logo: "/images/hadijaya/iklan/matahari.webp" },
+        { name: "Novell", logo: "/images/hadijaya/iklan/novell.webp" },
+        { name: "Okezone", logo: "/images/hadijaya/iklan/okezone.webp" }
     ],
     government: [
-        { name: "Bank Indonesia", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=BI" },
-        { name: "Mahkamah Agung", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=MA" },
-        { name: "KPU", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=KPU" },
-        { name: "Kementerian Agama", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=Kemenag" },
-        { name: "BPK", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=BPK" },
-        { name: "BPOM", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=BPOM" },
-        { name: "Polri", logo: "https://via.placeholder.com/60x60/e5e7eb/666?text=Polri" }
+        { name: "DIPA", logo: "/images/hadijaya/iklan/dipa.webp" },
+        { name: "LKPP", logo: "/images/hadijaya/iklan/lkpp.webp" },
+        { name: "RE Inovasi", logo: "/images/hadijaya/iklan/re%20inovasi.webp" }
     ]
 };
 

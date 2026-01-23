@@ -7,16 +7,15 @@ const TrustedLogo = React.memo(({ name, logo, isRound = false }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     return (
-        <div className="grayscale hover:grayscale-0 transition opacity-60 hover:opacity-100">
-            {isLoading && (
-                <div className={`${isRound ? 'h-14 w-14 rounded-full' : 'h-10 w-24'} bg-slate-200 animate-pulse`} />
-            )}
+        <div className="hover:scale-110 transition-transform duration-300 flex items-center justify-center">
             <img
                 src={imageError ? 'https://via.placeholder.com/100x40/e5e7eb/666?text=Logo' : logo}
                 alt={`${name} - Trusted Partner`}
-                className={`${isRound ? 'h-14 w-14 rounded-full' : 'h-10'} object-contain ${isLoading ? 'hidden' : 'block'}`}
+                className={`${isRound ? 'rounded-full object-cover' : 'w-auto'}`}
+                style={{ maxHeight: isRound ? 80 : 64, opacity: isLoading ? 0 : 1, transition: 'opacity 300ms ease-in-out' }}
                 onLoad={() => setIsLoading(false)}
-                onError={() => {
+                onError={(e) => {
+                    console.error(`Failed to load logo: ${logo}`, e);
                     setImageError(true);
                     setIsLoading(false);
                 }}
@@ -115,7 +114,7 @@ const HomeShowcase = () => {
                     </h3>
 
                     {/* Logo Grid - Top Row */}
-                    <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12 mb-8">
+                    <div className="flex lex-wrap justify-center items-center gap-6 md:gapf-8 lg:gap-12 mb-8">
                         {TRUSTED_PARTNERS.companies.map((partner) => (
                             <TrustedLogo key={partner.name} name={partner.name} logo={partner.logo} />
                         ))}

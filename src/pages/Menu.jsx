@@ -28,15 +28,28 @@ const Menu = () => {
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-serif font-bold text-slate-900 mb-6">Menu & Harga</h2>
                     <div className="flex flex-wrap justify-center gap-4">
-                        {['all', 'paket', 'nasi', 'daging', 'ayam', 'snack'].map(cat => (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`px-6 py-3 rounded-full text-sm font-bold transition capitalize ${getBtnClass(cat)}`}
-                            >
-                                {cat === 'all' ? 'Semua' : cat}
-                            </button>
-                        ))}
+                        {['all', 'paket', 'nasi', 'daging', 'ayam', 'telur', 'tahu-tempe', 'sambel', 'snack'].map(cat => {
+                            const labels = {
+                                all: 'Semua',
+                                paket: 'Paket',
+                                nasi: 'Nasi',
+                                daging: 'Daging',
+                                ayam: 'Ayam',
+                                telur: 'Telur',
+                                'tahu-tempe': 'Tahu/Tempe',
+                                sambel: 'Sambel',
+                                snack: 'Snack'
+                            };
+                            return (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`px-6 py-3 rounded-full text-sm font-bold transition ${getBtnClass(cat)}`}
+                                >
+                                    {labels[cat]}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
