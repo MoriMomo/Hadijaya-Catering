@@ -10,15 +10,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <>
-            <Helmet>
-                <title>Hadijaya Catering - Nasi Uduk Hijau Otentik Sejak 1999</title>
-                <meta name="description" content="Nikmati kelezatan Nasi Uduk Hijau otentik dari Hadijaya Catering. Pilihan utama instansi pemerintah dan keluarga Jakarta Selatan untuk setiap momen spesial sejak 1999." />
-                <meta property="og:title" content="Hadijaya Catering - Nasi Uduk Hijau Otentik Sejak 1999" />
-                <meta property="og:description" content="Nikmati kelezatan Nasi Uduk Hijau otentik dari Hadijaya Catering. Pilihan utama instansi pemerintah dan keluarga Jakarta Selatan untuk setiap momen spesial sejak 1999." />
-                <meta property="og:type" content="website" />
-            </Helmet>
-            <div className="animate-fade-in pb-12">
+        <div className="animate-fade-in pb-12">
             {/* Hero Section */}
             <div className="relative bg-[#fcfbf9] min-h-162.5 flex items-center overflow-hidden">
                 <div className="absolute right-[-10%] top-[-20%] w-[60%] h-[120%] bg-orange-50/50 rounded-full blur-3xl -z-10"></div>
@@ -130,7 +122,6 @@ const Home = () => {
                 </div>
             </div>
         </div>
-        </>
     );
 };
 
