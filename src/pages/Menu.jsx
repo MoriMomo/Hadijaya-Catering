@@ -18,6 +18,9 @@ const Menu = () => {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-serif font-bold text-slate-900 mb-6">Menu & Harga</h2>
+                    <p className="text-sm text-slate-500 mb-6 italic">
+                        📸 <strong>Catatan:</strong> Gambar hanya digunakan sebagai referensi. Silakan hubungi kami untuk informasi tampilan makanan yang lebih detail.
+                    </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         {['all', 'paket', 'nasi', 'daging', 'ayam', 'telur', 'tahu-tempe', 'sambel', 'snack'].map(cat => {
                             const labels = {
