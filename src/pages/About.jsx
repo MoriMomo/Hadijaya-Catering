@@ -6,91 +6,120 @@ const About = () => (
     <>
         <Helmet>
             <title>Tentang Kami - Hadijaya Catering</title>
-            <meta name="description" content="Hadijaya Catering telah melayani sejak 1999 dengan fokus pada kualitas dan kepuasan pelanggan. Spesialis Nasi Uduk Hijau untuk instansi pemerintah dan keluarga." />
+            <meta
+                name="description"
+                content="Hadijaya Catering berdiri sejak 2010 dengan layanan katering korporat, pemerintahan, dan acara khusus. Fokus pada kualitas bahan, dapur higienis, dan pelayanan profesional."
+            />
             <meta property="og:title" content="Tentang Kami - Hadijaya Catering" />
-            <meta property="og:description" content="Hadijaya Catering telah melayani sejak 1999 dengan fokus pada kualitas dan kepuasan pelanggan. Spesialis Nasi Uduk Hijau untuk instansi pemerintah dan keluarga." />
+            <meta
+                property="og:description"
+                content="Sejak 2010, Hadijaya Catering menghadirkan layanan katering berkualitas dengan dapur higienis, chef profesional, dan standar layanan bintang lima."
+            />
             <meta property="og:type" content="website" />
         </Helmet>
-        <div className="py-24 bg-slate-50 min-h-screen animate-fade-in">
-            <div className="max-w-6xl mx-auto px-6">
-                <div className="grid md:grid-cols-3 gap-10 items-start">
-                    <div className="md:col-span-1">
-                        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                            <OptimizedImage
-                                src="/images/dapur.jpg"
-                                fallback="/images/placeholder.svg"
-                                className="w-full h-64 object-cover"
-                                alt="Dapur Hadijaya Catering"
-                            />
-                        </div>
-                        <div className="mt-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h3 className="text-lg font-bold">Profil & Kontak</h3>
-                            <p className="text-sm text-slate-600 mt-3">
-                                <strong>Nama Perusahaan:</strong> PT. Hadi Jaya Citra / Hadijaya Catering
+
+        <div className="py-20 bg-slate-50 min-h-screen animate-fade-in">
+            <div className="max-w-6xl mx-auto px-6 space-y-16">
+                {/* Hero Section */}
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                    <div className="space-y-4">
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Tentang Kami</p>
+                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 leading-tight">
+                            Hadijaya Catering — Layanan Katering Berkualitas Sejak 2000.
+                        </h1>
+                        <div className="space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Sejak tahun 2000, Hadi Jaya Citra telah melayani berbagai kebutuhan bisnis dengan dedikasi dan komitmen untuk terus berkembang.
+                                Pada tahun 2017, kami resmi menjadi Perseroan Terbatas untuk memperkuat visi profesionalisme kami.
                             </p>
-                            <p className="text-sm text-slate-600 mt-2">
-                                <strong>Alamat:</strong> Jl. Pos Pengumben lama RT004/05 NO.10, Jl. Sukabumi Selatan Kebon Jeruk, Jakarta Barat 11560
+                            <p>
+                                Kami menyediakan solusi komprehensif: layanan catering berkualitas, penyediaan alat tulis kantor, dan jasa pembersihan profesional.
+                                Kepercayaan klien adalah aset terbesar kami.
                             </p>
-                            <p className="text-sm text-slate-600 mt-2"><strong>Telepon:</strong> 0812 1121 2185</p>
-                            <p className="text-sm text-slate-600 mt-1"><strong>WhatsApp:</strong> 0812 1121 2185</p>
-                            <p className="text-sm text-slate-600 mt-1"><strong>E-mail:</strong> pt.hjcitra@gmail.com</p>
                         </div>
                     </div>
+                    <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <OptimizedImage
+                            src="/images/hadijaya/makanan/dapur.webp"
+                            fallback="/images/placeholder.svg"
+                            className="w-full h-[22rem] object-cover"
+                            alt="Dapur Hadijaya Catering"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" aria-hidden="true" />
+                    </div>
+                </div>
 
-                    <div className="md:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                        <h2 className="text-3xl font-serif font-bold text-slate-900 mb-4">Tentang Hadijaya Catering</h2>
-                        <p className="text-slate-600 leading-relaxed mb-6">Hadijaya Catering berdiri dari warisan resep keluarga yang telah dipercaya sejak lama. Kami melayani katering nasi box, prasmanan, dan paket acara untuk instansi dan keluarga di Jakarta Barat dan sekitarnya.</p>
+                {/* Visi & Misi */}
+                <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">Visi</h3>
+                        <p className="text-slate-600 leading-relaxed font-medium">
+                            Menjadi perusahaan yang profesional, dapat diandalkan serta bertanggung jawab.
+                        </p>
+                    </div>
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 className="text-2xl font-serif font-bold text-slate-900 mb-3">Misi</h3>
+                        <ul className="space-y-3 text-slate-600">
+                            <li className="flex gap-3">
+                                <span className="text-orange-600 font-bold">•</span>
+                                <span>Senantiasa mengembangkan kesempurnaan proses bisnis untuk terus maju.</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="text-orange-600 font-bold">•</span>
+                                <span>Memberikan pelayanan terbaik untuk setiap klien.</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="text-orange-600 font-bold">•</span>
+                                <span>Menjadi rekanan yang saling memberikan manfaat dan dipercaya.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-                        <h3 className="text-2xl font-bold mt-6 mb-3">Spesial Menu (Paket)</h3>
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold">Paket A — Rp 35.000</h4>
-                                <p className="text-sm text-slate-600 mt-2">Nasi Uduk Ijo + Daging Semur, Kentang Sambel Goreng, Sambel Trasi Mangga, Krupuk & Lalapan</p>
+                {/* Komitmen & Layanan */}
+        
+
+                {/* Klien Terpercaya */}
+                <div>
+                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600 mb-6">Klien Kami</p>
+                    <p className="text-slate-600 mb-6">
+                        Saat ini sudah cukup banyak perusahaan atau instansi besar yang mempercayakan kebutuhannya kepada PT. Hadi Jaya Citra karena pelayanannya yang memuaskan.
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {['Okezone.com', 'Novell Pharma', 'DIPA Healthcare', 'LKPP', 'Matahari Mall', 'Reinovasi'].map((client) => (
+                            <div key={client} className="bg-white p-4 rounded-lg border border-slate-200 text-center text-slate-700 font-medium text-sm">
+                                {client}
                             </div>
-                            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold">Paket B — Rp 35.000</h4>
-                                <p className="text-sm text-slate-600 mt-2">Nasi Uduk Ijo + Daging Dengdeng, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan</p>
-                            </div>
-                            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold">Paket C — Rp 30.000</h4>
-                                <p className="text-sm text-slate-600 mt-2">Nasi Uduk Ijo + Ayam Goreng, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan</p>
-                            </div>
-                            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100">
-                                <h4 className="font-bold">Paket D — Rp 30.000</h4>
-                                <p className="text-sm text-slate-600 mt-2">Nasi Uduk Ijo + Ayam Rendang, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan</p>
-                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Kontak */}
+                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 className="text-lg font-bold text-slate-900 mb-4">Profil & Kontak</h3>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                        <div>
+                            <p className="font-bold text-slate-700">PT. Hadi Jaya Citra</p>
+                            <p className="mt-1">Perseroan Terbatas (PT)</p>
+                            <p className="text-xs text-slate-500 mt-1">Akte Pendirian No. 02 - 11 Agustus 2017</p>
                         </div>
-
-                        <h3 className="text-2xl font-bold mt-8 mb-3">Menu Ala Carte (Contoh harga)</h3>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            <div>
-                                <h4 className="font-semibold">Nasi</h4>
-                                <ul className="text-sm text-slate-600 mt-2 space-y-1">
-                                    <li>Nasi Uduk Ijo — Rp 12.000 / porsi</li>
-                                    <li>Nasi Uduk Kuning — Rp 10.000 / porsi</li>
-                                    <li>Nasi Uduk Putih — Rp 9.000 / porsi</li>
-                                    <li>Nasi Biasa — Rp 7.000 / porsi</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold">Daging & Ayam</h4>
-                                <ul className="text-sm text-slate-600 mt-2 space-y-1">
-                                    <li>Empal / Semur / Rendang / Sate Assem — Rp 20.000 / porsi</li>
-                                    <li>Ayam Goreng / Geprek / Bakar / Gulai / Rendang / Semur — Rp 15.000 / porsi</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold">Lainnya</h4>
-                                <ul className="text-sm text-slate-600 mt-2 space-y-1">
-                                    <li>Telur Balado / Semur / Rendang — Rp 8.000 / porsi</li>
-                                    <li>Tahu/Tempe (variasi) — Rp 7.000 / porsi</li>
-                                    <li>Sambel Mangga — Rp 5.000 / porsi</li>
-                                    <li>Snack (Pastel, Risol, Lupis, dll) — Rp 4.000 / porsi</li>
-                                </ul>
-                            </div>
+                        <div>
+                            <p className="font-bold text-slate-700">NPWP: 82.695.476.0-035.000</p>
+                            <p className="mt-2">No. SIUP Kecil: 142/24.1PK/31.73.05/-1.824.27/e/2017</p>
+                            <p className="mt-1">TDP: 09.02.1.46.58715</p>
                         </div>
-
-                        <p className="text-slate-500 mt-6 text-sm">Catatan: Harga contoh untuk pesanan ala-carte. Untuk menu prasmanan atau permintaan khusus, silakan hubungi kami via WhatsApp/telepon untuk penawaran dan konfirmasi ketersediaan.</p>
+                        <div className="md:col-span-2">
+                            <p className="font-bold text-slate-700 mb-2">Alamat:</p>
+                            <p>Jl. Pos Pengumben Lama No. 10, Sukabumi Selatan, Kebon Jeruk, DKI Jakarta 11560</p>
+                        </div>
+                        <div>
+                            <p className="font-bold text-slate-700 mb-2">Telepon:</p>
+                            <p>0888-08656-200</p>
+                        </div>
+                        <div>
+                            <p className="font-bold text-slate-700 mb-2">Email:</p>
+                            <p>pt.hjcitra@gmail.com</p>
+                        </div>
                     </div>
                 </div>
             </div>
