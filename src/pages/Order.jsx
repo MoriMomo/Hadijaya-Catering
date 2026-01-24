@@ -118,7 +118,9 @@ const Order = () => {
                 const parsed = JSON.parse(saved);
                 if (parsed.name) setFormData(prev => ({ ...prev, name: parsed.name }));
                 if (parsed.phone) setFormData(prev => ({ ...prev, phone: parsed.phone }));
-            } catch { }
+            } catch (e) {
+                console.error('Error restoring draft:', e);
+            }
         }
     }, []);
 
@@ -244,7 +246,7 @@ const Order = () => {
         const message = `Halo Hadijaya Catering,%0A%0ASaya ingin memesan untuk:%0A- Nama: ${encodeURIComponent(formData.name)}%0A- No HP: ${encodeURIComponent(formData.phone)}%0A- Tanggal: ${selectedDate}%0A%0ADaftar Pesanan:%0A${linesText}%0A%0ATotal porsi: ${totalPortions}%0AEstimasi Total: ${formatCurrency(totalPrice)}%0A%0AMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
 
         setTimeout(() => {
-            window.open(`https://wa.me/628111040342?text=${message}`, '_blank');
+            window.open(`https://wa.me/+6289687472787?text=${message}`, '_blank');
             setIsSubmitting(false);
             setShowSuccess(true);
             clearDraft();
@@ -261,6 +263,47 @@ const Order = () => {
                 <meta property="og:description" content="Pesan katering untuk acara Anda dengan mudah. Pilih menu favorit dan tentukan tanggal pengiriman. Minimal pemesanan 2 hari sebelum acara." />
                 <meta property="og:type" content="website" />
             </Helmet>
+
+            {/* Success Message */}
+            {showSuccess && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-6">
+                    <div className="bg-white rounded-2xl p-8 text-center max-w-sm shadow-2xl">
+                        <div className="text-5xl mb-4">✅</div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">Pesanan Terkirim!</h3>
+                        <p className="text-slate-600">Tim kami akan segera menghubungi Anda via WhatsApp untuk konfirmasi.</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Confirmation Modal */}
+            {showConfirm && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-6">
+                    <div className="bg-white rounded-2xl p-8 max-w-sm shadow-2xl">
+                        <h3 className="text-lg font-bold text-slate-900 mb-4">Konfirmasi Pesanan</h3>
+                        <p className="text-slate-600 mb-2"><strong>Nama:</strong> {formData.name}</p>
+                        <p className="text-slate-600 mb-2"><strong>No. WhatsApp:</strong> {formData.phone}</p>
+                        <p className="text-slate-600 mb-2"><strong>Tanggal:</strong> {selectedDate}</p>
+                        <p className="text-slate-600 mb-4"><strong>Total Porsi:</strong> {totalPortions}</p>
+                        <p className="text-lg font-bold text-orange-700 mb-6">Estimasi: {formatCurrency(totalPrice)}</p>
+                        <p className="text-sm text-slate-500 mb-6">Apakah pesanan Anda sudah benar?</p>
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => setShowConfirm(false)}
+                                className="flex-1 px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300 transition"
+                            >
+                                Batal
+                            </button>
+                            <button
+                                onClick={confirmSubmit}
+                                className="flex-1 px-4 py-2 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 transition"
+                            >
+                                Kirim via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
                 <div className="max-w-3xl mx-auto px-6">
                     <div className="text-center mb-12">
