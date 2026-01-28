@@ -427,86 +427,102 @@ const Order = () => {
                             </div>
 
                             <div className="space-y-4">
-                                {orderLines.map((line) => {
+                                {orderLines.map((line, index) => {
                                     const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
                                     const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
                                     return (
-                                        <div key={line.id} className="grid grid-cols-12 gap-3 items-start bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                            <div className="col-span-12 md:col-span-6">
-                                                <label htmlFor={`menu-${line.id}`} className="text-xs text-slate-500 uppercase font-bold">Menu</label>
+                                        <div key={line.id} className="bg-slate-50 p-6 rounded-xl border-2 border-slate-300">
+                                            {/* Header Row with Item Number */}
+                                            <div className="flex items-center justify-between mb-4">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                                                        {index + 1}
+                                                    </div>
+                                                    <h4 className="text-sm text-slate-700 font-bold">Item #{index + 1}</h4>
+                                                </div>
+                                                {lineTotal > 0 && (
+                                                    <p className="text-sm font-bold text-orange-700">{formatCurrency(lineTotal)}</p>
+                                                )}
+                                            </div>
+
+                                            {/* Menu Select */}
+                                            <div className="mb-4">
                                                 <select
                                                     id={`menu-${line.id}`}
                                                     value={line.menuId}
                                                     onChange={(e) => updateLine(line.id, { menuId: e.target.value })}
-                                                    className="w-full bg-transparent px-2 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded"
+                                                    className="w-full bg-white border border-slate-300 px-4 py-3 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium"
                                                 >
                                                     {MENU_DATA.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
                                                 </select>
                                                 {menu && menu.price > 0 && (
-                                                    <p className="text-xs text-slate-500 mt-1">@ {formatCurrency(menu.price)}</p>
+                                                    <p className="text-xs text-slate-500 mt-2">@ {formatCurrency(menu.price)}</p>
                                                 )}
                                             </div>
 
-                                            <div className="col-span-8 md:col-span-4">
-                                                <label htmlFor={`qty-${line.id}`} className="text-xs text-slate-500 uppercase font-bold">Porsi</label>
-                                                <div className="flex items-center gap-2">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => decrementQty(line.id)}
-                                                        aria-label="Kurangi porsi"
-                                                        className="w-8 h-8 bg-white border border-slate-300 rounded-md flex items-center justify-center hover:bg-slate-100 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                    >
-                                                        <Minus className="w-4 h-4 text-slate-600" />
-                                                    </button>
-                                                    <input
-                                                        id={`qty-${line.id}`}
-                                                        type="number"
-                                                        min="1"
-                                                        value={line.qty}
-                                                        onChange={(e) => updateLine(line.id, { qty: Number(e.target.value) || 1 })}
-                                                        className="flex-1 text-center bg-white border border-slate-200 rounded-md px-2 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => incrementQty(line.id)}
-                                                        aria-label="Tambah porsi"
-                                                        className="w-8 h-8 bg-white border border-slate-300 rounded-md flex items-center justify-center hover:bg-slate-100 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                    >
-                                                        <Plus className="w-4 h-4 text-slate-600" />
-                                                    </button>
+                                            {/* Porsi and Delete Row */}
+                                            <div className="flex items-center justify-between gap-4">
+                                                <div className="flex-1">
+                                                    <label htmlFor={`qty-${line.id}`} className="text-xs text-slate-500 uppercase font-bold block mb-2">Porsi</label>
+                                                    <div className="flex items-center gap-2">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => decrementQty(line.id)}
+                                                            aria-label="Kurangi porsi"
+                                                            className="w-10 h-10 bg-white border-2 border-slate-300 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:border-orange-500 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                                        >
+                                                            <Minus className="w-4 h-4 text-slate-600" />
+                                                        </button>
+                                                        <input
+                                                            id={`qty-${line.id}`}
+                                                            type="number"
+                                                            min="1"
+                                                            value={line.qty}
+                                                            onChange={(e) => updateLine(line.id, { qty: Number(e.target.value) || 1 })}
+                                                            className="flex-1 text-center bg-white border-2 border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-bold text-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => incrementQty(line.id)}
+                                                            aria-label="Tambah porsi"
+                                                            className="w-10 h-10 bg-white border-2 border-slate-300 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:border-orange-500 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                                        >
+                                                            <Plus className="w-4 h-4 text-slate-600" />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="col-span-4 md:col-span-2 flex flex-col items-end justify-between h-full">
-                                                {lineTotal > 0 && (
-                                                    <p className="text-xs font-bold text-slate-700 mb-2">{formatCurrency(lineTotal)}</p>
+                                                {orderLines.length > 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeLine(line.id)}
+                                                        aria-label="Hapus item"
+                                                        className="self-end px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition focus:outline-none focus:ring-2 focus:ring-red-500"
+                                                    >
+                                                        Hapus
+                                                    </button>
                                                 )}
-                                                <button
-                                                    type="button"
-                                                    onClick={() => removeLine(line.id)}
-                                                    aria-label="Hapus item"
-                                                    className="text-sm text-red-600 hover:underline focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1"
-                                                >
-                                                    Hapus
-                                                </button>
                                             </div>
                                         </div>
                                     );
                                 })}
                             </div>
 
-                            <div className="mt-6 p-4 bg-orange-50 rounded-xl border border-orange-200">
-                                <div className="flex justify-between items-center text-sm mb-2">
-                                    <span className="text-slate-600">Total Porsi:</span>
-                                    <span className="font-bold text-slate-900">{totalPortions}</span>
+                            <div className="mt-8 p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl border-2 border-orange-300 shadow-md">
+                                <div className="flex justify-between items-center text-base mb-3">
+                                    <span className="text-slate-700 font-medium">Total Porsi:</span>
+                                    <span className="font-bold text-slate-900 text-lg">{totalPortions}</span>
                                 </div>
                                 {totalPrice > 0 && (
-                                    <div className="flex justify-between items-center text-lg">
-                                        <span className="font-bold text-slate-700">Estimasi Total:</span>
-                                        <span className="font-bold text-orange-700">{formatCurrency(totalPrice)}</span>
-                                    </div>
+                                    <>
+                                        <div className="border-t border-orange-300 my-3"></div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="font-bold text-slate-700 text-base">Estimasi Total:</span>
+                                            <span className="font-bold text-orange-700 text-2xl">{formatCurrency(totalPrice)}</span>
+                                        </div>
+                                    </>
                                 )}
-                                <p className="text-xs text-slate-500 mt-2">*Harga final akan dikonfirmasi via WhatsApp</p>
+                                <p className="text-xs text-slate-600 mt-4 text-center italic">*Harga final akan dikonfirmasi via WhatsApp</p>
                             </div>
                         </div>
 
