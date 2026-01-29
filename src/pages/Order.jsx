@@ -31,7 +31,7 @@ const Order = () => {
             idCounterRef.current = 1;
         }
         // Return default initial value
-        return [{ id: 1, menuId: MENU_DATA[0].id, qty: 10 }];
+        return [];
     });
 
     // Validation helpers
@@ -87,6 +87,30 @@ const Order = () => {
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedDay, setSelectedDay] = useState('');
+
+    const [activeCategory, setActiveCategory] = useState('paket');
+
+    const categories = [
+        { id: 'paket', label: 'Paket Hemat' },
+        { id: 'nasi', label: 'Nasi' },
+        { id: 'ayam', label: 'Olahan Ayam' },
+        { id: 'daging', label: 'Olahan Daging' },
+        { id: 'tahu-tempe', label: 'Tahu & Tempe' },
+        { id: 'telur', label: 'Olahan Telur' },
+        { id: 'sambel', label: 'Aneka Sambal' },
+        { id: 'snack', label: 'Snack & Tambahan' }
+    ];
+
+    const addToOrder = (menuItem) => {
+        setOrderLines(prev => {
+            const existing = prev.find(l => l.menuId === menuItem.id);
+            if (existing) {
+                return prev.map(l => l.menuId === menuItem.id ? { ...l, qty: (Number(l.qty) || 0) + 1 } : l);
+            }
+            const nextId = ++idCounterRef.current;
+            return [...prev, { id: nextId, menuId: menuItem.id, qty: 10 }];
+        });
+    };
 
     useEffect(() => {
         if (dateOptions.length && !selectedYear) {
@@ -155,10 +179,7 @@ const Order = () => {
         setDateWarning(false);
     };
 
-    const addLine = () => {
-        const nextId = ++idCounterRef.current;
-        setOrderLines(prev => [...prev, { id: nextId, menuId: MENU_DATA[0].id, qty: 10 }]);
-    };
+
 
     const updateLine = (id, patch) => {
         setOrderLines(prev => prev.map(l => l.id === id ? { ...l, ...patch } : l));
@@ -289,7 +310,7 @@ const Order = () => {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setShowConfirm(false)}
-                                className="flex-1 px-4 py-2 bg-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-300 transition"
+                                className="flex-1 px-4 py-2 bg-slate-600 text-white rounded-lg font-medium hover:bg-slate-700 transition"
                             >
                                 Batal
                             </button>
@@ -304,14 +325,14 @@ const Order = () => {
                 </div>
             )}
 
-            <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
+            <div className="pt-12 pb-24 bg-slate-50 min-h-screen animate-fade-in">
                 <div className="max-w-3xl mx-auto px-6">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-serif font-bold text-slate-900">Reservasi Pesanan</h2>
                         <p className="text-slate-500 mt-4 font-light">Isi formulir dan daftar pesanan. Tim kami akan menghubungi via WhatsApp untuk konfirmasi.</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-slate-100 space-y-8" noValidate>
+                    <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-200/60 space-y-8" noValidate>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Name Field */}
                             <div className="space-y-2">
@@ -412,142 +433,163 @@ const Order = () => {
                             )}
                         </div>
 
-                        {/* Order Lines */}
-                        <div>
-                            <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-lg font-bold">Daftar Pesanan</h3>
-                                <button
-                                    type="button"
-                                    onClick={addLine}
-                                    aria-label="Tambah item pesanan"
-                                    className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded-full text-sm transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
-                                >
-                                    <Plus className="w-4 h-4" /> Tambah Item
-                                </button>
-                            </div>
+                        {/* Menu Selection Section */}
+                        <div className="space-y-8 animate-fade-in">
+                            <div>
+                                <h3 className="text-xl font-bold font-serif text-slate-900 mb-6 flex items-center gap-2">
+                                    <span className="bg-orange-600 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">1</span>
+                                    Pilih Menu Favorit
+                                </h3>
 
-                            <div className="space-y-4">
-                                {orderLines.map((line, index) => {
-                                    const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
-                                    const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
-                                    return (
-                                        <div key={line.id} className="bg-slate-50 p-6 rounded-xl border-2 border-slate-300">
-                                            {/* Header Row with Item Number */}
-                                            <div className="flex items-center justify-between mb-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="bg-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
-                                                        {index + 1}
-                                                    </div>
-                                                    <h4 className="text-sm text-slate-700 font-bold">Item #{index + 1}</h4>
-                                                </div>
-                                                {lineTotal > 0 && (
-                                                    <p className="text-sm font-bold text-orange-700">{formatCurrency(lineTotal)}</p>
-                                                )}
-                                            </div>
-
-                                            {/* Menu Select */}
-                                            <div className="mb-4">
-                                                <select
-                                                    id={`menu-${line.id}`}
-                                                    value={line.menuId}
-                                                    onChange={(e) => updateLine(line.id, { menuId: e.target.value })}
-                                                    className="w-full bg-white border border-slate-300 px-4 py-3 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium"
-                                                >
-                                                    {MENU_DATA.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-                                                </select>
-                                                {menu && menu.price > 0 && (
-                                                    <p className="text-xs text-slate-500 mt-2">@ {formatCurrency(menu.price)}</p>
-                                                )}
-                                            </div>
-
-                                            {/* Porsi and Delete Row */}
-                                            <div className="flex items-center justify-between gap-4">
-                                                <div className="flex-1">
-                                                    <label htmlFor={`qty-${line.id}`} className="text-xs text-slate-500 uppercase font-bold block mb-2">Porsi</label>
-                                                    <div className="flex items-center gap-2">
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => decrementQty(line.id)}
-                                                            aria-label="Kurangi porsi"
-                                                            className="w-10 h-10 bg-white border-2 border-slate-300 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:border-orange-500 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                        >
-                                                            <Minus className="w-4 h-4 text-slate-600" />
-                                                        </button>
-                                                        <input
-                                                            id={`qty-${line.id}`}
-                                                            type="number"
-                                                            min="1"
-                                                            value={line.qty}
-                                                            onChange={(e) => updateLine(line.id, { qty: Number(e.target.value) || 1 })}
-                                                            className="flex-1 text-center bg-white border-2 border-slate-300 rounded-lg px-3 py-2 text-slate-900 font-bold text-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                                        />
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => incrementQty(line.id)}
-                                                            aria-label="Tambah porsi"
-                                                            className="w-10 h-10 bg-white border-2 border-slate-300 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:border-orange-500 transition focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                                        >
-                                                            <Plus className="w-4 h-4 text-slate-600" />
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                {orderLines.length > 1 && (
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => removeLine(line.id)}
-                                                        aria-label="Hapus item"
-                                                        className="self-end px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                    >
-                                                        Hapus
-                                                    </button>
-                                                )}
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-
-                            <div className="mt-8 p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl border-2 border-orange-300 shadow-md">
-                                <div className="flex justify-between items-center text-base mb-3">
-                                    <span className="text-slate-700 font-medium">Total Porsi:</span>
-                                    <span className="font-bold text-slate-900 text-lg">{totalPortions}</span>
+                                {/* Categories Tabs */}
+                                <div className="flex overflow-x-auto pb-4 gap-2 mb-6 snap-x">
+                                    {categories.map(cat => (
+                                        <button
+                                            key={cat.id}
+                                            type="button"
+                                            onClick={() => setActiveCategory(cat.id)}
+                                            className={`px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition snap-start border-2 ${activeCategory === cat.id
+                                                ? 'bg-orange-600 text-white border-orange-600 shadow-lg scale-105'
+                                                : 'bg-slate-700 text-white border-slate-700 hover:bg-slate-800'
+                                                }`}
+                                        >
+                                            {cat.label}
+                                        </button>
+                                    ))}
                                 </div>
-                                {totalPrice > 0 && (
-                                    <>
-                                        <div className="border-t border-orange-300 my-3"></div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="font-bold text-slate-700 text-base">Estimasi Total:</span>
-                                            <span className="font-bold text-orange-700 text-2xl">{formatCurrency(totalPrice)}</span>
+
+                                {/* Menu Grid - Full Height (Page Scroll) */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b pb-8 border-slate-100">
+                                    {MENU_DATA.filter(m => m.category === activeCategory).map(item => (
+                                        <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group relative overflow-hidden">
+                                            <div className="flex justify-between items-start mb-3">
+                                                <h4 className="font-bold text-slate-900 pr-2">{item.name}</h4>
+                                                <p className="text-orange-600 font-bold text-sm whitespace-nowrap bg-orange-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
+                                            </div>
+                                            <p className="text-slate-500 text-xs line-clamp-2 mb-4 h-8">{item.desc}</p>
+                                            <button
+                                                type="button"
+                                                onClick={() => addToOrder(item)}
+                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
+                                            >
+                                                <Plus className="w-4 h-4" /> Tambah ke Pesanan
+                                            </button>
                                         </div>
-                                    </>
-                                )}
-                                <p className="text-xs text-slate-600 mt-4 text-center italic">*Harga final akan dikonfirmasi via WhatsApp</p>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
-                        {/* Submit Button */}
-                        <div className="pt-6">
-                            <button
-                                type="submit"
-                                disabled={!isFormValid() || isSubmitting}
-                                className={`w-full font-bold py-5 rounded-xl shadow-xl transition transform flex items-center justify-center gap-3 text-lg tracking-wide focus:outline-none focus:ring-4 focus:ring-orange-300 ${!isFormValid() || isSubmitting
-                                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                                    : 'bg-orange-600 hover:bg-orange-700 text-white hover:shadow-2xl hover:-translate-y-1'
-                                    }`}
-                            >
-                                {isSubmitting ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                        Mengirim...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Send className="w-5 h-5" /> Kirim Pesanan via WhatsApp
-                                    </>
-                                )}
-                            </button>
+                        <div className="border-t-4 border-slate-100 my-10 rounded-full"></div>
+
+                        {/* Order Cart / Summary */}
+                        <div id="order-summary" className="animate-fade-in scroll-mt-24">
+                            <div className="flex items-center justify-between mb-6">
+                                <h3 className="text-xl font-bold font-serif text-slate-900 flex items-center gap-2">
+                                    <span className="bg-slate-900 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">2</span>
+                                    Daftar Pesanan
+                                </h3>
+                                <span className="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full">
+                                    {orderLines.length} Item
+                                </span>
+                            </div>
+
+                            {orderLines.length === 0 ? (
+                                <div className="text-center py-16 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center group hover:border-orange-200 transition-colors">
+                                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 text-4xl group-hover:scale-110 transition-transform duration-300">🍽️</div>
+                                    <p className="text-slate-900 font-bold text-lg mb-1">Daftar Pesanan Kosong</p>
+                                    <p className="text-slate-500 text-sm max-w-xs mx-auto">Silakan pilih menu favorit Anda dari kategori di atas untuk mulai memesan.</p>
+                                    <button
+                                        type="button"
+                                        onClick={() => document.getElementById('menu-selection').scrollIntoView({ behavior: 'smooth' })}
+                                        className="mt-6 text-orange-600 font-bold text-sm hover:underline"
+                                    >
+                                        Mulai Belanja &uarr;
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="space-y-4 mb-24">
+                                    {orderLines.map((line) => {
+                                        const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
+                                        const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
+                                        return (
+                                            <div key={line.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition flex gap-4">
+                                                {/* Optional: Add small thumbnail if available */}
+                                                {/* <div className="w-16 h-16 bg-slate-100 rounded-lg hidden sm:block"></div> */}
+
+                                                <div className="flex-1">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <h4 className="font-bold text-slate-900 text-base line-clamp-2 leading-tight">{menu?.name}</h4>
+                                                        <div className="text-right pl-2">
+                                                            <div className="font-bold text-slate-900 text-sm">{formatCurrency(lineTotal)}</div>
+                                                            <div className="text-[10px] text-slate-400">@ {formatCurrency(menu?.price || 0)}</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between mt-3">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeLine(line.id)}
+                                                            className="text-xs text-red-500 font-medium px-2 py-1 rounded hover:bg-red-50 transition flex items-center gap-1"
+                                                        >
+                                                            Hapus
+                                                        </button>
+
+                                                        <div className="flex items-center gap-3 bg-slate-50 rounded-lg p-1 border border-slate-200">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => decrementQty(line.id)}
+                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition disabled:opacity-50"
+                                                                disabled={line.qty <= 1}
+                                                            >
+                                                                <Minus className="w-3 h-3" />
+                                                            </button>
+                                                            <span className="w-6 text-center text-sm font-bold text-slate-900">{line.qty}</span>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => incrementQty(line.id)}
+                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition"
+                                                            >
+                                                                <Plus className="w-3 h-3" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+
+                            {/* Sticky Bottom Action Bar */}
+                            <div className={`fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-40 transition-transform duration-300 ${orderLines.length > 0 ? 'translate-y-0' : 'translate-y-full'}`}>
+                                <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
+                                    <div className="flex flex-col">
+                                        <span className="text-xs text-slate-500 font-medium">Est. Total ({totalPortions} Porsi)</span>
+                                        <span className="text-xl font-bold text-slate-900">{formatCurrency(totalPrice)}</span>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={!isFormValid() || isSubmitting}
+                                        className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
+                                            ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
+                                            : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
+                                            }`}
+                                    >
+                                        {isSubmitting ? (
+                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        ) : (
+                                            <>
+                                                Kirim Pesanan <Send className="w-4 h-4" />
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* Hidden Desktop Submit Button (Optional, if we want to keep one inline for desktop) */}
+                        {/* We rely on the sticky footer for simplicity now, but you could keep a static one for large screens if preferred */}
                     </form>
                 </div>
             </div>

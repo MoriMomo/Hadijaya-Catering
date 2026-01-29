@@ -92,7 +92,7 @@ const Menu = () => {
                                     onClick={() => handleCategoryClick(cat.id)}
                                     className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-medium text-sm whitespace-nowrap transition-all snap-start flex-shrink-0 ${activeCategory === cat.id
                                         ? 'bg-orange-600 text-white shadow-md'
-                                        : 'bg-white text-white-700 border border-slate-200 hover:border-orange-300 hover:bg-orange-50'
+                                        : 'bg-slate-700 text-white border border-slate-700 hover:bg-slate-800'
                                         }`}
                                 >
                                     <span className="text-lg">{cat.icon}</span>
@@ -120,20 +120,22 @@ const Menu = () => {
                                     className="scroll-mt-32"
                                 >
                                     {/* Section Header - NEWSPAPER STYLE */}
-                                    <div className="border-b-2 border-slate-300 pb-3 mb-6">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-3xl">{catData.icon}</span>
-                                                <h2 className="text-2xl font-serif font-bold text-slate-900">
-                                                    {catData.label}
-                                                </h2>
-                                                <span className="text-sm text-white-500 font-medium">
-                                                    {catData.items.length} item
-                                                </span>
+                                    <div className="border-b-2 border-slate-300 pb-4 mb-6">
+                                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                                            <div className="flex items-center gap-4">
+                                                <span className="text-4xl bg-orange-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-orange-100">{catData.icon}</span>
+                                                <div>
+                                                    <h2 className="text-2xl font-serif font-bold text-slate-900 leading-none mb-1">
+                                                        {catData.label}
+                                                    </h2>
+                                                    <span className="text-sm text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded-full">
+                                                        {catData.items.length} pilihan menu
+                                                    </span>
+                                                </div>
                                             </div>
                                             <button
                                                 onClick={() => setActiveCategory(catId)}
-                                                className="flex items-center gap-1 text-orange-600 text-sm font-medium hover:text-orange-700"
+                                                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-900 transition shadow-md active:scale-95"
                                             >
                                                 Lihat Semua
                                                 <ChevronRight className="w-4 h-4" />
