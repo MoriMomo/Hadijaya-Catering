@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Star, Users, Clock, Award, ArrowRight } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 import MenuCard from '../components/MenuCard';
@@ -11,6 +12,12 @@ const Home = () => {
 
     return (
         <div className="animate-fade-in pb-12">
+            <Helmet>
+                <title>Hadijaya Catering - Cita Rasa Legendaris Sejak 1999</title>
+                <meta name="description" content="Nasi Uduk Hijau otentik dan layanan katering profesional di Jakarta Selatan. Melayani nasi box, prasmanan, dan acara instansi sejak tahun 1999." />
+                <meta property="og:title" content="Hadijaya Catering - Cita Rasa Legendaris Jakarta" />
+                <meta property="og:description" content="Layanan katering terbaik untuk wilayah Jakarta dan sekitarnya. Spesialis Nasi Uduk Hijau otentik." />
+            </Helmet>
             {/* Hero Section - IMPROVED */}
             <div className="relative bg-[#fcfbf9] overflow-hidden">
                 {/* Remove odd background glow, use subtle gradient instead */}

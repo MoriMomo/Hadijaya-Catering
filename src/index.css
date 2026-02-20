@@ -117,3 +117,16 @@ button:focus-visible {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
 }
+
+@layer utilities {
+  .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .font-serif { font-family: 'Playfair Display', serif; }
+  .hero-pattern {
+    background-color: #fdfbf7;
+    background-image: radial-gradient(#065f46 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+  }
+  .hover-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .hover-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+}
+
