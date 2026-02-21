@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Star } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 import { TESTIMONIALS, TRUSTED_PARTNERS, AUTO_PLAY_INTERVAL } from '../constants/testimonials';
 
 const TrustedLogo = React.memo(({ name, logo, isRound = false }) => {
@@ -105,13 +107,17 @@ const HomeShowcase = () => {
     const visibleTestimonials = TESTIMONIALS.slice(currentIndex, currentIndex + testimonialsPerPage);
 
     return (
-        <>
+        <div className="bg-white dark:bg-slate-900 transition-colors duration-300">
             {/* Trusted Partners Section */}
-            <div className="bg-[#fcfbf9] py-16 border-b border-slate-200">
+            <div className="bg-[#fcfbf9] dark:bg-slate-800/50 py-16 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
                 <div className="max-w-7xl mx-auto px-6">
-                    <h3 className="text-center text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-12">
+                    <motion.h3
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        className="text-center text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-12"
+                    >
                         Kami Senang Dapat Dipercaya Oleh Anda
-                    </h3>
+                    </motion.h3>
 
                     {/* Logo Grid - Top Row */}
                     <div className="flex lex-wrap justify-center items-center gap-6 md:gapf-8 lg:gap-12 mb-8">
@@ -130,7 +136,7 @@ const HomeShowcase = () => {
             </div>
 
             {/* Testimonials Section */}
-            <div className="bg-[#4a7c59] py-16 md:py-20">
+            <div className="bg-[#4a7c59] dark:bg-slate-900 py-16 md:py-20 transition-colors duration-300">
                 <div className="max-w-6xl mx-auto px-4 md:px-6">
                     <div className="relative">
 
@@ -171,10 +177,46 @@ const HomeShowcase = () => {
                                 ))}
                             </div>
                         </div>
+
+                        {/* Navigation controls - Optional for mobile, essential for desktop */}
+                        {!isMobile && (
+                            <>
+                                <button
+                                    onClick={handlePrev}
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-700 rounded-full flex items-center justify-center shadow-lg text-slate-800 dark:text-white transition duration-200 opacity-0 group-hover:opacity-100 disabled:opacity-50 z-10"
+                                    disabled={currentIndex === 0}
+                                    aria-label="Previous testimonial"
+                                >
+                                    <ChevronLeft className="w-6 h-6" />
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-700 rounded-full flex items-center justify-center shadow-lg text-slate-800 dark:text-white transition duration-200 opacity-0 group-hover:opacity-100 disabled:opacity-50 z-10"
+                                    disabled={currentIndex >= maxIndex}
+                                    aria-label="Next testimonial"
+                                >
+                                    <ChevronRight className="w-6 h-6" />
+                                </button>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Indicators */}
+                    <div className="flex justify-center mt-8 space-x-2">
+                        {[...Array(maxIndex + 1)].map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentIndex(idx)}
+                                className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx ? 'w-8 bg-white dark:bg-orange-500' : 'w-2 bg-white/40 dark:bg-slate-600'
+                                    }`}
+                                aria-label={`Go to slide ${idx + 1}`}
+                                aria-pressed={currentIndex === idx}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
