@@ -107,14 +107,14 @@ const HomeShowcase = () => {
     const visibleTestimonials = TESTIMONIALS.slice(currentIndex, currentIndex + testimonialsPerPage);
 
     return (
-        <div className="bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div className="bg-white transition-colors duration-300">
             {/* Trusted Partners Section */}
-            <div className="bg-[#fcfbf9] dark:bg-slate-800/50 py-16 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+            <div className="bg-[#fcfbf9] py-16 border-b border-slate-200 transition-colors duration-300">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.h3
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        className="text-center text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-12"
+                        className="text-center text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-12"
                     >
                         Kami Senang Dapat Dipercaya Oleh Anda
                     </motion.h3>
@@ -136,13 +136,22 @@ const HomeShowcase = () => {
             </div>
 
             {/* Testimonials Section */}
-            <div className="bg-[#4a7c59] dark:bg-slate-900 py-16 md:py-20 transition-colors duration-300">
-                <div className="max-w-6xl mx-auto px-4 md:px-6">
-                    <div className="relative">
+            <div className="bg-white py-16 md:py-24 transition-colors duration-300">
+                <div className="max-w-7xl mx-auto px-4 md:px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-center mb-16"
+                    >
+                        <span className="text-[#d35400] font-bold uppercase tracking-widest text-xs">Testimoni</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#2c2520] mt-3">Apa Kata Mereka</h2>
+                    </motion.div>
+
+                    <div className="relative group">
 
                         {/* Testimonials Grid with Touch Support */}
                         <div
-                            className="relative min-h-60 md:min-h-64 overflow-hidden"
+                            className="relative min-h-[300px] md:min-h-[280px] overflow-hidden px-4 md:px-12 py-4"
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}
                             onTouchEnd={handleTouchEnd}
@@ -159,20 +168,25 @@ const HomeShowcase = () => {
                                 {visibleTestimonials.map((testimonial, idx) => (
                                     <article
                                         key={testimonial.id}
-                                        className="text-center text-white px-4 md:px-0"
+                                        className="bg-white p-8 rounded-2xl premium-shadow border border-[#f0ece6] flex flex-col h-full transform transition-transform hover:-translate-y-1"
                                         style={{
                                             animationDelay: `${idx * 0.1}s`
                                         }}
                                     >
-                                        <div className="flex justify-center gap-1 mb-4" aria-label={`Rating: ${testimonial.rating} out of 5 stars`}>
+                                        <div className="flex gap-1 mb-6" aria-label={`Rating: ${testimonial.rating} out of 5 stars`}>
                                             {[...Array(testimonial.rating)].map((_, i) => (
-                                                <Star key={i} className="w-5 h-5 md:w-6 md:h-6 fill-amber-400 text-amber-400" aria-hidden="true" />
+                                                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" aria-hidden="true" />
                                             ))}
                                         </div>
-                                        <blockquote className="text-sm md:text-base leading-relaxed mb-4 max-w-md mx-auto">
+                                        <blockquote className="text-sm md:text-base leading-relaxed mb-8 text-[#5c5046] flex-grow font-light">
                                             "{testimonial.text}"
                                         </blockquote>
-                                        <cite className="font-bold not-italic">— {testimonial.name}</cite>
+                                        <div className="flex items-center gap-3 mt-auto pt-4 border-t border-[#f0ece6]">
+                                            <div className="w-10 h-10 rounded-full bg-[#fdf5f0] text-[#d35400] flex items-center justify-center font-bold text-sm">
+                                                {testimonial.name.charAt(0)}
+                                            </div>
+                                            <cite className="font-bold text-[#2c2520] not-italic text-sm">{testimonial.name}</cite>
+                                        </div>
                                     </article>
                                 ))}
                             </div>
@@ -183,7 +197,7 @@ const HomeShowcase = () => {
                             <>
                                 <button
                                     onClick={handlePrev}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-700 rounded-full flex items-center justify-center shadow-lg text-slate-800 dark:text-white transition duration-200 opacity-0 group-hover:opacity-100 disabled:opacity-50 z-10"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 w-12 h-12 bg-white rounded-full flex items-center justify-center premium-shadow border border-[#f0ece6] text-[#2c2520] hover:text-[#d35400] transition-all duration-300 opacity-0 group-hover:opacity-100 disabled:opacity-0 z-10 hover:scale-110"
                                     disabled={currentIndex === 0}
                                     aria-label="Previous testimonial"
                                 >
@@ -191,7 +205,7 @@ const HomeShowcase = () => {
                                 </button>
                                 <button
                                     onClick={handleNext}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 md:w-12 md:h-12 bg-white/90 dark:bg-slate-800/90 hover:bg-white dark:hover:bg-slate-700 rounded-full flex items-center justify-center shadow-lg text-slate-800 dark:text-white transition duration-200 opacity-0 group-hover:opacity-100 disabled:opacity-50 z-10"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 w-12 h-12 bg-white rounded-full flex items-center justify-center premium-shadow border border-[#f0ece6] text-[#2c2520] hover:text-[#d35400] transition-all duration-300 opacity-0 group-hover:opacity-100 disabled:opacity-0 z-10 hover:scale-110"
                                     disabled={currentIndex >= maxIndex}
                                     aria-label="Next testimonial"
                                 >
@@ -207,7 +221,7 @@ const HomeShowcase = () => {
                             <button
                                 key={idx}
                                 onClick={() => setCurrentIndex(idx)}
-                                className={`h-2 rounded-full transition-all duration-300 ${currentIndex === idx ? 'w-8 bg-white dark:bg-orange-500' : 'w-2 bg-white/40 dark:bg-slate-600'
+                                className={`h-2.5 rounded-full transition-all duration-300 ${currentIndex === idx ? 'w-8 bg-[#d35400]' : 'w-2.5 bg-[#e2e8f0] hover:bg-[#d35400]/50'
                                     }`}
                                 aria-label={`Go to slide ${idx + 1}`}
                                 aria-pressed={currentIndex === idx}

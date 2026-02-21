@@ -90,9 +90,9 @@ const Menu = () => {
                                 <button
                                     key={cat.id}
                                     onClick={() => handleCategoryClick(cat.id)}
-                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-medium text-sm whitespace-nowrap transition-all snap-start flex-shrink-0 ${activeCategory === cat.id
-                                        ? 'bg-orange-600 text-white shadow-md'
-                                        : 'bg-slate-700 text-white border border-slate-700 hover:bg-slate-800'
+                                    className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap transition-all duration-300 snap-start flex-shrink-0 border ${activeCategory === cat.id
+                                        ? 'bg-[#d35400] text-white border-[#d35400] shadow-md transform scale-105'
+                                        : 'bg-white text-[#5c5046] border-[#e2e8f0] shadow-sm hover:border-[#d35400] hover:text-[#d35400]'
                                         }`}
                                 >
                                     <span className="text-lg">{cat.icon}</span>
