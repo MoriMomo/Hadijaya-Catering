@@ -72,7 +72,7 @@ const Menu = () => {
                         <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-2">
                             Menu & Harga
                         </h1>
-                        <p className="text-white-600">
+                        <p className="text-slate-600">
                             Pilih kategori atau scroll untuk melihat semua menu
                         </p>
                     </div>
@@ -91,8 +91,8 @@ const Menu = () => {
                                     key={cat.id}
                                     onClick={() => handleCategoryClick(cat.id)}
                                     className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm whitespace-nowrap transition-all duration-300 snap-start flex-shrink-0 border ${activeCategory === cat.id
-                                        ? 'bg-[#d35400] text-white border-[#d35400] shadow-md transform scale-105'
-                                        : 'bg-white text-[#5c5046] border-[#e2e8f0] shadow-sm hover:border-[#d35400] hover:text-[#d35400]'
+                                        ? 'bg-accent-500 text-white border-accent-500 shadow-md transform scale-105'
+                                        : 'bg-white text-slate-600 border-slate-200 shadow-sm hover:border-accent-400 hover:text-accent-500'
                                         }`}
                                 >
                                     <span className="text-lg">{cat.icon}</span>
@@ -123,7 +123,7 @@ const Menu = () => {
                                     <div className="border-b-2 border-slate-300 pb-4 mb-6">
                                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                                             <div className="flex items-center gap-4">
-                                                <span className="text-4xl bg-orange-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-orange-100">{catData.icon}</span>
+                                                <span className="text-4xl bg-accent-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-accent-200">{catData.icon}</span>
                                                 <div>
                                                     <h2 className="text-2xl font-serif font-bold text-slate-900 leading-none mb-1">
                                                         {catData.label}

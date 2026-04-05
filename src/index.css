@@ -5,10 +5,10 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: #2c2520;
-  /* Deep Espresso */
-  background-color: #faf9f6;
-  /* Alabaster Off-white */
+  color: #2C2620;
+  /* Deep warm brown */
+  background-color: #FFFBF8;
+  /* Creamy white - warm and inviting */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,12 +18,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #F2A65A;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #E89D47;
 }
 
 body {
@@ -45,13 +45,15 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9f9f9;
+  background-color: #E8E2D8;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #F2A65A;
+  background-color: #F2A65A;
+  color: white;
 }
 
 button:focus,
@@ -116,6 +118,7 @@ button:focus-visible {
 }
 
 @layer utilities {
+  /* Typography */
   .font-sans {
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
@@ -124,6 +127,28 @@ button:focus-visible {
     font-family: 'Playfair Display', Georgia, serif;
   }
 
+  /* Card Consistency System - Phase 2 */
+  .card-base {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(226, 232, 240);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  .card-base:hover {
+    border-color: rgb(203, 213, 225);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Touch Target Min 48x48px - Phase 4 */
+  .touch-target {
+    min-height: 3rem;
+    min-width: 3rem;
+  }
+
+  /* Primary Styles */
   .hero-pattern {
     background-color: #faf9f6;
     background-image: radial-gradient(rgba(211, 84, 0, 0.08) 1px, transparent 1px);

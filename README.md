@@ -98,10 +98,10 @@ In development mode, the app tracks all 404 errors:
 
 ## 🛠️ Tech Stack
 
-- **Framework:** React 18
+- **Framework:** React 19
 - **Build Tool:** Vite
 - **Styling:** Tailwind CSS
-- **Routing:** React Router v6
+- **Routing:** React Router v7
 - **Icons:** Lucide React
 
 ## 📚 Documentation

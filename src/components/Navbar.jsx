@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
@@ -8,7 +8,7 @@ const NavButton = ({ to, label, active, isCta }) => {
         return (
             <Link
                 to={to}
-                className="bg-[#d35400] hover:bg-[#e65100] text-white visited:text-white no-underline px-8 py-2.5 rounded-full font-semibold transition-all duration-300 text-sm w-full md:w-auto shadow-md hover:shadow-lg block text-center focus:outline-none hover:-translate-y-0.5"
+                className="bg-accent-400 hover:bg-accent-500 text-white visited:text-white no-underline px-8 py-2.5 rounded-full font-semibold transition-all duration-300 text-sm w-full md:w-auto shadow-md hover:shadow-lg block text-center focus:outline-none hover:-translate-y-0.5"
             >
                 {label}
             </Link>
@@ -19,19 +19,33 @@ const NavButton = ({ to, label, active, isCta }) => {
         <Link
             to={to}
             aria-current={active ? "page" : undefined}
-            className={`transition-all duration-300 text-sm font-medium py-2 px-4 rounded-lg w-full md:w-auto text-left md:text-center block no-underline focus:outline-none relative group ${active ? 'text-[#d35400] font-semibold' : 'text-slate-600 hover:text-[#d35400]'
+            className={`transition-all duration-300 text-sm font-medium py-2 px-4 rounded-lg w-full md:w-auto text-left md:text-center block no-underline focus:outline-none relative group ${active ? 'text-accent-400 font-semibold' : 'text-slate-600 hover:text-accent-400'
                 }`}
         >
             {label}
             {/* Subtle bottom border hover effect */}
-            <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-[#d35400] transform origin-left transition-transform duration-300 ${active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} rounded-full opacity-80`} />
+            <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-accent-400 transform origin-left transition-transform duration-300 ${active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} rounded-full opacity-80`} />
         </Link>
     );
 };
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 8);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const navItems = [
         { id: 'home', label: 'Beranda', to: '/' },
@@ -41,7 +55,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 glass-nav transition-all duration-300">
+        <nav className={`sticky top-0 z-50 glass-nav transition-all duration-300 ${isScrolled ? 'shadow-md border-b border-slate-200/80' : 'border-b border-transparent'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 md:h-20">
                     {/* Logo */}
@@ -50,7 +64,7 @@ const Navbar = () => {
                         className="flex items-center gap-2 md:gap-3 cursor-pointer group"
                     >
                         <OptimizedImage
-                            src="../images/hadijaya/makanan/hadijaya-catering-logo.jpeg"
+                            src="/images/hadijaya/makanan/hadijaya-catering-logo.webp"
                             fallback="/images/placeholder.svg"
                             alt="Hadijaya Catering Logo"
                             className="h-10 md:h-12"
@@ -76,7 +90,7 @@ const Navbar = () => {
                     <div className="md:hidden flex items-center gap-2">
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="p-2 text-slate-600 hover:text-[#d35400] bg-slate-50 hover:bg-[#fff9f5] rounded-lg transition-all duration-200 focus:outline-none border border-slate-200"
+                            className="p-2 text-slate-600 hover:text-accent-400 bg-slate-50 hover:bg-accent-50 rounded-lg transition-all duration-200 focus:outline-none border border-slate-200"
                             aria-label="Toggle menu"
                         >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -87,7 +101,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 top-16 bg-[#faf9f6] z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-200 pb-20 shadow-inner">
+                <div className="md:hidden fixed inset-0 top-16 bg-slate-50 z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-200 pb-20 shadow-inner">
                     <div className="px-6 py-6 space-y-4">
                         {navItems.map(item => (
                             <div key={item.id} className="border-b border-slate-200/50 pb-2 last:border-0" onClick={() => setMobileMenuOpen(false)}>

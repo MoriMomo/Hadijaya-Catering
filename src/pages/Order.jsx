@@ -262,12 +262,12 @@ const Order = () => {
             const menu = MENU_DATA.find(m => m.id === Number(l.menuId)) || {};
             const linePrice = (menu.price || 0) * l.qty;
             return `- ${menu.name || 'Item'}: ${l.qty} porsi @ ${formatCurrency(menu.price || 0)} = ${formatCurrency(linePrice)}`;
-        }).join('%0A');
+        }).join('\n');
 
-        const message = `Halo Hadijaya Catering,%0A%0ASaya ingin memesan untuk:%0A- Nama: ${encodeURIComponent(formData.name)}%0A- No HP: ${encodeURIComponent(formData.phone)}%0A- Tanggal: ${selectedDate}%0A%0ADaftar Pesanan:%0A${linesText}%0A%0ATotal porsi: ${totalPortions}%0AEstimasi Total: ${formatCurrency(totalPrice)}%0A%0AMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
+        const message = `Halo Hadijaya Catering,\n\nSaya ingin memesan untuk:\n- Nama: ${formData.name}\n- No HP: ${formData.phone}\n- Tanggal: ${selectedDate}\n\nDaftar Pesanan:\n${linesText}\n\nTotal porsi: ${totalPortions}\nEstimasi Total: ${formatCurrency(totalPrice)}\n\nMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
 
         setTimeout(() => {
-            window.open(`https://wa.me/+6289687472787?text=${message}`, '_blank');
+            window.open(`https://wa.me/6289687472787?text=${encodeURIComponent(message)}`, '_blank');
             setIsSubmitting(false);
             setShowSuccess(true);
             clearDraft();
@@ -305,7 +305,7 @@ const Order = () => {
                         <p className="text-slate-600 mb-2"><strong>No. WhatsApp:</strong> {formData.phone}</p>
                         <p className="text-slate-600 mb-2"><strong>Tanggal:</strong> {selectedDate}</p>
                         <p className="text-slate-600 mb-4"><strong>Total Porsi:</strong> {totalPortions}</p>
-                        <p className="text-lg font-bold text-orange-700 mb-6">Estimasi: {formatCurrency(totalPrice)}</p>
+                        <p className="text-lg font-bold text-accent-600 mb-6">Estimasi: {formatCurrency(totalPrice)}</p>
                         <p className="text-sm text-slate-500 mb-6">Apakah pesanan Anda sudah benar?</p>
                         <div className="flex gap-3">
                             <button
@@ -316,7 +316,7 @@ const Order = () => {
                             </button>
                             <button
                                 onClick={confirmSubmit}
-                                className="flex-1 px-4 py-2 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 transition"
+                                className="flex-1 px-4 py-2 bg-accent-500 text-white rounded-lg font-medium hover:bg-accent-600 transition"
                             >
                                 Kirim via WhatsApp
                             </button>
@@ -348,7 +348,7 @@ const Order = () => {
                                     onBlur={() => handleBlur('name')}
                                     aria-describedby={errors.name ? 'name-error' : undefined}
                                     aria-invalid={!!errors.name}
-                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.name && touched.name ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
+                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.name && touched.name ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-accent-400 transition placeholder-slate-400 focus:outline-none`}
                                     placeholder="Nama Anda"
                                 />
                                 {errors.name && touched.name && (
@@ -372,7 +372,7 @@ const Order = () => {
                                     onBlur={() => handleBlur('phone')}
                                     aria-describedby={errors.phone ? 'phone-error' : undefined}
                                     aria-invalid={!!errors.phone}
-                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
+                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-accent-400 transition placeholder-slate-400 focus:outline-none`}
                                     placeholder="0812..."
                                 />
                                 {errors.phone && touched.phone && (
@@ -397,7 +397,7 @@ const Order = () => {
                                     value={selectedYear}
                                     onChange={(e) => handleYearChange(e.target.value)}
                                     aria-label="Pilih tahun"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-accent-400 transition focus:outline-none"
                                 >
                                     {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                                 </select>
@@ -406,7 +406,7 @@ const Order = () => {
                                     value={selectedMonth}
                                     onChange={(e) => handleMonthChange(e.target.value)}
                                     aria-label="Pilih bulan"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-accent-400 transition focus:outline-none"
                                 >
                                     {(monthOptionsForYear(selectedYear) || []).map(m => {
                                         const monthName = new Date(Number(selectedYear), m - 1, 1).toLocaleString('id-ID', { month: 'long' });
@@ -418,7 +418,7 @@ const Order = () => {
                                     value={selectedDay}
                                     onChange={(e) => handleDayChange(e.target.value)}
                                     aria-label="Pilih hari"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-accent-400 transition focus:outline-none"
                                 >
                                     {(dayOptionsForYearMonth(selectedYear, selectedMonth) || []).map(d => (
                                         <option key={d.iso} value={d.day}>{new Date(d.iso).toLocaleDateString('id-ID', { weekday: 'short', day: '2-digit' })}</option>
@@ -437,7 +437,7 @@ const Order = () => {
                         <div className="space-y-8 animate-fade-in">
                             <div>
                                 <h3 className="text-xl font-bold font-serif text-slate-900 mb-6 flex items-center gap-2">
-                                    <span className="bg-orange-600 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">1</span>
+                                    <span className="bg-accent-500 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">1</span>
                                     Pilih Menu Favorit
                                 </h3>
 
@@ -449,7 +449,7 @@ const Order = () => {
                                             type="button"
                                             onClick={() => setActiveCategory(cat.id)}
                                             className={`px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition snap-start border-2 ${activeCategory === cat.id
-                                                ? 'bg-orange-600 text-white border-orange-600 shadow-lg scale-105'
+                                                ? 'bg-accent-500 text-white border-accent-500 shadow-lg scale-105'
                                                 : 'bg-slate-700 text-white border-slate-700 hover:bg-slate-800'
                                                 }`}
                                         >
@@ -464,13 +464,13 @@ const Order = () => {
                                         <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group relative overflow-hidden">
                                             <div className="flex justify-between items-start mb-3">
                                                 <h4 className="font-bold text-slate-900 pr-2">{item.name}</h4>
-                                                <p className="text-orange-600 font-bold text-sm whitespace-nowrap bg-orange-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
+                                                <p className="text-accent-600 font-bold text-sm whitespace-nowrap bg-accent-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
                                             </div>
                                             <p className="text-slate-500 text-xs line-clamp-2 mb-4 h-8">{item.desc}</p>
                                             <button
                                                 type="button"
                                                 onClick={() => addToOrder(item)}
-                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
+                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-accent-500 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
                                             >
                                                 <Plus className="w-4 h-4" /> Tambah ke Pesanan
                                             </button>
@@ -489,20 +489,20 @@ const Order = () => {
                                     <span className="bg-slate-900 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">2</span>
                                     Daftar Pesanan
                                 </h3>
-                                <span className="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full">
+                                <span className="bg-accent-100 text-accent-800 text-xs font-bold px-3 py-1 rounded-full">
                                     {orderLines.length} Item
                                 </span>
                             </div>
 
                             {orderLines.length === 0 ? (
-                                <div className="text-center py-16 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center group hover:border-orange-200 transition-colors">
+                                <div className="text-center py-16 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center group hover:border-accent-200 transition-colors">
                                     <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 text-4xl group-hover:scale-110 transition-transform duration-300">🍽️</div>
                                     <p className="text-slate-900 font-bold text-lg mb-1">Daftar Pesanan Kosong</p>
                                     <p className="text-slate-500 text-sm max-w-xs mx-auto">Silakan pilih menu favorit Anda dari kategori di atas untuk mulai memesan.</p>
                                     <button
                                         type="button"
                                         onClick={() => document.getElementById('menu-selection').scrollIntoView({ behavior: 'smooth' })}
-                                        className="mt-6 text-orange-600 font-bold text-sm hover:underline"
+                                        className="mt-6 text-accent-500 font-bold text-sm hover:underline"
                                     >
                                         Mulai Belanja &uarr;
                                     </button>
@@ -539,7 +539,7 @@ const Order = () => {
                                                             <button
                                                                 type="button"
                                                                 onClick={() => decrementQty(line.id)}
-                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition disabled:opacity-50"
+                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-accent-500 transition disabled:opacity-50"
                                                                 disabled={line.qty <= 1}
                                                             >
                                                                 <Minus className="w-3 h-3" />
@@ -548,7 +548,7 @@ const Order = () => {
                                                             <button
                                                                 type="button"
                                                                 onClick={() => incrementQty(line.id)}
-                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition"
+                                                                className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-accent-500 transition"
                                                             >
                                                                 <Plus className="w-3 h-3" />
                                                             </button>
@@ -573,7 +573,7 @@ const Order = () => {
                                         disabled={!isFormValid() || isSubmitting}
                                         className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
                                             ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                                            : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
+                                            : 'bg-accent-500 text-white hover:bg-accent-600 active:scale-95'
                                             }`}
                                     >
                                         {isSubmitting ? (

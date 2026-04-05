@@ -16,7 +16,7 @@ const Orders = () => {
                     <ArrowRight className="w-4 h-4 rotate-180" /> Kembali
                 </button>
                 <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-orange-600 shadow-sm border border-slate-100">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-accent-500 shadow-sm border border-slate-100">
                         <ClipboardList className="w-6 h-6" />
                     </div>
                     <h2 className="text-3xl font-bold text-slate-900 font-serif">Riwayat Pesanan</h2>
@@ -42,8 +42,8 @@ const Orders = () => {
                                     <td className="p-6 font-mono font-bold text-slate-600">Rp {order.value.toLocaleString('id-ID')}</td>
                                     <td className="p-6">
                                         <span className={`px-3 py-1 rounded-full text-xs font-bold border ${order.status === 'Selesai' ? 'bg-green-100 text-green-700 border-green-200' :
-                                                order.status === 'Confirmed' ? 'bg-blue-100 text-blue-700 border-blue-200' :
-                                                    'bg-yellow-100 text-yellow-700 border-yellow-200'
+                                            order.status === 'Confirmed' ? 'bg-blue-100 text-blue-700 border-blue-200' :
+                                                'bg-yellow-100 text-yellow-700 border-yellow-200'
                                             }`}>
                                             {order.status}
                                         </span>

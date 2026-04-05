@@ -5,25 +5,25 @@ const StatCard = ({ title, icon, value, subtitle, badge, badgeColor = 'blue', on
         red: 'text-red-400 bg-red-50',
         blue: 'text-blue-400 bg-blue-50',
         green: 'text-green-400 bg-green-50',
-        orange: 'text-orange-400 bg-orange-50'
+        orange: 'text-accent-400 bg-accent-50'
     };
 
     const iconColors = {
         red: 'bg-red-50 text-red-500',
         blue: 'bg-blue-50 text-blue-500',
         green: 'bg-green-50 text-green-500',
-        orange: 'bg-orange-50 text-orange-500'
+        orange: 'bg-accent-50 text-accent-500'
     };
 
     if (onClick) {
         return (
             <div
                 onClick={onClick}
-                className="bg-orange-600 p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between relative overflow-hidden group cursor-pointer"
+                className="bg-accent-500 p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between relative overflow-hidden group cursor-pointer"
             >
                 <div className="absolute right-0 top-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/20 transition"></div>
                 <h3 className="font-bold text-lg mb-2 relative z-10">{title}</h3>
-                <p className="text-orange-100 text-xs mb-4 relative z-10">{subtitle}</p>
+                <p className="text-accent-100 text-xs mb-4 relative z-10">{subtitle}</p>
                 <div className="flex items-center gap-2 font-bold text-sm relative z-10">
                     {value}
                 </div>
@@ -32,7 +32,7 @@ const StatCard = ({ title, icon, value, subtitle, badge, badgeColor = 'blue', on
     }
 
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-orange-200 transition">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-accent-200 transition">
             <div className="flex justify-between items-start mb-4">
                 <div className={`p-3 ${iconColors[badgeColor]} rounded-xl`}>
                     {icon}
