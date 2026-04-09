@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
+import { useCart } from '../context/CartContext';
 
 const NavButton = ({ to, label, active, isCta }) => {
     if (isCta) {
@@ -29,10 +30,29 @@ const NavButton = ({ to, label, active, isCta }) => {
     );
 };
 
+const CartBadge = ({ count, onClick }) => {
+    return (
+        <button
+            onClick={onClick}
+            className="relative p-2 text-slate-600 hover:text-accent-500 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-400 rounded-full hover:bg-accent-50"
+            aria-label="View Cart"
+        >
+            <ShoppingBag className="w-6 h-6" />
+            {count > 0 && (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-500 rounded-full animate-fade-in shadow-sm min-w-[20px] h-[20px]">
+                    {count}
+                </span>
+            )}
+        </button>
+    );
+};
+
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
+    const { cartCount } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -74,7 +94,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-6 lg:gap-10">
+                    <div className="hidden md:flex items-center gap-6 lg:gap-8">
                         {navItems.map(item => (
                             <NavButton
                                 key={item.id}
@@ -84,10 +104,17 @@ const Navbar = () => {
                                 isCta={item.isCta}
                             />
                         ))}
+                        <div className="pl-4 border-l border-slate-200">
+                            <CartBadge count={cartCount} onClick={() => navigate('/order#order-summary')} />
+                        </div>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center gap-2">
+                    {/* Mobile Menu & Cart */}
+                    <div className="md:hidden flex items-center gap-3">
+                        <CartBadge count={cartCount} onClick={() => {
+                            setMobileMenuOpen(false);
+                            navigate('/order#order-summary');
+                        }} />
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="p-2 text-slate-600 hover:text-accent-400 bg-slate-50 hover:bg-accent-50 rounded-lg transition-all duration-200 focus:outline-none border border-slate-200"

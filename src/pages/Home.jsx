@@ -9,6 +9,7 @@ import { TESTIMONIALS } from '../constants/testimonials';
 import MenuCard from '../components/MenuCard';
 import HomeShowcase from '../components/HomeShowcase';
 import OptimizedImage from '../components/OptimizedImage';
+import FAQSection from '../components/FAQSection';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -262,6 +263,9 @@ const Home = () => {
                     </motion.div>
                 </div>
             </div>
+
+            {/* FAQs Section */}
+            <FAQSection />
 
             {/* CTA - Keep at bottom */}
             <div className="py-20 bg-accent-500 relative overflow-hidden text-center px-6 transition-colors duration-300">

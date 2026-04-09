@@ -1,13 +1,17 @@
 import { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ShoppingBag, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { MENU_DATA } from '../constants/data';
 import MenuCard from '../components/MenuCard';
+import { useCart } from '../context/CartContext';
 
 const Menu = () => {
     const [activeCategory, setActiveCategory] = useState('semua');
     const scrollContainerRef = useRef(null);
     const sectionRefs = useRef({});
+    const navigate = useNavigate();
+    const { orderLines } = useCart();
 
     const categories = [
         { id: 'semua', label: 'Semua Menu', icon: '🍱' },
@@ -58,6 +62,14 @@ const Menu = () => {
         }
     };
 
+    const cartCount = orderLines.length;
+    const calculateTotal = () => {
+        return orderLines.reduce((sum, line) => {
+            const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
+            return sum + (menu?.price || 0) * (Number(line.qty) || 0);
+        }, 0);
+    };
+
     return (
         <>
             <Helmet>
@@ -65,7 +77,7 @@ const Menu = () => {
                 <meta name="description" content="Lihat menu lengkap Hadijaya Catering dengan berbagai pilihan paket dan harga terjangkau" />
             </Helmet>
 
-            <div className="pt-16 pb-24 bg-slate-50 min-h-screen">
+            <div className={`pt-16 bg-slate-50 min-h-screen ${cartCount > 0 ? 'pb-32' : 'pb-24'}`}>
                 {/* Header */}
                 <div className="bg-white border-b border-slate-200 mb-8">
                     <div className="max-w-7xl mx-auto px-6 py-8">
@@ -162,6 +174,32 @@ const Menu = () => {
                     )}
                 </div>
             </div>
+
+            {/* Mobile Sticky Buy Bar */}
+            {cartCount > 0 && (
+                <div className="fixed bottom-0 left-0 right-0 p-4 z-50 animate-fade-in lg:hidden pointer-events-none">
+                    <div className="bg-slate-900 text-white rounded-2xl p-4 shadow-2xl flex items-center justify-between pointer-events-auto">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-slate-800 p-2 rounded-full relative">
+                                <ShoppingBag className="w-5 h-5 text-accent-400" />
+                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                                    {cartCount}
+                                </span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">Total item</span>
+                                <span className="text-sm font-bold">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => navigate('/order#order-summary')}
+                            className="bg-accent-500 hover:bg-accent-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm tracking-wide shadow-lg transition-transform active:scale-95 flex items-center gap-2"
+                        >
+                            Lanjut <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 };

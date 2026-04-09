@@ -1,48 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
+import { useCart } from '../context/CartContext';
 
 const Order = () => {
-    const [formData, setFormData] = useState({ name: '', phone: '' });
+    const { 
+        orderLines, checkoutDetails, setCheckoutDetails, 
+        addToCart, removeLine, incrementQty, decrementQty, 
+        totalPortions, clearCart 
+    } = useCart();
+
     const [errors, setErrors] = useState({ name: '', phone: '' });
     const [touched, setTouched] = useState({ name: false, phone: false });
-    const [selectedDate, setSelectedDate] = useState('');
     const [dateWarning, setDateWarning] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-    const idCounterRef = useRef(1);
-
-    // Initialize orderLines with lazy initializer to avoid setState in effect
-    // eslint-disable-next-line react-hooks/refs
-    const [orderLines, setOrderLines] = useState(() => {
-        try {
-            const saved = localStorage.getItem('hadijaya-order-draft');
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                idCounterRef.current = parsed.nextId || 1;
-                if (parsed.lines && parsed.lines.length > 0) {
-                    return parsed.lines;
-                }
-            }
-        } catch (error) {
-            console.error("Error loading saved order:", error);
-            idCounterRef.current = 1;
-        }
-        // Return default initial value
-        return [];
-    });
 
     // Validation helpers
     const validateName = (name) => {
-        if (!name.trim()) return 'Nama wajib diisi';
+        if (!name?.trim()) return 'Nama wajib diisi';
         if (name.trim().length < 3) return 'Nama minimal 3 karakter';
         return '';
     };
 
     const validatePhone = (phone) => {
-        if (!phone.trim()) return 'Nomor WhatsApp wajib diisi';
+        if (!phone?.trim()) return 'Nomor WhatsApp wajib diisi';
         const cleaned = phone.replace(/\D/g, '');
         if (cleaned.startsWith('62') && cleaned.length >= 11) return '';
         if (cleaned.startsWith('08') && cleaned.length >= 10) return '';
@@ -50,11 +34,11 @@ const Order = () => {
     };
 
     const isFormValid = () => {
-        return !validateName(formData.name) && !validatePhone(formData.phone) && selectedDate && totalPortions >= 10;
+        return !validateName(checkoutDetails.name) && !validatePhone(checkoutDetails.phone) && checkoutDetails.date && totalPortions >= 10;
     };
 
     const handleField = (id, value) => {
-        setFormData(prev => ({ ...prev, [id]: value }));
+        setCheckoutDetails(prev => ({ ...prev, [id]: value }));
         if (touched[id]) {
             const error = id === 'name' ? validateName(value) : validatePhone(value);
             setErrors(prev => ({ ...prev, [id]: error }));
@@ -63,7 +47,7 @@ const Order = () => {
 
     const handleBlur = (id) => {
         setTouched(prev => ({ ...prev, [id]: true }));
-        const value = formData[id];
+        const value = checkoutDetails[id];
         const error = id === 'name' ? validateName(value) : validatePhone(value);
         setErrors(prev => ({ ...prev, [id]: error }));
     };
@@ -101,52 +85,29 @@ const Order = () => {
         { id: 'snack', label: 'Snack & Tambahan' }
     ];
 
-    const addToOrder = (menuItem) => {
-        setOrderLines(prev => {
-            const existing = prev.find(l => l.menuId === menuItem.id);
-            if (existing) {
-                return prev.map(l => l.menuId === menuItem.id ? { ...l, qty: (Number(l.qty) || 0) + 1 } : l);
-            }
-            const nextId = ++idCounterRef.current;
-            return [...prev, { id: nextId, menuId: menuItem.id, qty: 10 }];
-        });
-    };
-
     useEffect(() => {
         if (dateOptions.length && !selectedYear) {
+            // Priority to existing date in checkoutDetails
+            if (checkoutDetails.date) {
+                const parts = checkoutDetails.date.split('-');
+                if (parts.length === 3) {
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                    setSelectedYear(String(parseInt(parts[0])));
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                    setSelectedMonth(String(parseInt(parts[1])));
+                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                    setSelectedDay(String(parseInt(parts[2])));
+                    return;
+                }
+            }
+
             const first = dateOptions[0];
             setSelectedYear(String(first.year));
             setSelectedMonth(String(first.month));
             setSelectedDay(String(first.day));
-            setSelectedDate(first.value);
+            handleField('date', first.value);
         }
-    }, [dateOptions, selectedYear]);
-
-    // Save draft to localStorage
-    useEffect(() => {
-        const draft = {
-            lines: orderLines,
-            nextId: idCounterRef.current,
-            name: formData.name,
-            phone: formData.phone,
-            date: selectedDate
-        };
-        localStorage.setItem('hadijaya-order-draft', JSON.stringify(draft));
-    }, [orderLines, formData, selectedDate]);
-
-    // Restore name/phone from draft on mount
-    useEffect(() => {
-        const saved = localStorage.getItem('hadijaya-order-draft');
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (parsed.name) setFormData(prev => ({ ...prev, name: parsed.name }));
-                if (parsed.phone) setFormData(prev => ({ ...prev, phone: parsed.phone }));
-            } catch (e) {
-                console.error('Error restoring draft:', e);
-            }
-        }
-    }, []);
+    }, [dateOptions, selectedYear, checkoutDetails.date]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const allowedDates = dateOptions;
     const yearOptions = Array.from(new Set(allowedDates.map(d => d.year)));
@@ -160,7 +121,7 @@ const Order = () => {
         setSelectedMonth(String(m));
         const days = dayOptionsForYearMonth(y, m);
         setSelectedDay(String(days[0].day));
-        setSelectedDate(days[0].iso);
+        handleField('date', days[0].iso);
         setDateWarning(false);
     };
 
@@ -168,37 +129,16 @@ const Order = () => {
         setSelectedMonth(m);
         const days = dayOptionsForYearMonth(selectedYear, m);
         setSelectedDay(String(days[0].day));
-        setSelectedDate(days[0].iso);
+        handleField('date', days[0].iso);
         setDateWarning(false);
     };
 
     const handleDayChange = (d) => {
         setSelectedDay(d);
         const found = allowedDates.find(x => x.year === Number(selectedYear) && x.month === Number(selectedMonth) && x.day === Number(d));
-        if (found) setSelectedDate(found.value);
+        if (found) handleField('date', found.value);
         setDateWarning(false);
     };
-
-
-
-    const updateLine = (id, patch) => {
-        setOrderLines(prev => prev.map(l => l.id === id ? { ...l, ...patch } : l));
-    };
-
-    const removeLine = (id) => {
-        setOrderLines(prev => prev.filter(l => l.id !== id));
-    };
-
-    const incrementQty = (id) => {
-        updateLine(id, { qty: (orderLines.find(l => l.id === id)?.qty || 0) + 1 });
-    };
-
-    const decrementQty = (id) => {
-        const current = orderLines.find(l => l.id === id)?.qty || 0;
-        if (current > 1) updateLine(id, { qty: current - 1 });
-    };
-
-    const totalPortions = orderLines.reduce((s, l) => s + (Number(l.qty) || 0), 0);
 
     const calculateTotal = () => {
         return orderLines.reduce((sum, line) => {
@@ -217,16 +157,12 @@ const Order = () => {
         }).format(amount);
     };
 
-    const clearDraft = () => {
-        localStorage.removeItem('hadijaya-order-draft');
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // Final validation
-        const nameError = validateName(formData.name);
-        const phoneError = validatePhone(formData.phone);
+        const nameError = validateName(checkoutDetails.name);
+        const phoneError = validatePhone(checkoutDetails.phone);
 
         if (nameError || phoneError) {
             setErrors({ name: nameError, phone: phoneError });
@@ -234,12 +170,12 @@ const Order = () => {
             return;
         }
 
-        if (!selectedDate) {
+        if (!checkoutDetails.date) {
             alert('Pilih tanggal acara.');
             return;
         }
 
-        const validDate = allowedDates.find(d => d.value === selectedDate);
+        const validDate = allowedDates.find(d => d.value === checkoutDetails.date);
         if (!validDate) {
             setDateWarning(true);
             alert('Tanggal tidak tersedia. Pilih tanggal lain (pemesanan minimal H-2).');
@@ -264,13 +200,13 @@ const Order = () => {
             return `- ${menu.name || 'Item'}: ${l.qty} porsi @ ${formatCurrency(menu.price || 0)} = ${formatCurrency(linePrice)}`;
         }).join('\n');
 
-        const message = `Halo Hadijaya Catering,\n\nSaya ingin memesan untuk:\n- Nama: ${formData.name}\n- No HP: ${formData.phone}\n- Tanggal: ${selectedDate}\n\nDaftar Pesanan:\n${linesText}\n\nTotal porsi: ${totalPortions}\nEstimasi Total: ${formatCurrency(totalPrice)}\n\nMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
+        const message = `Halo Hadijaya Catering,\n\nSaya ingin memesan untuk:\n- Nama: ${checkoutDetails.name}\n- No HP: ${checkoutDetails.phone}\n- Tanggal: ${checkoutDetails.date}\n\nDaftar Pesanan:\n${linesText}\n\nTotal porsi: ${totalPortions}\nEstimasi Total: ${formatCurrency(totalPrice)}\n\nMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
 
         setTimeout(() => {
             window.open(`https://wa.me/6289687472787?text=${encodeURIComponent(message)}`, '_blank');
             setIsSubmitting(false);
             setShowSuccess(true);
-            clearDraft();
+            clearCart();
             setTimeout(() => setShowSuccess(false), 4000);
         }, 800);
     };
@@ -301,9 +237,9 @@ const Order = () => {
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-6">
                     <div className="bg-white rounded-2xl p-8 max-w-sm shadow-2xl">
                         <h3 className="text-lg font-bold text-slate-900 mb-4">Konfirmasi Pesanan</h3>
-                        <p className="text-slate-600 mb-2"><strong>Nama:</strong> {formData.name}</p>
-                        <p className="text-slate-600 mb-2"><strong>No. WhatsApp:</strong> {formData.phone}</p>
-                        <p className="text-slate-600 mb-2"><strong>Tanggal:</strong> {selectedDate}</p>
+                        <p className="text-slate-600 mb-2"><strong>Nama:</strong> {checkoutDetails.name}</p>
+                        <p className="text-slate-600 mb-2"><strong>No. WhatsApp:</strong> {checkoutDetails.phone}</p>
+                        <p className="text-slate-600 mb-2"><strong>Tanggal:</strong> {checkoutDetails.date}</p>
                         <p className="text-slate-600 mb-4"><strong>Total Porsi:</strong> {totalPortions}</p>
                         <p className="text-lg font-bold text-accent-600 mb-6">Estimasi: {formatCurrency(totalPrice)}</p>
                         <p className="text-sm text-slate-500 mb-6">Apakah pesanan Anda sudah benar?</p>
@@ -343,7 +279,7 @@ const Order = () => {
                                     type="text"
                                     id="name"
                                     required
-                                    value={formData.name}
+                                    value={checkoutDetails.name}
                                     onChange={(e) => handleField('name', e.target.value)}
                                     onBlur={() => handleBlur('name')}
                                     aria-describedby={errors.name ? 'name-error' : undefined}
@@ -367,7 +303,7 @@ const Order = () => {
                                     type="tel"
                                     id="phone"
                                     required
-                                    value={formData.phone}
+                                    value={checkoutDetails.phone}
                                     onChange={(e) => handleField('phone', e.target.value)}
                                     onBlur={() => handleBlur('phone')}
                                     aria-describedby={errors.phone ? 'phone-error' : undefined}
@@ -434,7 +370,7 @@ const Order = () => {
                         </div>
 
                         {/* Menu Selection Section */}
-                        <div className="space-y-8 animate-fade-in">
+                        <div className="space-y-8 animate-fade-in" id="menu-selection">
                             <div>
                                 <h3 className="text-xl font-bold font-serif text-slate-900 mb-6 flex items-center gap-2">
                                     <span className="bg-accent-500 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">1</span>
@@ -460,22 +396,25 @@ const Order = () => {
 
                                 {/* Menu Grid - Full Height (Page Scroll) */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b pb-8 border-slate-100">
-                                    {MENU_DATA.filter(m => m.category === activeCategory).map(item => (
-                                        <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group relative overflow-hidden">
-                                            <div className="flex justify-between items-start mb-3">
-                                                <h4 className="font-bold text-slate-900 pr-2">{item.name}</h4>
-                                                <p className="text-accent-600 font-bold text-sm whitespace-nowrap bg-accent-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
+                                    {MENU_DATA.filter(m => m.category === activeCategory).map(item => {
+                                        const isInCart = orderLines.some(l => Number(l.menuId) === Number(item.id));
+                                        return (
+                                            <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group relative overflow-hidden">
+                                                <div className="flex justify-between items-start mb-3">
+                                                    <h4 className="font-bold text-slate-900 pr-2">{item.name}</h4>
+                                                    <p className="text-accent-600 font-bold text-sm whitespace-nowrap bg-accent-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
+                                                </div>
+                                                <p className="text-slate-500 text-xs line-clamp-2 mb-4 h-8">{item.desc}</p>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => addToCart(item)}
+                                                    className={`w-full py-2.5 rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md ${isInCart ? 'bg-green-100 text-green-700' : 'bg-slate-900 text-white hover:bg-accent-500'}`}
+                                                >
+                                                    <Plus className="w-4 h-4" /> {isInCart ? 'Tambah Lagi' : 'Tambah ke Pesanan'}
+                                                </button>
                                             </div>
-                                            <p className="text-slate-500 text-xs line-clamp-2 mb-4 h-8">{item.desc}</p>
-                                            <button
-                                                type="button"
-                                                onClick={() => addToOrder(item)}
-                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-accent-500 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
-                                            >
-                                                <Plus className="w-4 h-4" /> Tambah ke Pesanan
-                                            </button>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
