@@ -151,12 +151,12 @@ const Home = () => {
                             <div className="absolute -inset-4 bg-gradient-to-tr from-accent-100/35 to-slate-50 rounded-[2.5rem] transform rotate-3 scale-105 opacity-55 blur-xl"></div>
                             <div className="absolute -inset-4 bg-gradient-to-bl from-accent-400/4 to-transparent rounded-[2.5rem] transform -rotate-2 scale-100 opacity-80"></div>
 
-                            <div className="relative z-10 rounded-[2rem] overflow-hidden premium-shadow border-8 border-white aspect-[4/5] sm:aspect-square md:aspect-[4/5] lg:h-[600px]">
+                            <div className="relative z-10 rounded-[2.5rem] overflow-hidden premium-shadow border-[12px] border-white aspect-[4/5] sm:aspect-square md:aspect-[4/5] lg:h-[600px] hover-card">
                                 <OptimizedImage
-                                    src="/images/hadijaya/makanan/jumbotron-dish.jpeg"
+                                    src="/images/nasi_uduk_friendly.png"
                                     fallback="/images/placeholder.svg"
                                     className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700 ease-out"
-                                    alt="Hadijaya Signature Dish"
+                                    alt="Nasi Uduk Hijau yang menggugah selera"
                                     priority={true}
                                 />
                                 {/* Inner subtle gradient for image richness */}

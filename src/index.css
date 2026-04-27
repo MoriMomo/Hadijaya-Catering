@@ -174,4 +174,18 @@ button:focus-visible {
     transform: translateY(-8px);
     box-shadow: 0 20px 25px -5px rgba(211, 84, 0, 0.08);
   }
+
+  /* Antigravity Warm & Appetizing Aesthetics */
+  .warm-container {
+    background: rgba(255, 250, 245, 0.9); /* Warm cream slightly transparent */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(211, 84, 0, 0.08);
+    border-radius: 1.5rem;
+  }
+
+  .appetizing-glow {
+    text-shadow: 0 4px 15px rgba(232, 157, 71, 0.5);
+  }
 }

@@ -78,14 +78,23 @@ const Menu = () => {
             </Helmet>
 
             <div className={`pt-16 bg-slate-50 min-h-screen ${cartCount > 0 ? 'pb-32' : 'pb-24'}`}>
-                {/* Header */}
-                <div className="bg-white border-b border-slate-200 mb-8">
-                    <div className="max-w-7xl mx-auto px-6 py-8">
-                        <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-2">
-                            Menu & Harga
+                {/* Warm & Welcoming Header */}
+                <div className="relative mb-8 pt-4">
+                    <div className="absolute inset-0 z-0 pt-0">
+                        <img 
+                            src="/images/hadijaya_menu_friendly.png" 
+                            alt="Hidangan Prasmanan yang Menggugah Selera" 
+                            className="w-full h-full object-cover"
+                        />
+                        {/* Warm soft gradient to make white text readable, but not overly "dark mode" */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#8B3E1B]/70 via-[#8B3E1B]/30 to-transparent"></div>
+                    </div>
+                    <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28 text-center text-white">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 appetizing-glow drop-shadow-lg">
+                            Koleksi Menu Spesial
                         </h1>
-                        <p className="text-slate-600">
-                            Pilih kategori atau scroll untuk melihat semua menu
+                        <p className="text-amber-50 text-lg md:text-xl font-medium drop-shadow-md max-w-2xl mx-auto">
+                            Dimasak penuh cinta dengan bumbu rempah pilihan. Pas untuk momen kumpul keluarga dan acara pentingmu.
                         </p>
                     </div>
                 </div>

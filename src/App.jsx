@@ -7,11 +7,15 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
 const Menu = lazy(() => import('./pages/Menu'));
 const Order = lazy(() => import('./pages/Order'));
 const About = lazy(() => import('./pages/About'));
+const Orders = lazy(() => import('./pages/Orders'));
+const Login = lazy(() => import('./pages/Login'));
 
 const Loader = () => (
   <div className="py-24 flex flex-col items-center justify-center gap-4">
@@ -23,8 +27,9 @@ const Loader = () => (
 const App = () => {
   return (
     <ErrorBoundary>
-      <CartProvider>
-        <Router>
+      <AuthProvider>
+        <CartProvider>
+          <Router>
           <div className="font-sans antialiased text-slate-800 selection:bg-accent-400 selection:text-white overflow-x-hidden min-h-screen bg-slate-50 transition-colors duration-300">
             <div className="flex flex-col min-h-screen">
               <Navbar />
@@ -37,6 +42,18 @@ const App = () => {
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/order" element={<Order />} />
                     <Route path="/about" element={<About />} />
+
+                    {/* Admin Routes */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={<Navigate to="/orders" replace />} />
+                    <Route 
+                      path="/orders" 
+                      element={
+                        <ProtectedRoute>
+                          <Orders />
+                        </ProtectedRoute>
+                      } 
+                    />
 
                     {/* Catch all - redirect to home */}
                     <Route path="*" element={<Navigate to="/" replace />} />
@@ -59,8 +76,9 @@ const App = () => {
               </a>
             </div>
           </div>
-        </Router>
-      </CartProvider>
+          </Router>
+        </CartProvider>
+      </AuthProvider>
     </ErrorBoundary>
   );
 };

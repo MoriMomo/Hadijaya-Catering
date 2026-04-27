@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 import { useCart } from '../context/CartContext';
+import { supabase } from '../utils/supabaseClient';
 
 const Order = () => {
     const { 
@@ -91,12 +92,11 @@ const Order = () => {
             if (checkoutDetails.date) {
                 const parts = checkoutDetails.date.split('-');
                 if (parts.length === 3) {
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
+                    /* eslint-disable react-hooks/set-state-in-effect */
                     setSelectedYear(String(parseInt(parts[0])));
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
                     setSelectedMonth(String(parseInt(parts[1])));
-                    // eslint-disable-next-line react-hooks/exhaustive-deps
                     setSelectedDay(String(parseInt(parts[2])));
+                    /* eslint-enable react-hooks/set-state-in-effect */
                     return;
                 }
             }
@@ -190,7 +190,7 @@ const Order = () => {
         setShowConfirm(true);
     };
 
-    const confirmSubmit = () => {
+    const confirmSubmit = async () => {
         setShowConfirm(false);
         setIsSubmitting(true);
 
@@ -199,6 +199,23 @@ const Order = () => {
             const linePrice = (menu.price || 0) * l.qty;
             return `- ${menu.name || 'Item'}: ${l.qty} porsi @ ${formatCurrency(menu.price || 0)} = ${formatCurrency(linePrice)}`;
         }).join('\n');
+
+        // Optional Database Save via Supabase
+        if (supabase) {
+            try {
+                await supabase.from('orders').insert([{
+                    client_name: checkoutDetails.name,
+                    client_phone: checkoutDetails.phone,
+                    event_date: checkoutDetails.date,
+                    total_pax: totalPortions,
+                    total_value: totalPrice,
+                    status: 'Pending',
+                    items: orderLines
+                }]);
+            } catch (err) {
+                console.error("Supabase error:", err);
+            }
+        }
 
         const message = `Halo Hadijaya Catering,\n\nSaya ingin memesan untuk:\n- Nama: ${checkoutDetails.name}\n- No HP: ${checkoutDetails.phone}\n- Tanggal: ${checkoutDetails.date}\n\nDaftar Pesanan:\n${linesText}\n\nTotal porsi: ${totalPortions}\nEstimasi Total: ${formatCurrency(totalPrice)}\n\nMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
 
