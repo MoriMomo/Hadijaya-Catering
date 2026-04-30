@@ -4,10 +4,24 @@ import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-re
 import { MENU_DATA } from '../constants/data';
 
 const Order = () => {
-    const [formData, setFormData] = useState({ name: '', phone: '' });
+    const [formData, setFormData] = useState(() => {
+        try {
+            const saved = localStorage.getItem('hadijaya-order-draft');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                return {
+                    name: parsed.name || '',
+                    phone: parsed.phone || ''
+                };
+            }
+        } catch (e) {
+            console.error('Error restoring draft:', e);
+        }
+        return { name: '', phone: '' };
+    });
     const [errors, setErrors] = useState({ name: '', phone: '' });
     const [touched, setTouched] = useState({ name: false, phone: false });
-    const [selectedDate, setSelectedDate] = useState('');
+
     const [dateWarning, setDateWarning] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
@@ -84,9 +98,10 @@ const Order = () => {
     };
 
     const dateOptions = generateDateOptions(30, 2);
-    const [selectedYear, setSelectedYear] = useState('');
-    const [selectedMonth, setSelectedMonth] = useState('');
-    const [selectedDay, setSelectedDay] = useState('');
+    const [selectedYear, setSelectedYear] = useState(() => dateOptions.length ? String(dateOptions[0].year) : '');
+    const [selectedMonth, setSelectedMonth] = useState(() => dateOptions.length ? String(dateOptions[0].month) : '');
+    const [selectedDay, setSelectedDay] = useState(() => dateOptions.length ? String(dateOptions[0].day) : '');
+    const [selectedDate, setSelectedDate] = useState(() => dateOptions.length ? dateOptions[0].value : '');
 
     const [activeCategory, setActiveCategory] = useState('paket');
 
@@ -112,16 +127,6 @@ const Order = () => {
         });
     };
 
-    useEffect(() => {
-        if (dateOptions.length && !selectedYear) {
-            const first = dateOptions[0];
-            setSelectedYear(String(first.year));
-            setSelectedMonth(String(first.month));
-            setSelectedDay(String(first.day));
-            setSelectedDate(first.value);
-        }
-    }, [dateOptions, selectedYear]);
-
     // Save draft to localStorage
     useEffect(() => {
         const draft = {
@@ -133,20 +138,6 @@ const Order = () => {
         };
         localStorage.setItem('hadijaya-order-draft', JSON.stringify(draft));
     }, [orderLines, formData, selectedDate]);
-
-    // Restore name/phone from draft on mount
-    useEffect(() => {
-        const saved = localStorage.getItem('hadijaya-order-draft');
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (parsed.name) setFormData(prev => ({ ...prev, name: parsed.name }));
-                if (parsed.phone) setFormData(prev => ({ ...prev, phone: parsed.phone }));
-            } catch (e) {
-                console.error('Error restoring draft:', e);
-            }
-        }
-    }, []);
 
     const allowedDates = dateOptions;
     const yearOptions = Array.from(new Set(allowedDates.map(d => d.year)));
@@ -434,7 +425,7 @@ const Order = () => {
                         </div>
 
                         {/* Menu Selection Section */}
-                        <div className="space-y-8 animate-fade-in">
+                        <div id="menu-selection" className="space-y-8 animate-fade-in scroll-mt-24">
                             <div>
                                 <h3 className="text-xl font-bold font-serif text-slate-900 mb-6 flex items-center gap-2">
                                     <span className="bg-orange-600 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">1</span>
