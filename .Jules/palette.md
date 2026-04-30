@@ -1,3 +1,11 @@
-## 2025-04-29 - [Quantity Selector Accessibility & UI]
-**Learning:** Found that the order quantity adjustment buttons lacked accessible labels in Indonesian and clear feedback when clicked or when disabled (min quantity 1).
-**Action:** Added `aria-label` with descriptive Indonesian text, implemented `aria-live="polite"` for the quantity span to announce updates to screen readers, and added interactive visual feedback like `active:scale-95` and robust `disabled:` classes to make it clear that the button shouldn't be clicked. Used `focus-visible:` to support keyboard navigation.
+## 2024-05-18 - Featured Menu Cards Lacked Keyboard A11y
+**Learning:** Featured cards on the homepage used generic `div` tags with `onClick` handlers but lacked keyboard interactions, meaning screen readers and keyboard users could not interact with them.
+**Action:** Added `role="button"`, `tabIndex={0}`, an `aria-label`, an `onKeyDown` handler to capture Enter/Space keys, and visual focus states using `focus-visible:ring` to make interactive card patterns fully accessible.
+
+## 2024-05-18 - Order Draft Forms Lacked Lazy State Initializers
+**Learning:** Initializing form states like Name, Date, and Phone via `useEffect` was triggering ESLint errors (`react-hooks/set-state-in-effect`) and causing multiple component re-renders during the initial mount.
+**Action:** Replaced `useEffect` updates with lazy initializer callbacks in the `useState` hook for `formData` and date options to cleanly load the data from `localStorage` without cascading re-renders.
+
+## 2024-05-18 - Page Scroll To Missing IDs
+**Learning:** The "Mulai Belanja" button on the empty state cart view attempted to call `.scrollIntoView` on an element with ID `menu-selection`, which did not exist, leading to a broken click interaction.
+**Action:** Always verify that scroll targets and anchor links refer to valid IDs in the document. Adding the correct ID and a scroll margin (`scroll-mt-24`) fixed the broken interaction and handled the sticky header layout perfectly.

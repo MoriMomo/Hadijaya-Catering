@@ -9,8 +9,17 @@ const MenuCard = ({ item, featured = false }) => {
     if (featured) {
         return (
             <div
-                className="bg-white rounded-2xl overflow-hidden hover-card group cursor-pointer"
+                className="bg-white rounded-2xl overflow-hidden hover-card group cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
                 onClick={() => navigate('/order')}
+                role="button"
+                tabIndex={0}
+                aria-label={`Pesan ${item.name}`}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate('/order');
+                    }
+                }}
             >
                 <div className="h-72 overflow-hidden relative">
                     <OptimizedImage
