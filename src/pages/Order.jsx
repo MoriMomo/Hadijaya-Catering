@@ -521,7 +521,8 @@ const Order = () => {
                                                         <button
                                                             type="button"
                                                             onClick={() => removeLine(line.id)}
-                                                            className="text-xs text-red-500 font-medium px-2 py-1 rounded hover:bg-red-50 transition flex items-center gap-1"
+                                                            className="text-xs text-red-500 font-medium px-2 py-1 rounded hover:bg-red-50 transition flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-none"
+                                                            aria-label={`Hapus ${menu?.name || 'item'} dari pesanan`}
                                                         >
                                                             Hapus
                                                         </button>
@@ -564,6 +565,7 @@ const Order = () => {
                                     <button
                                         type="submit"
                                         disabled={!isFormValid() || isSubmitting}
+                                        title={!isFormValid() ? "Lengkapi formulir dan pastikan pesanan minimal 10 porsi" : "Kirim Pesanan"}
                                         className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
                                             ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
                                             : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
