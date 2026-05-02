@@ -75,6 +75,8 @@ const Navbar = () => {
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="p-2 text-slate-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-all duration-200 focus:outline-none"
                             aria-label="Toggle menu"
+                            aria-expanded={mobileMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -84,7 +86,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-100 pb-20">
+                <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-100 pb-20">
                     <div className="px-6 py-6 space-y-4">
                         {navItems.map(item => (
                             <div key={item.id} className="border-b border-slate-50 pb-2 last:border-0" onClick={() => setMobileMenuOpen(false)}>

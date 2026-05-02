@@ -9,3 +9,6 @@
 ## 2024-05-18 - Page Scroll To Missing IDs
 **Learning:** The "Mulai Belanja" button on the empty state cart view attempted to call `.scrollIntoView` on an element with ID `menu-selection`, which did not exist, leading to a broken click interaction.
 **Action:** Always verify that scroll targets and anchor links refer to valid IDs in the document. Adding the correct ID and a scroll margin (`scroll-mt-24`) fixed the broken interaction and handled the sticky header layout perfectly.
+## 2026-05-02 - Mobile Menu Accessibility
+**Learning:** React state-driven toggles like mobile menus need ARIA attributes to communicate their state to screen readers, especially `aria-expanded` dynamically bound to the state and `aria-controls` pointing to the ID of the toggled element.
+**Action:** Always ensure that interactive UI elements have appropriate ARIA attributes connecting the trigger to the content and communicating current state.
