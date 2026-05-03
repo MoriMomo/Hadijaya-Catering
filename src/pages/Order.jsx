@@ -443,6 +443,7 @@ const Order = () => {
                                                 ? 'bg-orange-600 text-white border-orange-600 shadow-lg scale-105'
                                                 : 'bg-slate-700 text-white border-slate-700 hover:bg-slate-800'
                                                 }`}
+                                            aria-pressed={activeCategory === cat.id}
                                         >
                                             {cat.label}
                                         </button>
