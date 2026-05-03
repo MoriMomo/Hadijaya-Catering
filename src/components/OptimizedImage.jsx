@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 /**
- * Optimized Image component with fallback handling and responsive sources.
- * Fallback chain: original → .jpeg (if .jpg) → .svg → placeholder.
+ * Optimized Image component with fallback handling.
  */
 const OptimizedImage = ({
     src,
@@ -21,8 +20,6 @@ const OptimizedImage = ({
     const getBasePath = (path) => path?.replace(/\.(jpg|jpeg|png|svg|webp)$/i, '') || '';
     const currentExt = imgSrc.match(/\.(jpg|jpeg|png|svg|webp)$/i)?.[1];
     const basePath = getBasePath(imgSrc);
-    // Only emit WebP if source is JPG/PNG (not SVG placeholders)
-    const webpCandidate = currentExt !== 'webp' && currentExt !== 'svg' && basePath ? `${basePath}.webp` : null;
 
     const handleError = () => {
         const fallbacks = [];
@@ -57,12 +54,11 @@ const OptimizedImage = ({
     const aspectStyle = width && height ? { aspectRatio: `${width}/${height}` } : undefined;
 
     return (
-        <div className="relative" style={aspectStyle}>
+        <div className="relative w-full h-full" style={aspectStyle}>
             {isLoading && (
                 <div className={`${className} absolute inset-0 bg-slate-200 animate-pulse`} />
             )}
-            <picture>
-                {webpCandidate && <source srcSet={webpCandidate} type="image/webp" />}
+            <picture className="w-full h-full block">
                 <source srcSet={imgSrc} />
                 <img
                     src={imgSrc}
