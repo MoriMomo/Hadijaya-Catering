@@ -50,7 +50,7 @@ const MenuCard = ({ item, featured = false }) => {
                 <OptimizedImage
                     src={item.img}
                     fallback={item.fallbackImg}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500 mix-blend-multiply"
                     alt={item.name}
                 />
             </div>

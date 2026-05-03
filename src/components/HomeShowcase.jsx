@@ -7,7 +7,7 @@ const TrustedLogo = React.memo(({ name, logo, isRound = false }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     return (
-        <div className="hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+        <div className="hover:scale-110 transition-transform duration-300 flex items-center justify-center grayscale opacity-70 hover:opacity-100 hover:grayscale-0">
             <img
                 src={imageError ? 'https://via.placeholder.com/100x40/e5e7eb/666?text=Logo' : logo}
                 alt={`${name} - Trusted Partner`}

@@ -26,6 +26,7 @@ const Order = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [addedItemId, setAddedItemId] = useState(null);
     const idCounterRef = useRef(1);
 
     // Initialize orderLines with lazy initializer to avoid setState in effect
@@ -117,6 +118,9 @@ const Order = () => {
     ];
 
     const addToOrder = (menuItem) => {
+        setAddedItemId(menuItem.id);
+        setTimeout(() => setAddedItemId(null), 2000);
+
         setOrderLines(prev => {
             const existing = prev.find(l => l.menuId === menuItem.id);
             if (existing) {
@@ -461,9 +465,9 @@ const Order = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => addToOrder(item)}
-                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
+                                                className={`w-full py-2.5 rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md ${addedItemId === item.id ? "bg-green-600 text-white scale-[1.02]" : "bg-slate-900 text-white hover:bg-orange-600 hover:text-white"}`}
                                             >
-                                                <Plus className="w-4 h-4" /> Tambah ke Pesanan
+                                                {addedItemId === item.id ? (<>Berhasil ditambahkan!</>) : (<><Plus className="w-4 h-4" /> Tambah ke Pesanan</>)}
                                             </button>
                                         </div>
                                     ))}
@@ -566,7 +570,7 @@ const Order = () => {
                                         disabled={!isFormValid() || isSubmitting}
                                         className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
                                             ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                                            : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
+                                            : 'bg-orange-600 text-white drop-shadow-sm hover:bg-orange-700 active:scale-95'
                                             }`}
                                     >
                                         {isSubmitting ? (
