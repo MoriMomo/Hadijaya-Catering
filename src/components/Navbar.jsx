@@ -76,7 +76,6 @@ const Navbar = () => {
                             className="p-2 text-slate-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-all duration-200 focus:outline-none"
                             aria-label="Toggle menu"
                             aria-expanded={mobileMenuOpen}
-                            aria-controls="mobile-menu"
                         >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>

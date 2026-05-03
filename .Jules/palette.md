@@ -9,6 +9,7 @@
 ## 2024-05-18 - Page Scroll To Missing IDs
 **Learning:** The "Mulai Belanja" button on the empty state cart view attempted to call `.scrollIntoView` on an element with ID `menu-selection`, which did not exist, leading to a broken click interaction.
 **Action:** Always verify that scroll targets and anchor links refer to valid IDs in the document. Adding the correct ID and a scroll margin (`scroll-mt-24`) fixed the broken interaction and handled the sticky header layout perfectly.
+
 ## 2024-05-18 - Missing Semantic State on Custom Tabs
 **Learning:** Custom tab-like buttons used for filtering categories (in Menu and Order pages) used dynamic classes to indicate visual selection, but lacked `aria-pressed` states. Screen reader users would not know which filter was currently active.
 **Action:** Always add `aria-pressed={state === id}` to buttons that act as toggles or tabs to communicate the active selection state semantically.
