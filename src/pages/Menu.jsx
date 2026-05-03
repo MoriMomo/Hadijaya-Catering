@@ -72,7 +72,7 @@ const Menu = () => {
                         <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-2">
                             Menu & Harga
                         </h1>
-                        <p className="text-white-600">
+                        <p className="text-slate-600">
                             Pilih kategori atau scroll untuk melihat semua menu
                         </p>
                     </div>
@@ -94,6 +94,7 @@ const Menu = () => {
                                         ? 'bg-orange-600 text-white shadow-md'
                                         : 'bg-slate-700 text-white border border-slate-700 hover:bg-slate-800'
                                         }`}
+                                    aria-pressed={activeCategory === cat.id}
                                 >
                                     <span className="text-lg">{cat.icon}</span>
                                     <span>{cat.label}</span>
