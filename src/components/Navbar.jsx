@@ -85,7 +85,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-100 pb-20">
+                <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto h-screen animate-fade-in border-t border-slate-100 pb-20">
                     <div className="px-6 py-6 space-y-4">
                         {navItems.map(item => (
                             <div key={item.id} className="border-b border-slate-50 pb-2 last:border-0" onClick={() => setMobileMenuOpen(false)}>

@@ -17,3 +17,7 @@
 ## 2024-05-18 - Invalid Tailwind Class Caused Invisible Text
 **Learning:** Using `text-white-600` in `Menu.jsx` (which is not a valid Tailwind color shade since white has no shades) caused the text color to fall back to default white on a white background, making the description text completely invisible.
 **Action:** Always verify color utility class names against the Tailwind documentation or use auto-completion tools to prevent invisible text contrast bugs.
+
+## 2026-05-02 - Mobile Menu Accessibility
+**Learning:** React state-driven toggles like mobile menus need ARIA attributes to communicate their state to screen readers, especially `aria-expanded` dynamically bound to the state and `aria-controls` pointing to the ID of the toggled element.
+**Action:** Always ensure that interactive UI elements have appropriate ARIA attributes connecting the trigger to the content and communicating current state.
