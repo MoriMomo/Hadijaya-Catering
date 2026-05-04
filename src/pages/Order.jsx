@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
-import { MENU_DATA } from '../constants/data';
-import { validateName, validatePhone } from '../utils/validation';
+import { MENU_DATA, MENU_MAP } from '../constants/data';
 
 const Order = () => {
     const [formData, setFormData] = useState(() => {
@@ -175,16 +174,19 @@ const Order = () => {
         if (current > 1) updateLine(id, { qty: current - 1 });
     };
 
-    const totalPortions = orderLines.reduce((s, l) => s + (Number(l.qty) || 0), 0);
-
-    const calculateTotal = () => {
-        return orderLines.reduce((sum, line) => {
-            const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
-            return sum + (menu?.price || 0) * (Number(line.qty) || 0);
-        }, 0);
-    };
-
-    const totalPrice = calculateTotal();
+    const { totalPortions, totalPrice } = useMemo(() => {
+        return orderLines.reduce(
+            (acc, line) => {
+                const qty = Number(line.qty) || 0;
+                const menu = MENU_MAP.get(Number(line.menuId));
+                return {
+                    totalPortions: acc.totalPortions + qty,
+                    totalPrice: acc.totalPrice + (menu?.price || 0) * qty
+                };
+            },
+            { totalPortions: 0, totalPrice: 0 }
+        );
+    }, [orderLines]);
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('id-ID', {
@@ -236,7 +238,7 @@ const Order = () => {
         setIsSubmitting(true);
 
         const linesText = orderLines.map(l => {
-            const menu = MENU_DATA.find(m => m.id === Number(l.menuId)) || {};
+            const menu = MENU_MAP.get(Number(l.menuId)) || {};
             const linePrice = (menu.price || 0) * l.qty;
             return `- ${menu.name || 'Item'}: ${l.qty} porsi @ ${formatCurrency(menu.price || 0)} = ${formatCurrency(linePrice)}`;
         }).join('%0A');
@@ -490,7 +492,7 @@ const Order = () => {
                             ) : (
                                 <div className="space-y-4 mb-24">
                                     {orderLines.map((line) => {
-                                        const menu = MENU_DATA.find(m => m.id === Number(line.menuId));
+                                        const menu = MENU_MAP.get(Number(line.menuId));
                                         const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
                                         return (
                                             <div key={line.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition flex gap-4">
