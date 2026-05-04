@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
+import { validateName, validatePhone } from '../utils/validation';
 
 const Order = () => {
     const [formData, setFormData] = useState(() => {
@@ -47,21 +48,6 @@ const Order = () => {
         // Return default initial value
         return [];
     });
-
-    // Validation helpers
-    const validateName = (name) => {
-        if (!name.trim()) return 'Nama wajib diisi';
-        if (name.trim().length < 3) return 'Nama minimal 3 karakter';
-        return '';
-    };
-
-    const validatePhone = (phone) => {
-        if (!phone.trim()) return 'Nomor WhatsApp wajib diisi';
-        const cleaned = phone.replace(/\D/g, '');
-        if (cleaned.startsWith('62') && cleaned.length >= 11) return '';
-        if (cleaned.startsWith('08') && cleaned.length >= 10) return '';
-        return 'Format: 08xx atau +62xxx (min 10 digit)';
-    };
 
     const isFormValid = () => {
         return !validateName(formData.name) && !validatePhone(formData.phone) && selectedDate && totalPortions >= 10;
