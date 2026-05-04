@@ -6,7 +6,7 @@ const Footer = () => {
             {/* Main Footer Content */}
             <div className="bg-[#fcfbf9] py-12">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                         {/* Profil & Kontak */}
                         <div>
                             <h4 className="font-bold text-slate-900 text-lg mb-6">Profil & Kontak</h4>
@@ -40,33 +40,16 @@ const Footer = () => {
                             </address>
                         </div>
 
-                        {/* Hubungi Kami */}
+                        {/* Tautan Cepat */}
                         <div>
-                            <h4 className="font-bold text-slate-900 text-lg mb-6">Hubungi Kami</h4>
-                            <div className="space-y-3 text-sm text-slate-600">
-                                <p className="flex items-center gap-2">
-                                    <span className="text-slate-400" aria-hidden="true">📞</span>
-                                    <a href="tel:081211212185" className="hover:text-orange-600 transition">
-                                        Telepon: 0812 1121 2185
-                                    </a>
-                                </p>
-                                <p className="flex items-center gap-2">
-                                    <span className="text-slate-400" aria-hidden="true">💬</span>
-                                    <a href="https://wa.me/6281211212185" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition">
-                                        WhatsApp: 0812 1121 2185
-                                    </a>
-                                </p>
-                                <p className="flex items-center gap-2">
-                                    <span className="text-slate-400" aria-hidden="true">✉️</span>
-                                    <a href="mailto:pt.hjcitra@gmail.com" className="hover:text-orange-600 transition">
-                                        Saran dan Keluhan
-                                    </a>
-                                </p>
-                            </div>
+                            <h4 className="font-bold text-slate-900 text-lg mb-6">Tautan Cepat</h4>
+                            <ul className="space-y-3 text-sm text-slate-600">
+                                <li><a href="/" className="hover:text-orange-600 transition">Beranda</a></li>
+                                <li><a href="/menu" className="hover:text-orange-600 transition">Menu & Harga</a></li>
+                                <li><a href="/about" className="hover:text-orange-600 transition">Tentang Kami</a></li>
+                                <li><a href="/order" className="hover:text-orange-600 transition">Pemesanan</a></li>
+                            </ul>
                         </div>
-
-                        {/* Informasi */}
-
                     </div>
                 </div>
             </div>
