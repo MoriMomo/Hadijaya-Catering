@@ -125,3 +125,5 @@ export const ORDER_HISTORY = [
     { client: "Ibu Siti Arisan", date: "28 Okt 2023", pax: 50, value: 2000000, status: "Pending" },
     { client: "Dinas Pendidikan", date: "02 Nov 2023", pax: 300, value: 15000000, status: "Confirmed" }
 ];
+
+export const MENU_MAP = new Map(MENU_DATA.map(m => [m.id, m]));
