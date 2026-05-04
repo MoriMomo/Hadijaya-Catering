@@ -339,6 +339,7 @@ const Order = () => {
                                     onBlur={() => handleBlur('name')}
                                     aria-describedby={errors.name ? 'name-error' : undefined}
                                     aria-invalid={!!errors.name}
+                                    autoComplete="name"
                                     className={`w-full bg-slate-50 border-0 border-b-2 ${errors.name && touched.name ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
                                     placeholder="Nama Anda"
                                 />
@@ -363,6 +364,7 @@ const Order = () => {
                                     onBlur={() => handleBlur('phone')}
                                     aria-describedby={errors.phone ? 'phone-error' : undefined}
                                     aria-invalid={!!errors.phone}
+                                    autoComplete="tel"
                                     className={`w-full bg-slate-50 border-0 border-b-2 ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
                                     placeholder="0812..."
                                 />
