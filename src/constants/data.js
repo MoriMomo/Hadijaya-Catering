@@ -119,3 +119,4 @@ export const MENU_DATA = RAW_MENU_DATA.map(item => {
         fallbackImg
     };
 });
+
