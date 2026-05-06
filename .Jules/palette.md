@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-05-18 - Removed Default Focus Styles
+**Learning:** Found an accessibility anti-pattern in the Navbar component where default browser focus outlines were removed (`focus:outline-none`) without providing an explicit alternative visual focus indicator, harming keyboard navigation visibility.
+**Action:** Whenever removing default focus outlines with `focus:outline-none`, always ensure custom keyboard focus styles are provided using `focus-visible:ring-2 focus-visible:ring-offset-2` (and appropriate color variants) to maintain keyboard accessibility.
