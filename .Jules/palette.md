@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## $(date +%Y-%m-%d) - Localized ARIA Labels
+**Learning:** Hardcoded English ARIA labels (like "Toggle menu" or "Customer testimonials") on an Indonesian application confuse screen reader users because the screen reader will attempt to pronounce the English text using the document's language rules (Indonesian), leading to incomprehensible announcements.
+**Action:** Always verify that visually hidden accessibility text, including `aria-label`, matches the application's primary language to ensure an intuitive and localized experience for assistive technology users.

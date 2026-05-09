@@ -10,7 +10,7 @@ const TrustedLogo = React.memo(({ name, logo, isRound = false }) => {
         <div className="hover:scale-110 transition-transform duration-300 flex items-center justify-center">
             <img
                 src={imageError ? 'https://via.placeholder.com/100x40/e5e7eb/666?text=Logo' : logo}
-                alt={`${name} - Trusted Partner`}
+                alt={`Mitra terpercaya: ${name}`}
                 className={`${isRound ? 'rounded-full object-cover' : 'w-auto'}`}
                 style={{ maxHeight: isRound ? 80 : 64, opacity: isLoading ? 0 : 1, transition: 'opacity 300ms ease-in-out' }}
                 onLoad={() => setIsLoading(false)}
@@ -143,7 +143,7 @@ const HomeShowcase = () => {
                             role="region"
                             aria-live="polite"
                             aria-atomic="true"
-                            aria-label="Customer testimonials"
+                            aria-label="Testimoni pelanggan"
                         >
                             <div
                                 key={`testimonial-${currentIndex}`}
@@ -158,7 +158,7 @@ const HomeShowcase = () => {
                                             animationDelay: `${idx * 0.1}s`
                                         }}
                                     >
-                                        <div className="flex justify-center gap-1 mb-4" aria-label={`Rating: ${testimonial.rating} out of 5 stars`}>
+                                        <div className="flex justify-center gap-1 mb-4" aria-label={`Penilaian: ${testimonial.rating} dari 5 bintang`}>
                                             {[...Array(testimonial.rating)].map((_, i) => (
                                                 <Star key={i} className="w-5 h-5 md:w-6 md:h-6 fill-amber-400 text-amber-400" aria-hidden="true" />
                                             ))}
