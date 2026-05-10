@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-05-18 - Semantic Active States and Focus Indicators
+**Learning:** React Router `Link` components used in navigation relied entirely on custom Tailwind classes to visually indicate the active page, leaving screen readers unaware of the current context. Additionally, utilizing `focus:outline-none` without providing an explicit replacement (like `focus-visible`) broke keyboard navigation accessibility.
+**Action:** Always apply `aria-current="page"` to the active navigation link, and strictly pair `focus:outline-none` with explicit `focus-visible` styles to ensure semantic clarity and keyboard accessibility.
