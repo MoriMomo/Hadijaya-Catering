@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-05-11 - Navigation Focus Improvements
+**Learning:** Adding explicit keyboard focus indicators (`focus-visible:ring-2`) and updating `aria-current="page"` significantly improves keyboard and screen-reader accessibility for navigation components without adding visual noise for mouse users.
+**Action:** When updating focus states for interactive elements, prefer `focus-visible` over plain `focus` to ensure keyboard accessibility while maintaining a clean look for mouse interactions.
