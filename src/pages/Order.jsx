@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
+import { validateName, validatePhone } from "../utils/validation";
 import { MENU_DATA, MENU_MAP } from '../constants/data';
 
 const Order = () => {
