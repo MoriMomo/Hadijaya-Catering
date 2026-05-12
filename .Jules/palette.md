@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2026-05-12 - Keyboard Accessibility on Navigation Links
+**Learning:** Navigation links often strip default focus outlines using `focus:outline-none` for aesthetic reasons, which destroys keyboard accessibility. Furthermore, styling the active page is not enough; screen readers need semantic context.
+**Action:** Never remove `outline-none` without providing a visual alternative like `focus-visible:ring`. Always use `aria-current="page"` on the active navigation link to semantically identify it.
