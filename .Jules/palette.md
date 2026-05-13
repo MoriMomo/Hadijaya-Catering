@@ -22,6 +22,10 @@
 **Learning:** React state-driven toggles like mobile menus need ARIA attributes to communicate their state to screen readers, especially `aria-expanded` dynamically bound to the state and `aria-controls` pointing to the ID of the toggled element.
 **Action:** Always ensure that interactive UI elements have appropriate ARIA attributes connecting the trigger to the content and communicating current state.
 
-## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
+## 2024-05-18 - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2025-05-13 - Focus Outlines Without Alternatives Break Keyboard Navigation
+**Learning:** Found that the navigation links and mobile menu toggle were using Tailwind's `focus:outline-none` class without providing any visual alternative, making keyboard navigation virtually impossible as the user cannot see what element is currently focused.
+**Action:** Whenever removing the default browser outline with `focus:outline-none`, always pair it with an explicit visual focus indicator, such as `focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2`, to ensure keyboard users can navigate the interface.
