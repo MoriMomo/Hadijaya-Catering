@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-05-20 - Ensure focus visibility when using Tailwind focus:outline-none
+**Learning:** Using Tailwind's `focus:outline-none` on interactive elements (like buttons and links) to remove default browser styling completely breaks keyboard navigation for screen readers and power users because they can't see what element has focus.
+**Action:** Always provide an explicit alternative visual focus indicator when using `focus:outline-none`, such as adding `focus-visible:ring-2 focus-visible:ring-[color]`. Use `focus-visible` instead of `focus` to only show the ring when navigating via keyboard, keeping mouse clicks clean.
