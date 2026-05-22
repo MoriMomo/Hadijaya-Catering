@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## $(date +%Y-%m-%d) - Keyboard Accessibility in Navigation Links
+**Learning:** Found that default browser focus outlines were removed using Tailwind's `focus:outline-none` on interactive elements like navigation buttons, mobile menu toggles, and logo links, without providing an alternative focus indicator. This makes keyboard navigation impossible for accessibility users since they cannot see which element has focus.
+**Action:** Always pair `focus:outline-none` with explicit visual focus indicators like `focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2` to ensure keyboard accessibility while maintaining a clean mouse-click design.
