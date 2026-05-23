@@ -25,3 +25,4 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+\n## 2026-05-23 - Active Navigation State Visibility\n**Learning:** The active state of navigation links was visually indicated using Tailwind classes but not semantically exposed. Screen readers would read all links identically regardless of which page the user was currently on.\n**Action:** Always add `aria-current="page"` dynamically to active navigation items (`NavButton` components, etc.) to ensure screen reader users understand their current location within a site's structure.
