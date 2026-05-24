@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
@@ -8,7 +8,8 @@ const NavButton = ({ to, label, active, isCta }) => {
         return (
             <Link
                 to={to}
-                className="bg-orange-600 hover:bg-orange-700 text-white visited:text-white no-underline px-6 py-2 rounded-full font-semibold transition-colors duration-200 text-sm w-full md:w-auto shadow-md block text-center focus:outline-none"
+                className="bg-orange-600 hover:bg-orange-700 text-white visited:text-white no-underline px-6 py-2 rounded-full font-semibold transition-colors duration-200 text-sm w-full md:w-auto shadow-md block text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+                aria-current={active ? 'page' : undefined}
             >
                 {label}
             </Link>
@@ -18,8 +19,9 @@ const NavButton = ({ to, label, active, isCta }) => {
     return (
         <Link
             to={to}
-            className={`transition-colors duration-200 text-sm font-medium py-2 px-4 rounded-lg w-full md:w-auto text-left md:text-center block no-underline visited:text-slate-700 focus:outline-none ${active ? 'bg-orange-50 text-orange-600 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-orange-50'
+            className={`transition-colors duration-200 text-sm font-medium py-2 px-4 rounded-lg w-full md:w-auto text-left md:text-center block no-underline visited:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 ${active ? 'bg-orange-50 text-orange-600 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-orange-50'
                 }`}
+            aria-current={active ? 'page' : undefined}
         >
             {label}
         </Link>
@@ -73,9 +75,10 @@ const Navbar = () => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="p-2 text-slate-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-all duration-200 focus:outline-none"
+                            className="p-2 text-slate-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
                             aria-label="Toggle menu"
                             aria-expanded={mobileMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
