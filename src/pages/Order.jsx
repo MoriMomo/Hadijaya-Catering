@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA, MENU_MAP } from '../constants/data';
+import { validateName, validatePhone } from "../utils/validation";
 
 const Order = () => {
     const [formData, setFormData] = useState(() => {
