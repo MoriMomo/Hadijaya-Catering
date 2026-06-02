@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-06-02 - Active Navigation Link Semantics
+**Learning:** Client-side routing links that visually indicate the active page must use the `aria-current="page"` attribute to semantically communicate their status to screen readers.
+**Action:** Always include `aria-current="page"` conditionally on navigation links that represent the currently active route.
