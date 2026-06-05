@@ -22,6 +22,10 @@
 **Learning:** React state-driven toggles like mobile menus need ARIA attributes to communicate their state to screen readers, especially `aria-expanded` dynamically bound to the state and `aria-controls` pointing to the ID of the toggled element.
 **Action:** Always ensure that interactive UI elements have appropriate ARIA attributes connecting the trigger to the content and communicating current state.
 
-## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
+## 2024-06-05 - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## 2024-06-05 - [Navigation Semantic Active States]
+**Learning:** Custom navigation links and components that use visual styling (like colors or backgrounds) to indicate the active page do not communicate this state to screen reader users automatically.
+**Action:** Always add the `aria-current="page"` attribute to navigation links when they correspond to the currently active route or page to ensure full semantic accessibility.
