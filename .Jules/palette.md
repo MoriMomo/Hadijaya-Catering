@@ -25,3 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
+
+## $(date +%Y-%m-%d) - Redundant dynamic aria-labels on toggle buttons
+**Learning:** Using dynamic `aria-label`s (like "Open menu" vs "Close menu") on toggle buttons that also use `aria-expanded` can be redundant, as screen readers automatically announce the expanded/collapsed state.
+**Action:** Use a static `aria-label` describing the element (e.g., "Main navigation menu") and rely entirely on `aria-expanded` or `aria-pressed` attributes to convey state changes to assistive technologies.
