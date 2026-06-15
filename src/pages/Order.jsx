@@ -1,3 +1,4 @@
+import { validateName, validatePhone } from '../utils/validation';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
