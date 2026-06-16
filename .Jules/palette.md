@@ -26,6 +26,6 @@
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
 
-## 2024-05-19 - Focus Outlines on Navigation Elements
-**Learning:** Removing default browser focus outlines (`focus:outline-none`) without providing an explicit alternative makes keyboard navigation impossible for accessibility users, especially in critical components like navigation bars and mobile menus.
-**Action:** Always provide explicit visual focus indicators like `focus-visible:ring` when removing default outlines to maintain keyboard accessibility.
+## 2026-06-14 - [Added aria-current to Active Links]
+**Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
+**Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
