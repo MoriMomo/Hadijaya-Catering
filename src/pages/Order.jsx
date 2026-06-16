@@ -1,3 +1,4 @@
+import { validateName, validatePhone } from '../utils/validation';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
@@ -329,7 +330,7 @@ const Order = () => {
                                     aria-describedby={errors.name ? 'name-error' : undefined}
                                     aria-invalid={!!errors.name}
                                     autoComplete="name"
-                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.name && touched.name ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
+                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.name && touched.name ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500`}
                                     placeholder="Nama Anda"
                                 />
                                 {errors.name && touched.name && (
@@ -354,7 +355,7 @@ const Order = () => {
                                     aria-describedby={errors.phone ? 'phone-error' : undefined}
                                     aria-invalid={!!errors.phone}
                                     autoComplete="tel"
-                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none`}
+                                    className={`w-full bg-slate-50 border-0 border-b-2 ${errors.phone && touched.phone ? 'border-red-500' : 'border-slate-200'} px-4 py-3 text-slate-900 focus:ring-0 focus:border-orange-500 transition placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500`}
                                     placeholder="0812..."
                                 />
                                 {errors.phone && touched.phone && (
@@ -379,7 +380,7 @@ const Order = () => {
                                     value={selectedYear}
                                     onChange={(e) => handleYearChange(e.target.value)}
                                     aria-label="Pilih tahun"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
                                 >
                                     {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                                 </select>
@@ -388,7 +389,7 @@ const Order = () => {
                                     value={selectedMonth}
                                     onChange={(e) => handleMonthChange(e.target.value)}
                                     aria-label="Pilih bulan"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
                                 >
                                     {(monthOptionsForYear(selectedYear) || []).map(m => {
                                         const monthName = new Date(Number(selectedYear), m - 1, 1).toLocaleString('id-ID', { month: 'long' });
@@ -400,7 +401,7 @@ const Order = () => {
                                     value={selectedDay}
                                     onChange={(e) => handleDayChange(e.target.value)}
                                     aria-label="Pilih hari"
-                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none"
+                                    className="w-full bg-slate-50 border-0 border-b-2 px-3 py-2 text-slate-900 focus:ring-0 focus:border-orange-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
                                 >
                                     {(dayOptionsForYearMonth(selectedYear, selectedMonth) || []).map(d => (
                                         <option key={d.iso} value={d.day}>{new Date(d.iso).toLocaleDateString('id-ID', { weekday: 'short', day: '2-digit' })}</option>
