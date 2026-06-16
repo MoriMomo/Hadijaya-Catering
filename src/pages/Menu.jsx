@@ -83,7 +83,7 @@ const Menu = () => {
                 <meta name="description" content="Lihat menu lengkap Hadijaya Catering dengan berbagai pilihan paket dan harga terjangkau" />
             </Helmet>
 
-            <div className="pt-16 pb-24 bg-slate-50 min-h-screen">
+            <div className="pt-16 pb-24 bg-white min-h-screen">
                 {/* Header */}
                 <div className="bg-white border-b border-slate-200 mb-8">
                     <div className="max-w-7xl mx-auto px-6 py-8">

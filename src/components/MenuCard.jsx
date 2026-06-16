@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
 
 const MenuCard = ({ item, featured = false }) => {
@@ -9,7 +8,7 @@ const MenuCard = ({ item, featured = false }) => {
     if (featured) {
         return (
             <div
-                className="bg-white rounded-2xl overflow-hidden hover-card group cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+                className="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 hover-card group cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500 focus-visible:ring-offset-2 flex flex-col h-full hover:shadow-xl hover:border-orange-100 transition-all duration-300"
                 onClick={() => navigate('/order')}
                 role="button"
                 tabIndex={0}
@@ -21,23 +20,25 @@ const MenuCard = ({ item, featured = false }) => {
                     }
                 }}
             >
-                <div className="h-72 overflow-hidden relative">
+                <div className="h-64 sm:h-72 overflow-hidden relative">
                     <OptimizedImage
                         src={item.img}
                         fallback={item.fallbackImg}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700"
                         alt={item.name}
                     />
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full">
-                        <span className="text-orange-800 font-bold text-xs uppercase tracking-wider">Best Seller</span>
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full border border-orange-50">
+                        <span className="text-orange-600 font-bold text-xs uppercase tracking-wider">Best Seller</span>
                     </div>
                 </div>
-                <div className="p-6 md:p-8">
-                    <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-3">{item.name}</h3>
-                    <p className="text-slate-500 mb-6 font-light line-clamp-2">{item.desc}</p>
+                <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                    <div>
+                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 mb-2 leading-tight">{item.name}</h3>
+                        <p className="text-slate-500 text-sm mb-6 font-light line-clamp-2 leading-relaxed">{item.desc}</p>
+                    </div>
                     <div className="border-t border-slate-100 pt-4 flex justify-between items-center">
-                        <span className="text-lg font-bold text-orange-700">Rp {item.price.toLocaleString('id-ID')}</span>
-                        <span className="text-slate-400 text-sm">per pax/box</span>
+                        <span className="text-xl font-bold text-orange-600">Rp {item.price.toLocaleString('id-ID')}</span>
+                        <span className="text-slate-400 text-xs tracking-wider uppercase">per pax/box</span>
                     </div>
                 </div>
             </div>
@@ -45,22 +46,24 @@ const MenuCard = ({ item, featured = false }) => {
     }
 
     return (
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex gap-5 hover:border-orange-200 transition group hover:shadow-lg">
-            <div className="w-24 h-24 rounded-xl bg-slate-200 overflow-hidden shrink-0">
+        <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100/80 flex gap-4 hover:border-orange-200 transition group hover:shadow-md duration-300 items-center">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-slate-100 overflow-hidden shrink-0 border border-slate-200/50">
                 <OptimizedImage
                     src={item.img}
                     fallback={item.fallbackImg}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
                     alt={item.name}
                 />
             </div>
-            <div className="flex flex-col justify-center w-full">
-                <h3 className="font-bold text-slate-900 text-lg leading-tight mb-1">{item.name}</h3>
-                <p className="text-xs text-slate-500 mb-3 font-light line-clamp-2">{item.desc}</p>
-                <div className="mt-auto flex justify-between items-center">
+            <div className="flex flex-col justify-between h-20 md:h-24 w-full">
+                <div>
+                    <h3 className="font-bold text-slate-900 text-base md:text-lg leading-tight mb-1 group-hover:text-orange-600 transition-colors duration-200">{item.name}</h3>
+                    <p className="text-xs text-slate-400 font-light line-clamp-2 leading-normal">{item.desc}</p>
+                </div>
+                <div className="flex justify-between items-center mt-1">
                     {item.price > 0
-                        ? <span className="text-orange-700 font-bold">Rp {item.price.toLocaleString('id-ID')}</span>
-                        : <span className="text-amber-500 font-bold text-sm">Hubungi Kami</span>
+                        ? <span className="text-orange-600 font-bold text-sm md:text-base">Rp {item.price.toLocaleString('id-ID')}</span>
+                        : <span className="text-amber-500 font-bold text-xs uppercase tracking-wider">Hubungi Kami</span>
                     }
                 </div>
             </div>

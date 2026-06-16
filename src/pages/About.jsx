@@ -18,7 +18,7 @@ const About = () => (
             <meta property="og:type" content="website" />
         </Helmet>
 
-        <div className="pt-24 pb-20 bg-slate-50 min-h-screen animate-fade-in">
+        <div className="pt-24 pb-20 bg-white min-h-screen animate-fade-in">
             <div className="max-w-6xl mx-auto px-6 space-y-20">
                 {/* Hero Section */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">

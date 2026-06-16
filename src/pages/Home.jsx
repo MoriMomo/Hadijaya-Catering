@@ -12,11 +12,11 @@ const Home = () => {
     return (
         <div className="animate-fade-in pb-12">
             {/* Hero Section - IMPROVED */}
-            <div className="relative bg-[#fcfbf9] overflow-hidden">
+            <div className="relative bg-white overflow-hidden">
                 {/* Remove odd background glow, use subtle gradient instead */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 to-transparent -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/20 to-transparent -z-10"></div>
 
-                <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid md:grid-cols-2 gap-8 items-center py-12 md:py-16">
+                <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid md:grid-cols-2 gap-12 items-center py-16 md:py-24">
                     <div className="space-y-6 animate-slide-up order-2 md:order-1">
                         {/* Keep badge but make it more subtle */}
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-orange-100">
@@ -69,11 +69,11 @@ const Home = () => {
 
                     {/* Image - Keep but optimize space */}
                     <div className="relative order-1 md:order-2">
-                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-square md:aspect-auto md:h-[500px]">
+                        <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/60 border-4 border-white aspect-square md:aspect-auto md:h-[480px]">
                             <OptimizedImage
                                 src="/images/hadijaya/makanan/jumbotron-dish.jpeg"
                                 fallback="/images/placeholder.svg"
-                                className="object-cover w-full h-full"
+                                className="object-cover w-full h-full hover:scale-102 transition-transform duration-700"
                                 alt="Hadijaya Signature Dish"
                                 priority={true}
                             />
@@ -83,8 +83,8 @@ const Home = () => {
             </div>
 
             {/* Menu Favorites - MOVED UP, before features */}
-            <div className="py-16 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-6">
+            <div className="py-20 md:py-24 bg-white border-b border-slate-100">
+                <div className="max-w-7xl mx-auto px-6 text-left">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">Menu Favorit</h2>
@@ -111,7 +111,7 @@ const Home = () => {
             <HomeShowcase />
 
             {/* Features - MOVED DOWN (less critical) */}
-            <div className="py-20 bg-white">
+            <div className="py-20 md:py-24 bg-white border-b border-slate-100">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center max-w-2xl mx-auto mb-20">
                         <span className="text-amber-500 font-bold uppercase tracking-widest text-xs">Kenapa Hadijaya?</span>
@@ -136,15 +136,38 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* CTA - Keep at bottom */}
-            <div className="py-20 bg-orange-600 relative overflow-hidden text-center px-6">
-                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                <div className="max-w-4xl mx-auto relative z-10">
-                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-8">Siap untuk Momen Spesial?</h2>
-                    <p className="text-orange-100 text-lg mb-10 font-light max-w-2xl mx-auto">Diskusikan kebutuhan katering Anda, dari nasi box hingga prasmanan besar. Kami siap memberikan penawaran terbaik.</p>
-                    <button onClick={() => navigate('/order')} className="bg-white hover:bg-orange-50 text-orange-600 px-12 py-5 rounded-xl font-bold shadow-2xl transition transform hover:scale-105 tracking-wide text-lg w-full md:w-auto">
-                        Minta Penawaran
-                    </button>
+            {/* CTA - Contained Card Style */}
+            <div className="py-16 md:py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="bg-gradient-to-br from-accent-500 to-accent-600 rounded-[2.5rem] py-16 px-8 md:px-16 text-center relative overflow-hidden shadow-2xl shadow-accent-500/20">
+                        {/* Subtle decorative background shapes */}
+                        <div className="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-black/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+
+                        <div className="max-w-3xl mx-auto relative z-10 space-y-6">
+                            <span className="text-accent-100 font-bold uppercase tracking-wider text-xs md:text-sm">Reservasi & Konsultasi</span>
+                            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white leading-tight">Siap untuk Momen Spesial Anda?</h2>
+                            <p className="text-accent-50/90 text-base md:text-lg font-light max-w-xl mx-auto leading-relaxed">
+                                Diskusikan kebutuhan katering Anda, dari nasi box hingga prasmanan besar. Kami siap memberikan cita rasa terbaik untuk acara Anda.
+                            </p>
+                            <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <button
+                                    onClick={() => navigate('/order')}
+                                    className="bg-white hover:bg-accent-50 text-accent-600 px-10 py-4.5 rounded-xl font-bold shadow-xl transition transform hover:-translate-y-1 text-base tracking-wide w-full sm:w-auto"
+                                >
+                                    Pesan Sekarang
+                                </button>
+                                <a
+                                    href="https://wa.me/6281211212185"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-accent-700/40 hover:bg-accent-700/60 text-white border border-accent-400/45 px-10 py-4.5 rounded-xl font-bold transition transform hover:-translate-y-1 text-base tracking-wide w-full sm:w-auto text-center flex items-center justify-center"
+                                >
+                                    Tanya via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

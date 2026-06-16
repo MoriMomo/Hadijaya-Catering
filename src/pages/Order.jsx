@@ -305,7 +305,7 @@ const Order = () => {
                 </div>
             )}
 
-            <div className="pt-12 pb-24 bg-slate-50 min-h-screen animate-fade-in">
+            <div className="pt-12 pb-24 bg-white min-h-screen animate-fade-in">
                 <div className="max-w-3xl mx-auto px-6">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-serif font-bold text-slate-900">Reservasi Pesanan</h2>
