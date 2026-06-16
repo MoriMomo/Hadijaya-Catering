@@ -47,7 +47,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link
                         to="/"
-                        className="flex items-center gap-2 md:gap-3 cursor-pointer group"
+                        className="flex items-center gap-2 md:gap-3 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-lg"
                     >
                         <OptimizedImage
                             src="../images/hadijaya/makanan/hadijaya-catering-logo.jpeg"
