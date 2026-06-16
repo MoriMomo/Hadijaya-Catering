@@ -1,40 +1,58 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ChevronRight } from 'lucide-react';
 import { MENU_DATA } from '../constants/data';
 import MenuCard from '../components/MenuCard';
+
+const categories = [
+    { id: 'semua', label: 'Semua Menu', icon: '🍱' },
+    { id: 'paket', label: 'Paket Spesial', icon: '⭐' },
+    { id: 'nasi', label: 'Nasi', icon: '🍚' },
+    { id: 'daging', label: 'Daging', icon: '🥩' },
+    { id: 'ayam', label: 'Ayam', icon: '🍗' },
+    { id: 'telur', label: 'Telur', icon: '🥚' },
+    { id: 'tahu-tempe', label: 'Tahu & Tempe', icon: '🥘' },
+    { id: 'sambel', label: 'Sambel', icon: '🌶️' },
+    { id: 'snack', label: 'Snack', icon: '🍰' }
+];
+
+// Precompute the grouped data outside of the component lifecycle
+// This turns an O(N*M) runtime operation per render into an O(N) operation once at module load
+const GROUPED_MENU_DATA = (() => {
+    const itemsByCategory = new Map();
+    for (let i = 0; i < MENU_DATA.length; i++) {
+        const item = MENU_DATA[i];
+        let items = itemsByCategory.get(item.category);
+        if (!items) {
+            items = [];
+            itemsByCategory.set(item.category, items);
+        }
+        items.push(item);
+    }
+
+    const result = {};
+    for (let i = 1; i < categories.length; i++) {
+        const cat = categories[i];
+        const items = itemsByCategory.get(cat.id);
+        if (items && items.length > 0) {
+            result[cat.id] = { ...cat, items };
+        }
+    }
+    return result;
+})();
 
 const Menu = () => {
     const [activeCategory, setActiveCategory] = useState('semua');
     const scrollContainerRef = useRef(null);
     const sectionRefs = useRef({});
 
-    const categories = [
-        { id: 'semua', label: 'Semua Menu', icon: '🍱' },
-        { id: 'paket', label: 'Paket Spesial', icon: '⭐' },
-        { id: 'nasi', label: 'Nasi', icon: '🍚' },
-        { id: 'daging', label: 'Daging', icon: '🥩' },
-        { id: 'ayam', label: 'Ayam', icon: '🍗' },
-        { id: 'telur', label: 'Telur', icon: '🥚' },
-        { id: 'tahu-tempe', label: 'Tahu & Tempe', icon: '🥘' },
-        { id: 'sambel', label: 'Sambel', icon: '🌶️' },
-        { id: 'snack', label: 'Snack', icon: '🍰' }
-    ];
+    const filteredData = useMemo(() => {
+        return activeCategory === 'semua'
+            ? MENU_DATA
+            : MENU_DATA.filter(item => item.category === activeCategory);
+    }, [activeCategory]);
 
-    const filteredData = activeCategory === 'semua'
-        ? MENU_DATA
-        : MENU_DATA.filter(item => item.category === activeCategory);
-
-    // Group by category for "Semua" view
-    const groupedData = activeCategory === 'semua'
-        ? categories.slice(1).reduce((acc, cat) => {
-            const items = MENU_DATA.filter(item => item.category === cat.id);
-            if (items.length > 0) {
-                acc[cat.id] = { ...cat, items };
-            }
-            return acc;
-        }, {})
-        : null;
+    const groupedData = activeCategory === 'semua' ? GROUPED_MENU_DATA : null;
 
     // Scroll to category section
     const scrollToCategory = (categoryId) => {
