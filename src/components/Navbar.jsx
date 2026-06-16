@@ -22,6 +22,7 @@ const NavButton = ({ to, label, active, isCta }) => {
             aria-current={active ? 'page' : undefined}
             className={`transition-colors duration-200 text-sm font-medium py-2 px-4 rounded-lg w-full md:w-auto text-left md:text-center block no-underline visited:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${active ? 'bg-orange-50 text-orange-600 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-orange-50'
                 }`}
+            aria-current={active ? "page" : undefined}
         >
             {label}
         </Link>
