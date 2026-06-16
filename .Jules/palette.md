@@ -22,10 +22,10 @@
 **Learning:** React state-driven toggles like mobile menus need ARIA attributes to communicate their state to screen readers, especially `aria-expanded` dynamically bound to the state and `aria-controls` pointing to the ID of the toggled element.
 **Action:** Always ensure that interactive UI elements have appropriate ARIA attributes connecting the trigger to the content and communicating current state.
 
-## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
+## 2024-06-05 - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
 
-## 2024-06-04 - Active Navigation Links Missing Semantic State
-**Learning:** Found that active navigation links were using visual classes (e.g., `text-orange-600`) to indicate their active status, but were missing the `aria-current="page"` attribute, so screen readers had no way to know which page was currently active. Furthermore, default focus rings were removed using `focus:outline-none` without providing an alternative like `focus-visible:ring`.
-**Action:** Always add `aria-current="page"` to active navigation links to communicate current state semantically, and never use `focus:outline-none` without adding `focus-visible:ring` to maintain keyboard accessibility.
+## 2026-06-14 - [Added aria-current to Active Links]
+**Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
+**Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
