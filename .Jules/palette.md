@@ -25,6 +25,7 @@
 ## $(date +%Y-%m-%d) - [Added AutoComplete to Forms]
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
-## 2024-06-11 - Semantic Navbar Links and Proper Focus Outlines
-**Learning:** Found that `focus:outline-none` was removing keyboard focus indicators across navigation elements without replacement. Additionally, active links lacked semantic meaning for screen readers.
-**Action:** Always replace `focus:outline-none` with `focus-visible:ring` equivalents to maintain keyboard accessibility, and ensure active navigation elements use `aria-current="page"` to communicate state semantically.
+
+## 2026-06-14 - [Added aria-current to Active Links]
+**Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
+**Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
