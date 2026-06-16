@@ -26,6 +26,6 @@
 **Learning:** Found that basic form fields (Name, Phone) were missing `autoComplete` attributes, increasing friction for users, especially on mobile, when completing an order/reservation.
 **Action:** Always include `autoComplete` tags (like `name` and `tel`) to satisfy WCAG 1.3.5 ("Identify Input Purpose") and speed up user input.
 
-## 2024-06-05 - [Navigation Semantic Active States]
-**Learning:** Custom navigation links and components that use visual styling (like colors or backgrounds) to indicate the active page do not communicate this state to screen reader users automatically.
-**Action:** Always add the `aria-current="page"` attribute to navigation links when they correspond to the currently active route or page to ensure full semantic accessibility.
+## 2026-06-14 - [Added aria-current to Active Links]
+**Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
+**Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
