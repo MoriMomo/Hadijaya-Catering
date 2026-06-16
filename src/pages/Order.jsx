@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA, MENU_MAP } from '../constants/data';
-import { validateName, validatePhone } from '../utils/validation';
 
 const Order = () => {
     const [formData, setFormData] = useState(() => {
@@ -29,19 +28,6 @@ const Order = () => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const idCounterRef = useRef(1);
-
-    const validateName = (name) => {
-        if (!name.trim()) return "Nama wajib diisi";
-        if (name.trim().length < 3) return "Nama minimal 3 karakter";
-        return "";
-    };
-
-    const validatePhone = (phone) => {
-        if (!phone.trim()) return "Nomor WhatsApp wajib diisi";
-        const cleanPhone = phone.replace(/\D/g, '');
-        if (cleanPhone.length < 10 || cleanPhone.length > 15) return "Nomor tidak valid (10-15 digit)";
-        return "";
-    };
 
     // Initialize orderLines with lazy initializer to avoid setState in effect
     // eslint-disable-next-line react-hooks/refs
