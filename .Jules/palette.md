@@ -29,3 +29,6 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+## 2024-06-19 - Improved Screen Reader Context for Order Buttons
+**Learning:** Repeating action buttons in a list or grid (like 'Tambah ke Pesanan' or increment/decrement controls) lack context for screen reader users if they all have the same generic label. A user navigating a list of buttons will just hear 'Add, Add, Add' without knowing what is being added.
+**Action:** Always inject the specific item's name into the `aria-label` of repeated action buttons to provide full context (e.g., `aria-label={"Tambah " + item.name + " ke pesanan"}`).
