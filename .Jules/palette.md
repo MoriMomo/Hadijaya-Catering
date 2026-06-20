@@ -29,3 +29,6 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+## 2024-06-25 - Contextual ARIA Labels for List Items
+**Learning:** Found that generic ARIA labels like "Tambah ke Pesanan" or "Kurangi jumlah" in item lists or shopping carts are inadequate for screen reader users because they don't explain *which* item the button controls.
+**Action:** Always provide item-specific `aria-label` attributes (e.g. `aria-label={"Tambah " + item.name + " ke pesanan"}`) for any repeated action buttons inside lists, tables, or grids.
