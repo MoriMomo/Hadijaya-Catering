@@ -29,3 +29,7 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+
+## 2026-07-05 - Action Buttons in Lists Lacked Contextual ARIA Labels
+**Learning:** Found that repeated "Tambah ke Pesanan" and quantity adjustment (+/-) buttons in the `Order.jsx` list used generic labels or none at all, making it difficult for screen reader users to know which specific item they were interacting with. Additionally, inline SVG icons within these buttons were being redundantly announced.
+**Action:** Always provide item-specific `aria-label`s (e.g., `aria-label={"Tambah " + item.name + " ke pesanan"}`) for repeated action buttons in lists. Furthermore, always add `aria-hidden="true"` to SVG elements inside these buttons to prevent redundant screen reader announcements.
