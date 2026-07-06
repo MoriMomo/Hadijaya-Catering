@@ -95,7 +95,7 @@ const Home = () => {
                             className="group flex items-center gap-2 text-orange-600 font-semibold text-sm hover:text-orange-700 transition"
                         >
                             Lihat Semua Menu
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
                         </button>
                     </div>
 
