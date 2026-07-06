@@ -29,3 +29,7 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+
+## 2024-05-18 - Item-Specific ARIA Labels for Repeated Actions
+**Learning:** Repeated action buttons (like "Tambah ke Pesanan", increment/decrement in lists, or "Lihat Semua" by category) lack context when read out of sequence by screen readers, making it unclear which item the action applies to. Additionally, nested SVG icons without `aria-hidden="true"` can cause redundant or confusing announcements.
+**Action:** Always provide item-specific `aria-label`s (e.g., `` `Tambah ${item.name} ke pesanan` ``) to repeated buttons, and apply `aria-hidden="true"` to any purely decorative nested SVGs.
