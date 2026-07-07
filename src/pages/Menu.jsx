@@ -154,10 +154,11 @@ const Menu = () => {
                                             </div>
                                             <button
                                                 onClick={() => setActiveCategory(catId)}
-                                                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-900 transition shadow-md active:scale-95"
+                                                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-900 transition shadow-md active:scale-95 focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:outline-none"
+                                                aria-label={`Lihat semua menu ${catData.label}`}
                                             >
                                                 Lihat Semua
-                                                <ChevronRight className="w-4 h-4" />
+                                                <ChevronRight className="w-4 h-4" aria-hidden="true" />
                                             </button>
                                         </div>
                                     </div>
