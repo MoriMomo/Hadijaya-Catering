@@ -29,3 +29,7 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+
+## 2024-05-18 - Missing Screen Reader Context on Repeated List Buttons
+**Learning:** Found that repeated "Tambah ke Pesanan" and "Lihat Semua" buttons across grids lacked specific context, resulting in screen readers announcing "Tambah ke Pesanan" repeatedly without knowing *what* was being added. Additionally, inline SVG icons inside these buttons were being redundantly announced.
+**Action:** Always include item-specific `aria-label`s on repeated list/grid action buttons (e.g., `aria-label="Tambah Nasi Kuning ke pesanan"`) and explicitly hide inline icon elements from screen readers using `aria-hidden="true"`. Finally, always couple this with explicit `focus-visible` classes to ensure visible focus rings.
