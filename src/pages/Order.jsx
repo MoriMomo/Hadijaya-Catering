@@ -453,9 +453,10 @@ const Order = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => addToOrder(item)}
-                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
+                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
+                                                aria-label={`Tambah ${item.name} ke pesanan`}
                                             >
-                                                <Plus className="w-4 h-4" /> Tambah ke Pesanan
+                                                <Plus className="w-4 h-4" aria-hidden="true" /> Tambah ke Pesanan
                                             </button>
                                         </div>
                                     ))}
@@ -525,18 +526,18 @@ const Order = () => {
                                                                 onClick={() => decrementQty(line.id)}
                                                                 className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-slate-600 disabled:active:scale-100 active:scale-95 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
                                                                 disabled={line.qty <= 1}
-                                                                aria-label="Kurangi jumlah"
+                                                                aria-label={`Kurangi jumlah ${menu?.name || 'item'}`}
                                                             >
-                                                                <Minus className="w-3 h-3" />
+                                                                <Minus className="w-3 h-3" aria-hidden="true" />
                                                             </button>
                                                             <span className="w-6 text-center text-sm font-bold text-slate-900" aria-live="polite" aria-atomic="true">{line.qty}</span>
                                                             <button
                                                                 type="button"
                                                                 onClick={() => incrementQty(line.id)}
                                                                 className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm text-slate-600 hover:text-orange-600 transition active:scale-95 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none"
-                                                                aria-label="Tambah jumlah"
+                                                                aria-label={`Tambah jumlah ${menu?.name || 'item'}`}
                                                             >
-                                                                <Plus className="w-3 h-3" />
+                                                                <Plus className="w-3 h-3" aria-hidden="true" />
                                                             </button>
                                                         </div>
                                                     </div>
