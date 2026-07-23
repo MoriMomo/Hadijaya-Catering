@@ -107,10 +107,10 @@ const HomeShowcase = () => {
     return (
         <>
             {/* Trusted Partners Section */}
-            <div className="bg-white py-16 md:py-20 border-b border-slate-100">
+            <div className="bg-[#FAF9F6] py-16 md:py-20 border-b border-stone-200/60">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center max-w-2xl mx-auto mb-10">
-                        <span className="text-orange-600 font-bold uppercase tracking-wider text-xs">Kemitraan & Kepercayaan</span>
+                        <span className="text-accent-600 font-bold uppercase tracking-wider text-xs">Kemitraan & Kepercayaan</span>
                         <h3 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mt-2">
                             Kami Senang Dapat Dipercaya Oleh Anda
                         </h3>
@@ -133,12 +133,12 @@ const HomeShowcase = () => {
             </div>
 
             {/* Testimonials Section */}
-            <div className="bg-white py-20 md:py-24 border-b border-slate-100">
+            <div className="bg-[#FAF9F6] py-20 md:py-24 border-b border-stone-200/60">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                        <span className="text-primary-600 font-bold uppercase tracking-widest text-xs">Testimoni Pelanggan</span>
+                        <span className="text-accent-600 font-bold uppercase tracking-widest text-xs">Testimoni Pelanggan</span>
                         <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">Apa Kata Mereka?</h2>
-                        <div className="w-12 h-1 bg-primary-500 mx-auto rounded-full mt-2"></div>
+                        <div className="w-12 h-1 bg-accent-500 mx-auto rounded-full mt-2"></div>
                     </div>
 
                     <div className="relative max-w-6xl mx-auto">

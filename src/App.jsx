@@ -12,8 +12,11 @@ const Order = lazy(() => import('./pages/Order'));
 const About = lazy(() => import('./pages/About'));
 
 const Loader = () => (
-  <div className="py-16 text-center text-slate-500">
-    Memuat konten...
+  <div className="min-h-[60vh] flex items-center justify-center text-slate-500 font-medium bg-stone-50/50">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-10 h-10 border-4 border-slate-200 border-t-primary-600 rounded-full animate-spin"></div>
+      <span>Memuat konten...</span>
+    </div>
   </div>
 );
 

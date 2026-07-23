@@ -9,7 +9,7 @@ const NavButton = ({ to, label, active, isCta }) => {
             <Link
                 to={to}
                 aria-current={active ? "page" : undefined}
-                className="bg-white hover:bg-orange-50 text-orange-600 font-bold px-6 py-2.5 rounded-full transition-colors duration-200 text-sm w-full md:w-auto shadow-md block text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 no-underline"
+                className="bg-accent-600 hover:bg-accent-700 text-white font-bold px-6 py-2.5 rounded-full transition-all duration-200 text-sm w-full md:w-auto shadow-md block text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2 no-underline"
             >
                 {label}
             </Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 bg-orange-600 border-b border-orange-700/30 shadow-md">
+        <nav className="sticky top-0 z-50 bg-primary-900/95 backdrop-blur-md border-b border-primary-950/20 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 md:h-20">
                     {/* Logo wrapped in white badge */}
@@ -49,9 +49,9 @@ const Navbar = () => {
                         className="flex items-center gap-2 md:gap-3 cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-xl bg-white px-4 py-2 shadow-sm hover:scale-102 transition duration-200 no-underline"
                     >
                         <OptimizedImage
-                            src="../images/hadijaya/makanan/hadijaya-catering-logo.jpeg"
+                            src="/images/hadijaya/makanan/hadijaya-catering-logo.webp"
                             fallback="/images/placeholder.svg"
-                            className="h-7 md:h-8 w-auto object-contain"
+                            className="h-7 md:h-8 w-[58px] md:w-[67px] object-contain"
                             width={100}
                             height={48}
                         />
@@ -87,10 +87,10 @@ const Navbar = () => {
 
             {/* Mobile Menu Overlay */}
             {mobileMenuOpen && (
-                <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-orange-600/98 backdrop-blur-md z-40 overflow-y-auto h-screen animate-fade-in border-t border-orange-500/30 pb-20">
+                <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-primary-900/98 backdrop-blur-md z-40 overflow-y-auto h-screen animate-fade-in border-t border-primary-950/20 pb-20">
                     <div className="px-6 py-6 space-y-4">
                         {navItems.map(item => (
-                            <div key={item.id} className="border-b border-orange-500/20 pb-2 last:border-0" onClick={() => setMobileMenuOpen(false)}>
+                            <div key={item.id} className="border-b border-primary-800/30 pb-2 last:border-0" onClick={() => setMobileMenuOpen(false)}>
                                 <NavButton
                                     to={item.to}
                                     label={item.label}

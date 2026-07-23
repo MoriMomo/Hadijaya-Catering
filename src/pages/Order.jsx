@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
 import { MENU_DATA, MENU_MAP } from '../constants/data';
+import OptimizedImage from '../components/OptimizedImage';
 
 const Order = () => {
     const [formData, setFormData] = useState(() => {
@@ -432,7 +433,7 @@ const Order = () => {
                                             onClick={() => setActiveCategory(cat.id)}
                                             className={`px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition snap-start border-2 ${activeCategory === cat.id
                                                 ? 'bg-orange-600 text-white border-orange-600 shadow-lg scale-105'
-                                                : 'bg-slate-700 text-white border-slate-700 hover:bg-slate-800'
+                                                : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-orange-50 hover:text-orange-600 hover:border-orange-200'
                                                 }`}
                                             aria-pressed={activeCategory === cat.id}
                                         >
@@ -441,25 +442,48 @@ const Order = () => {
                                     ))}
                                 </div>
 
-                                {/* Menu Grid - Full Height (Page Scroll) */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b pb-8 border-slate-100">
-                                    {MENU_DATA.filter(m => m.category === activeCategory).map(item => (
-                                        <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group relative overflow-hidden">
-                                            <div className="flex justify-between items-start mb-3">
-                                                <h4 className="font-bold text-slate-900 pr-2">{item.name}</h4>
-                                                <p className="text-orange-600 font-bold text-sm whitespace-nowrap bg-orange-50 px-2 py-1 rounded-lg">{formatCurrency(item.price)}</p>
-                                            </div>
-                                            <p className="text-slate-500 text-xs line-clamp-2 mb-4 h-8">{item.desc}</p>
-                                            <button
-                                                type="button"
-                                                onClick={() => addToOrder(item)}
-                                                className="w-full py-2.5 bg-slate-900 text-white hover:bg-orange-600 hover:text-white rounded-lg font-bold text-sm transition flex items-center justify-center gap-2 group-hover:shadow-md"
-                                            >
-                                                <Plus className="w-4 h-4" /> Tambah ke Pesanan
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
+                                 {/* Menu Grid - Full Height (Page Scroll) */}
+                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b pb-8 border-slate-100">
+                                     {MENU_DATA.filter(m => m.category === activeCategory).map(item => {
+                                         const lineItem = orderLines.find(l => l.menuId === item.id);
+                                         const itemQty = lineItem ? lineItem.qty : 0;
+                                         return (
+                                             <div key={item.id} className="bg-white border border-slate-200 p-4 rounded-xl hover:shadow-lg transition group flex gap-4 relative overflow-hidden">
+                                                 {itemQty > 0 && (
+                                                     <div className="absolute top-0 right-0 bg-orange-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-bl-lg shadow-sm">
+                                                         {itemQty} Porsi
+                                                     </div>
+                                                 )}
+
+                                                 <div className="w-20 h-20 rounded-xl bg-slate-50 overflow-hidden shrink-0 border border-slate-100 flex items-center justify-center">
+                                                     <OptimizedImage
+                                                         src={item.img}
+                                                         fallback={item.fallbackImg}
+                                                         className="w-full h-full object-cover transform group-hover:scale-105 transition duration-500"
+                                                         alt={item.name}
+                                                     />
+                                                 </div>
+
+                                                 <div className="flex flex-col justify-between flex-grow min-w-0">
+                                                     <div>
+                                                         <div className="flex justify-between items-start gap-2 mb-1">
+                                                             <h4 className="font-bold text-slate-900 text-sm sm:text-base leading-tight truncate pr-4">{item.name}</h4>
+                                                             <p className="text-orange-600 font-bold text-xs sm:text-sm whitespace-nowrap bg-orange-50 px-2 py-0.5 rounded-lg shrink-0">{formatCurrency(item.price)}</p>
+                                                         </div>
+                                                         <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed mb-3">{item.desc}</p>
+                                                     </div>
+                                                     <button
+                                                         type="button"
+                                                         onClick={() => addToOrder(item)}
+                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                                                     >
+                                                         <Plus className="w-3.5 h-3.5" /> Tambah ke Pesanan
+                                                     </button>
+                                                 </div>
+                                             </div>
+                                         );
+                                     })}
+                                 </div>
                             </div>
                         </div>
 
@@ -497,8 +521,14 @@ const Order = () => {
                                         const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
                                         return (
                                             <div key={line.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition flex gap-4">
-                                                {/* Optional: Add small thumbnail if available */}
-                                                {/* <div className="w-16 h-16 bg-slate-100 rounded-lg hidden sm:block"></div> */}
+                                                <div className="w-16 h-16 rounded-xl bg-slate-50 overflow-hidden shrink-0 border border-slate-100 hidden sm:flex items-center justify-center">
+                                                     <OptimizedImage
+                                                         src={menu?.img}
+                                                         fallback={menu?.fallbackImg}
+                                                         className="w-full h-full object-cover"
+                                                         alt={menu?.name || 'Menu item'}
+                                                     />
+                                                 </div>
 
                                                 <div className="flex-1">
                                                     <div className="flex justify-between items-start mb-2">

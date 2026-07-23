@@ -1,4 +1,4 @@
-# Logs
+# Logs & Reports
 logs
 *.log
 npm-debug.log*
@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+lint-output.txt
+lighthouse-report*.html
 
 node_modules
 dist

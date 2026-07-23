@@ -18,12 +18,12 @@ const About = () => (
             <meta property="og:type" content="website" />
         </Helmet>
 
-        <div className="pt-24 pb-20 bg-white min-h-screen animate-fade-in">
+        <div className="pt-24 pb-20 bg-[#FAF9F6] min-h-screen animate-fade-in">
             <div className="max-w-6xl mx-auto px-6 space-y-20">
                 {/* Hero Section */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-6">
-                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600">Tentang Kami</p>
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-600">Tentang Kami</p>
                         <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 leading-tight">
                             Hadijaya Catering — Layanan Katering Berkualitas Sejak 2000.
                         </h1>
@@ -38,7 +38,7 @@ const About = () => (
                             </p>
                         </div>
                     </div>
-                    <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                    <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
                         <OptimizedImage
                             src="/images/hadijaya/makanan/dapur.webp"
                             fallback="/images/placeholder.svg"
@@ -51,25 +51,25 @@ const About = () => (
 
                 {/* Visi & Misi */}
                 <div className="grid md:grid-cols-2 gap-8">
-                    <div className="bg-white p-10 rounded-2xl shadow-sm border border-slate-100">
+                    <div className="bg-white p-10 rounded-2xl shadow-sm border border-stone-200/80">
                         <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4">Visi</h3>
                         <p className="text-slate-600 leading-relaxed text-base">
                             Menjadi perusahaan yang profesional, dapat diandalkan serta bertanggung jawab.
                         </p>
                     </div>
-                    <div className="bg-white p-10 rounded-2xl shadow-sm border border-slate-100">
+                    <div className="bg-white p-10 rounded-2xl shadow-sm border border-stone-200/80">
                         <h3 className="text-2xl font-serif font-bold text-slate-900 mb-4">Misi</h3>
                         <ul className="space-y-3 text-slate-600 text-base">
                             <li className="flex gap-3">
-                                <span className="text-orange-600 font-bold">•</span>
+                                <span className="text-accent-600 font-bold">•</span>
                                 <span>Senantiasa mengembangkan kesempurnaan proses bisnis untuk terus maju.</span>
                             </li>
                             <li className="flex gap-3">
-                                <span className="text-orange-600 font-bold">•</span>
+                                <span className="text-accent-600 font-bold">•</span>
                                 <span>Memberikan pelayanan terbaik untuk setiap klien.</span>
                             </li>
                             <li className="flex gap-3">
-                                <span className="text-orange-600 font-bold">•</span>
+                                <span className="text-accent-600 font-bold">•</span>
                                 <span>Menjadi rekanan yang saling memberikan manfaat dan dipercaya.</span>
                             </li>
                         </ul>
@@ -81,13 +81,13 @@ const About = () => (
 
                 {/* Klien Terpercaya */}
                 <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-600 mb-6">Klien Kami</p>
+                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent-600 mb-6">Klien Kami</p>
                     <p className="text-slate-600 mb-8 text-base leading-relaxed">
                         Saat ini sudah cukup banyak perusahaan atau instansi besar yang mempercayakan kebutuhannya kepada PT. Hadi Jaya Citra karena pelayanannya yang memuaskan.
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {['Okezone.com', 'Novell Pharma', 'DIPA Healthcare', 'LKPP', 'Matahari Mall', 'Reinovasi'].map((client) => (
-                            <div key={client} className="bg-white p-6 rounded-lg border border-slate-200 text-center text-slate-700 font-medium text-sm hover:shadow-md transition-shadow">
+                            <div key={client} className="bg-white p-6 rounded-lg border border-stone-200 text-center text-slate-700 font-medium text-sm hover:shadow-md transition-shadow">
                                 {client}
                             </div>
                         ))}
@@ -95,7 +95,7 @@ const About = () => (
                 </div>
 
                 {/* Kontak */}
-                <div className="bg-white p-10 rounded-2xl shadow-sm border border-slate-100">
+                <div className="bg-white p-10 rounded-2xl shadow-sm border border-stone-200/80">
                     <h3 className="text-2xl font-serif font-bold text-slate-900 mb-6">Profil & Kontak</h3>
                     <div className="grid md:grid-cols-2 gap-8 text-sm text-slate-600">
                         <div>
