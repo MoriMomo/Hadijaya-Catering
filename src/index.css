@@ -4,41 +4,41 @@
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-serif: "Playfair Display", serif;
 
-  --color-primary-50: #F4F7F4;
-  --color-primary-100: #E5EDE6;
-  --color-primary-200: #CFDACF;
-  --color-primary-300: #A7BFA9;
-  --color-primary-400: #7B9E7E;
-  --color-primary-500: #527D56;
-  --color-primary-600: #3F6343;
-  --color-primary-700: #314E34;
-  --color-primary-800: #263D29;
-  --color-primary-900: #1C2E1F;
-  --color-primary-950: #111D13;
+  --color-primary-50: #F2FAF4;
+  --color-primary-100: #E1F4E6;
+  --color-primary-200: #C3E7CD;
+  --color-primary-300: #98D4AB;
+  --color-primary-400: #65B982;
+  --color-primary-500: #3E9B5F;
+  --color-primary-600: #2D7A49;
+  --color-primary-700: #24603B;
+  --color-primary-800: #1D4A2F;
+  --color-primary-900: #173925;
+  --color-primary-950: #0D2216;
 
-  --color-accent-50: #FAF4EF;
-  --color-accent-100: #F5E8DC;
-  --color-accent-200: #EACFB8;
-  --color-accent-300: #DCB28E;
-  --color-accent-400: #CA8D5D;
-  --color-accent-500: #B86B32;
-  --color-accent-600: #9E5424;
-  --color-accent-700: #7E401B;
-  --color-accent-800: #643216;
-  --color-accent-900: #512913;
-  --color-accent-950: #2F160A;
+  --color-accent-50: #FAF3EE;
+  --color-accent-100: #F5E5D8;
+  --color-accent-200: #ECC7AF;
+  --color-accent-300: #DF9E7B;
+  --color-accent-400: #CF744B;
+  --color-accent-500: #BD5228;
+  --color-accent-600: #9E3D18;
+  --color-accent-700: #7E2C10;
+  --color-accent-800: #65210A;
+  --color-accent-900: #521A08;
+  --color-accent-950: #300D04;
 
-  --color-orange-50: #FAF4EF;
-  --color-orange-100: #F5E8DC;
-  --color-orange-200: #EACFB8;
-  --color-orange-300: #DCB28E;
-  --color-orange-400: #CA8D5D;
-  --color-orange-500: #B86B32;
-  --color-orange-600: #9E5424;
-  --color-orange-700: #7E401B;
-  --color-orange-800: #643216;
-  --color-orange-900: #512913;
-  --color-orange-950: #2F160A;
+  --color-orange-50: #FAF3EE;
+  --color-orange-100: #F5E5D8;
+  --color-orange-200: #ECC7AF;
+  --color-orange-300: #DF9E7B;
+  --color-orange-400: #CF744B;
+  --color-orange-500: #BD5228;
+  --color-orange-600: #9E3D18;
+  --color-orange-700: #7E2C10;
+  --color-orange-800: #65210A;
+  --color-orange-900: #521A08;
+  --color-orange-950: #300D04;
 }
 
 :root {
@@ -53,8 +53,8 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  background-color: #FAF9F6;
-  color: #2D2A26;
+  background-color: #FAF7F2;
+  color: #2D251E;
 }
 
 a {

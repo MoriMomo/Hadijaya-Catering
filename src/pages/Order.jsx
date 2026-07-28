@@ -2,7 +2,7 @@ import { validateName, validatePhone } from '../utils/validation';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
-import { MENU_DATA, MENU_MAP } from '../constants/data';
+import { MENU_DATA, MENU_MAP, COMPANY_INFO } from '../constants/data';
 import OptimizedImage from '../components/OptimizedImage';
 
 const Order = () => {
@@ -248,7 +248,7 @@ const Order = () => {
         const message = `Halo Hadijaya Catering,%0A%0ASaya ingin memesan untuk:%0A- Nama: ${encodeURIComponent(formData.name)}%0A- No HP: ${encodeURIComponent(formData.phone)}%0A- Tanggal: ${selectedDate}%0A%0ADaftar Pesanan:%0A${linesText}%0A%0ATotal porsi: ${totalPortions}%0AEstimasi Total: ${formatCurrency(totalPrice)}%0A%0AMohon konfirmasi ketersediaan dan harga final. Terima kasih.`;
 
         setTimeout(() => {
-            window.open(`https://wa.me/+6289687472787?text=${message}`, '_blank');
+            window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${message}`, '_blank');
             setIsSubmitting(false);
             setShowSuccess(true);
             clearDraft();

@@ -106,12 +106,12 @@ const HomeShowcase = () => {
 
     return (
         <>
-            {/* Trusted Partners Section */}
-            <div className="bg-[#FAF9F6] py-16 md:py-20 border-b border-stone-200/60">
+            {/* Trusted Partners Section - WARM SAND BACKGROUND */}
+            <div className="bg-[#F4EFE6] py-16 md:py-20 border-b border-amber-900/10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center max-w-2xl mx-auto mb-10">
-                        <span className="text-accent-600 font-bold uppercase tracking-wider text-xs">Kemitraan & Kepercayaan</span>
-                        <h3 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mt-2">
+                        <span className="text-accent-700 font-bold uppercase tracking-wider text-xs">Kemitraan & Kepercayaan</span>
+                        <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#2D251E] mt-2">
                             Kami Senang Dapat Dipercaya Oleh Anda
                         </h3>
                     </div>
@@ -132,12 +132,15 @@ const HomeShowcase = () => {
                 </div>
             </div>
 
-            {/* Testimonials Section */}
-            <div className="bg-[#FAF9F6] py-20 md:py-24 border-b border-stone-200/60">
-                <div className="max-w-7xl mx-auto px-6">
+            {/* Testimonials Section - BOTANICAL ACCENT GREEN BACKGROUND */}
+            <div className="bg-[#1C3B2B] py-20 md:py-24 border-b border-[#2A523D] relative overflow-hidden text-white">
+                {/* Decorative background glow */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-accent-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                        <span className="text-accent-600 font-bold uppercase tracking-widest text-xs">Testimoni Pelanggan</span>
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-900">Apa Kata Mereka?</h2>
+                        <span className="text-accent-300 font-bold uppercase tracking-widest text-xs">Testimoni Pelanggan</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white">Apa Kata Mereka?</h2>
                         <div className="w-12 h-1 bg-accent-500 mx-auto rounded-full mt-2"></div>
                     </div>
 
@@ -161,25 +164,25 @@ const HomeShowcase = () => {
                                 {visibleTestimonials.map((testimonial, idx) => (
                                     <article
                                         key={testimonial.id}
-                                        className="bg-white rounded-2xl p-8 border border-slate-200/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full relative group"
+                                        className="bg-[#FAF6F0] rounded-2xl p-8 border border-amber-900/10 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full relative group"
                                         style={{
                                             animationDelay: `${idx * 0.1}s`
                                         }}
                                     >
                                         {/* Decorative quote mark */}
-                                        <span className="absolute top-2 right-6 text-primary-100/50 text-7xl font-serif select-none pointer-events-none group-hover:text-primary-200/50 transition-colors duration-300">“</span>
+                                        <span className="absolute top-2 right-6 text-accent-700/15 text-7xl font-serif select-none pointer-events-none group-hover:text-accent-700/25 transition-colors duration-300">“</span>
                                         
                                         <div>
                                             <div className="flex gap-1 mb-4" aria-label={`Rating: ${testimonial.rating} out of 5 stars`}>
                                                 {[...Array(testimonial.rating)].map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true" />
+                                                    <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" aria-hidden="true" />
                                                 ))}
                                             </div>
-                                            <blockquote className="text-slate-700 text-sm sm:text-base leading-relaxed mb-6 italic text-left">
+                                            <blockquote className="text-[#453A30] text-sm sm:text-base leading-relaxed mb-6 italic text-left font-normal">
                                                 "{testimonial.text}"
                                             </blockquote>
                                         </div>
-                                        <cite className="font-bold not-italic text-slate-800 text-sm block border-t border-slate-100 pt-4 text-left">— {testimonial.name}</cite>
+                                        <cite className="font-bold not-italic text-[#2D251E] text-sm block border-t border-amber-900/10 pt-4 text-left">— {testimonial.name}</cite>
                                     </article>
                                 ))}
                             </div>
@@ -196,8 +199,8 @@ const HomeShowcase = () => {
                                             setDirection(i > currentIndex ? 'next' : 'prev');
                                             setCurrentIndex(i);
                                         }}
-                                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 ${
-                                            currentIndex === i ? 'bg-primary-600 w-8' : 'bg-slate-300 hover:bg-slate-400'
+                                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-400/50 ${
+                                            currentIndex === i ? 'bg-accent-400 w-8' : 'bg-white/30 hover:bg-white/50'
                                         }`}
                                         aria-label={`Go to slide ${i + 1}`}
                                     />
