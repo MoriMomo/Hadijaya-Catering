@@ -62,10 +62,11 @@ const App = () => {
               href={`https://wa.me/${COMPANY_INFO.whatsapp}`}
               target="_blank"
               rel="noreferrer"
-              className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:scale-110 z-50 flex items-center gap-2 md:gap-3 group border-2 md:border-4 border-white/20"
+              aria-label="Chat WhatsApp"
+              className="fixed bottom-4 right-4 md:bottom-8 md:right-8 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:scale-110 z-50 flex items-center gap-2 md:gap-3 group border-2 md:border-4 border-white/20 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:scale-110"
             >
               <MessageCircle className="w-5 h-5 md:w-7 md:h-7" />
-              <span className="max-w-0 overflow-hidden md:group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap font-bold text-sm md:text-lg">
+              <span className="max-w-0 overflow-hidden md:group-hover:max-w-xs md:group-focus-visible:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap font-bold text-sm md:text-lg">
                 Chat WhatsApp
               </span>
             </a>

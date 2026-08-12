@@ -29,3 +29,7 @@
 ## 2026-06-14 - [Added aria-current to Active Links]
 **Learning:** Navigation links mapped over an array lacked an `aria-current="page"` attribute when active, which meant screen reader users were not semantically informed of their current active state, only sighted users could see the visual indicator.
 **Action:** Always include `aria-current={isActive ? 'page' : undefined}` to navigation links to semantically communicate active status to assistive technologies.
+
+## 2026-06-17 - Expanding UI Components on Focus
+**Learning:** Components that visually expand or reveal text on hover (e.g., using `group-hover`) often remain collapsed when accessed via keyboard focus unless explicitly handled. This prevents keyboard users from seeing the descriptive text.
+**Action:** Always combine `group-hover` reveal patterns with `group-focus-visible` (e.g., `group-focus-visible:max-w-xs`) to ensure the revealed text expands for keyboard users just as it does for mouse users.
