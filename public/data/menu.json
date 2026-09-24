@@ -1,0 +1,372 @@
+[
+  {
+    "id": 1,
+    "name": "Paket A - Nasi Uduk Ijo + Daging Semur",
+    "category": "paket",
+    "price": 35000,
+    "desc": "Nasi Uduk Ijo, Daging Semur, Kentang Sambel Goreng, Sambel Trasi Mangga, Krupuk & Lalapan",
+    "featured": true,
+    "img": "/images/hadijaya/makanan/paket/paket-a-nasi-uduk-ijo-daging-semur.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 2,
+    "name": "Paket B - Nasi Uduk Ijo + Daging Dengdeng",
+    "category": "paket",
+    "price": 35000,
+    "desc": "Nasi Uduk Ijo, Daging Dengdeng, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan",
+    "featured": true,
+    "img": "/images/hadijaya/makanan/paket/paket-b-nasi-uduk-ijo-daging-dengdeng.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 3,
+    "name": "Paket C - Nasi Uduk Ijo + Ayam Goreng",
+    "category": "paket",
+    "price": 30000,
+    "desc": "Nasi Uduk Ijo, Ayam Goreng, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/paket/paket-c-nasi-uduk-ijo-ayam-goreng.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 4,
+    "name": "Paket D - Nasi Uduk Ijo + Ayam Rendang",
+    "category": "paket",
+    "price": 30000,
+    "desc": "Nasi Uduk Ijo, Ayam Rendang, Tempe Orek, Sambel Trasi Mangga, Krupuk & Lalapan",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/paket/paket-d-nasi-uduk-ijo-+-ayam-rendang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 10,
+    "name": "Nasi Uduk Ijo",
+    "category": "nasi",
+    "price": 12000,
+    "desc": "Nasi uduk harum daun suji/pandan",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/nasi/nasi-uduk-ijo.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 11,
+    "name": "Nasi Uduk Kuning",
+    "category": "nasi",
+    "price": 10000,
+    "desc": "Nasi kuning untuk acara spesial",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/nasi/nasi-kuning.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 12,
+    "name": "Nasi Uduk Putih",
+    "category": "nasi",
+    "price": 9000,
+    "desc": "Nasi uduk tanpa pewarna",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/nasi/nasi-uduk-putih.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 13,
+    "name": "Nasi Biasa",
+    "category": "nasi",
+    "price": 7000,
+    "desc": "Nasi putih biasa",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/nasi/nasi-biasa.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 20,
+    "name": "Empal",
+    "category": "daging",
+    "price": 20000,
+    "desc": "Empal sapi empuk",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/daging/empal.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 21,
+    "name": "Semur",
+    "category": "daging",
+    "price": 20000,
+    "desc": "Semur daging manis gurih",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/daging/semur.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 22,
+    "name": "Rendang",
+    "category": "daging",
+    "price": 20000,
+    "desc": "Rendang sapi pedas sedap",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/daging/rendang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 23,
+    "name": "Sate Assem",
+    "category": "daging",
+    "price": 20000,
+    "desc": "Sate daging khas",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/daging/sate-assem.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 30,
+    "name": "Ayam Goreng",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam goreng renyah",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayam-goreng.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 31,
+    "name": "Ayam Geprek",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam geprek pedas",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayam-geprek.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 32,
+    "name": "Ayam Bakar",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam bakar manis",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayan-bakar.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 33,
+    "name": "Ayam Gulai",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam gulai santan",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayam-guali.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 34,
+    "name": "Ayam Rendang",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam rendang empuk",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayam-rendang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 35,
+    "name": "Ayam Semur",
+    "category": "ayam",
+    "price": 15000,
+    "desc": "Ayam semur manis gurih",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/ayam/ayam-semur.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 40,
+    "name": "Telur Balado",
+    "category": "telur",
+    "price": 8000,
+    "desc": "Telur balado pedas",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/telur/telur-balado.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 41,
+    "name": "Telur Semur",
+    "category": "telur",
+    "price": 8000,
+    "desc": "Telur semur manis",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/telur/telur-semur.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 42,
+    "name": "Telur Rendang",
+    "category": "telur",
+    "price": 8000,
+    "desc": "Telur rendang lezat",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/telur/telur-rendang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 50,
+    "name": "Tahu/Tempe Goreng Spesial",
+    "category": "tahu-tempe",
+    "price": 7000,
+    "desc": "Tahu/tempe goreng spesial",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/tahutempe/tempe-goreng.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 51,
+    "name": "Tahu/Tempe Semur",
+    "category": "tahu-tempe",
+    "price": 7000,
+    "desc": "Tahu/tempe semur",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/tahutempe/tahu-semur.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 52,
+    "name": "Tahu/Tempe Masak Kari",
+    "category": "tahu-tempe",
+    "price": 7000,
+    "desc": "Tahu/tempe kari",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/tahutempe/tempe-kari.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 53,
+    "name": "Tempe Orek",
+    "category": "tahu-tempe",
+    "price": 7000,
+    "desc": "Tempe orek manis",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/tahutempe/tempe-orek.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 54,
+    "name": "Tahu Orek Balado",
+    "category": "tahu-tempe",
+    "price": 7000,
+    "desc": "Tahu orek balado pedas",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/tahutempe/tahu-orek.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 60,
+    "name": "Sambel Mangga",
+    "category": "sambel",
+    "price": 5000,
+    "desc": "Sambel mangga segar",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/sambal/sambal-mangga.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 61,
+    "name": "Sambel Kacang",
+    "category": "sambel",
+    "price": 3000,
+    "desc": "Sambel kacang",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/sambal/sambal-kacang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 62,
+    "name": "Sambel Goreng",
+    "category": "sambel",
+    "price": 3000,
+    "desc": "Sambel goreng pedas",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/sambal/sambal-goreng.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 70,
+    "name": "Pastel",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Pastel goreng",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/pastel.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 71,
+    "name": "Risol",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Risol mayo",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/risol.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 72,
+    "name": "Kue Lupis",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Kue lupis tradisional",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/kue-lupis.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 73,
+    "name": "Kue Pisang",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Kue pisang",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/kue-pisang.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 74,
+    "name": "Lontong",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Lontong",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/lontong.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 75,
+    "name": "Lemper",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Lemper ayam",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/lemper.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 76,
+    "name": "Dadar Gulung",
+    "category": "snack",
+    "price": 4000,
+    "desc": "Dadar gulung",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/dadar-gulung.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  },
+  {
+    "id": 77,
+    "name": "Extra Buah",
+    "category": "snack",
+    "price": 7000,
+    "desc": "Porsi buah tambahan",
+    "featured": false,
+    "img": "/images/hadijaya/makanan/snack/extra-buah.webp",
+    "fallbackImg": "/images/placeholder.svg"
+  }
+]
