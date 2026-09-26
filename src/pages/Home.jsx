@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star, Users, Clock, Award, ArrowRight } from 'lucide-react';
-import { MENU_DATA, COMPANY_INFO } from '../constants/data';
+import { COMPANY_INFO } from '../constants/data';
+import { useMenu } from '@/features/menu';
 import MenuCard from '../components/MenuCard';
 import HomeShowcase from '../components/HomeShowcase';
 import OptimizedImage from '../components/OptimizedImage';
 
 const Home = () => {
     const navigate = useNavigate();
+    const { data, isLoading } = useMenu();
+
+    const featuredItems = useMemo(
+        () => (data ? data.filter(item => item.featured) : []),
+        [data]
+    );
 
     return (
         <div className="animate-fade-in pb-12 bg-[#FAF7F2]">
@@ -100,11 +107,19 @@ const Home = () => {
                         </button>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {MENU_DATA.filter(item => item.featured).map(item => (
-                            <MenuCard key={item.id} item={item} featured={true} />
-                        ))}
-                    </div>
+                    {isLoading ? (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" aria-busy="true" aria-label="Memuat menu favorit...">
+                            {Array.from({ length: 3 }).map((_, idx) => (
+                                <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl h-40 animate-pulse" />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {featuredItems.map(item => (
+                                <MenuCard key={item.id} item={item} featured={true} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

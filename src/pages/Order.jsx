@@ -1,11 +1,18 @@
-import { validateName, validatePhone } from '../utils/validation';
+﻿import { validateName, validatePhone } from '../utils/validation';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AlertCircle, Calendar, Minus, Phone, Plus, Send, User } from 'lucide-react';
-import { MENU_DATA, MENU_MAP, COMPANY_INFO } from '../constants/data';
+import { COMPANY_INFO } from '../constants/data';
+import { useMenu, MenuError, MenuSkeleton } from '@/features/menu';
 import OptimizedImage from '../components/OptimizedImage';
 
 const Order = () => {
+    const { data: menuData, isLoading: menuLoading, isError: menuError, error: menuErrorObj, refetch: refetchMenu } = useMenu();
+
+    // Validated menu list (empty until fetch resolves) and id -> item lookup.
+    const menuItems = useMemo(() => menuData || [], [menuData]);
+    const menuMap = useMemo(() => new Map(menuItems.map(m => [m.id, m])), [menuItems]);
+
     const [formData, setFormData] = useState(() => {
         try {
             const saved = localStorage.getItem('hadijaya-order-draft');
@@ -180,7 +187,7 @@ const Order = () => {
         return orderLines.reduce(
             (acc, line) => {
                 const qty = Number(line.qty) || 0;
-                const menu = MENU_MAP.get(Number(line.menuId));
+                const menu = menuMap.get(Number(line.menuId));
                 return {
                     totalPortions: acc.totalPortions + qty,
                     totalPrice: acc.totalPrice + (menu?.price || 0) * qty
@@ -188,7 +195,7 @@ const Order = () => {
             },
             { totalPortions: 0, totalPrice: 0 }
         );
-    }, [orderLines]);
+    }, [orderLines, menuMap]);
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('id-ID', {
@@ -240,7 +247,7 @@ const Order = () => {
         setIsSubmitting(true);
 
         const linesText = orderLines.map(l => {
-            const menu = MENU_MAP.get(Number(l.menuId)) || {};
+            const menu = menuMap.get(Number(l.menuId)) || {};
             const linePrice = (menu.price || 0) * l.qty;
             return `- ${menu.name || 'Item'}: ${l.qty} porsi @ ${formatCurrency(menu.price || 0)} = ${formatCurrency(linePrice)}`;
         }).join('%0A');
@@ -443,8 +450,13 @@ const Order = () => {
                                 </div>
 
                                  {/* Menu Grid - Full Height (Page Scroll) */}
+                                 {menuLoading ? (
+                                     <MenuSkeleton count={4} />
+                                 ) : menuError ? (
+                                     <MenuError message={menuErrorObj?.message || 'Gagal memuat data menu'} onRetry={refetchMenu} />
+                                 ) : (
                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-b pb-8 border-slate-100">
-                                     {MENU_DATA.filter(m => m.category === activeCategory).map(item => {
+                                     {menuItems.filter(m => m.category === activeCategory).map(item => {
                                          const lineItem = orderLines.find(l => l.menuId === item.id);
                                          const itemQty = lineItem ? lineItem.qty : 0;
                                          return (
@@ -484,6 +496,7 @@ const Order = () => {
                                          );
                                      })}
                                  </div>
+                                 )}
                             </div>
                         </div>
 
@@ -517,7 +530,7 @@ const Order = () => {
                             ) : (
                                 <div className="space-y-4 mb-24">
                                     {orderLines.map((line) => {
-                                        const menu = MENU_MAP.get(Number(line.menuId));
+                                        const menu = menuMap.get(Number(line.menuId));
                                         const lineTotal = (menu?.price || 0) * (Number(line.qty) || 0);
                                         return (
                                             <div key={line.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition flex gap-4">
