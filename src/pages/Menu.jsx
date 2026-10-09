@@ -83,9 +83,9 @@ const Menu = () => {
                 <meta name="description" content="Lihat menu lengkap Hadijaya Catering dengan berbagai pilihan paket dan harga terjangkau" />
             </Helmet>
 
-            <div className="pt-16 pb-24 bg-white min-h-screen">
+            <div className="pt-16 pb-24 bg-[#FAF9F6] min-h-screen">
                 {/* Header */}
-                <div className="bg-white border-b border-slate-200 mb-8">
+                <div className="bg-[#FAF9F6] border-b border-stone-200/80 mb-8">
                     <div className="max-w-7xl mx-auto px-6 py-8">
                         <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-2">
                             Menu & Harga
@@ -97,7 +97,7 @@ const Menu = () => {
                 </div>
 
                 {/* Scrollable Category Chips - GOJEK STYLE */}
-                <div className="sticky top-16 z-40 bg-white border-b border-slate-200 shadow-sm">
+                <div className="sticky top-16 z-40 bg-[#FAF9F6]/95 backdrop-blur-md border-b border-stone-200/80 shadow-xs">
                     <div className="max-w-7xl mx-auto px-6 py-4">
                         <div
                             ref={scrollContainerRef}
@@ -109,8 +109,8 @@ const Menu = () => {
                                     key={cat.id}
                                     onClick={() => handleCategoryClick(cat.id)}
                                     className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-medium text-sm whitespace-nowrap transition-all snap-start flex-shrink-0 ${activeCategory === cat.id
-                                        ? 'bg-orange-600 text-white shadow-md'
-                                        : 'bg-slate-700 text-white border border-slate-700 hover:bg-slate-800'
+                                        ? 'bg-accent-600 text-white shadow-md'
+                                        : 'bg-white text-slate-700 border border-stone-200 hover:bg-accent-50 hover:text-accent-700 hover:border-accent-200'
                                         }`}
                                     aria-pressed={activeCategory === cat.id}
                                 >
@@ -139,22 +139,22 @@ const Menu = () => {
                                     className="scroll-mt-32"
                                 >
                                     {/* Section Header - NEWSPAPER STYLE */}
-                                    <div className="border-b-2 border-slate-300 pb-4 mb-6">
+                                    <div className="border-b-2 border-stone-300/80 pb-4 mb-6">
                                         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                                             <div className="flex items-center gap-4">
-                                                <span className="text-4xl bg-orange-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-orange-100">{catData.icon}</span>
+                                                <span className="text-4xl bg-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-xs border border-stone-200/80">{catData.icon}</span>
                                                 <div>
                                                     <h2 className="text-2xl font-serif font-bold text-slate-900 leading-none mb-1">
                                                         {catData.label}
                                                     </h2>
-                                                    <span className="text-sm text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded-full">
+                                                    <span className="text-sm text-slate-600 font-medium bg-stone-200/60 px-2.5 py-0.5 rounded-full">
                                                         {catData.items.length} pilihan menu
                                                     </span>
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={() => setActiveCategory(catId)}
-                                                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-900 transition shadow-md active:scale-95"
+                                                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-primary-950 transition shadow-md active:scale-95"
                                             >
                                                 Lihat Semua
                                                 <ChevronRight className="w-4 h-4" />

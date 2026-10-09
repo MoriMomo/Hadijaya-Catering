@@ -1,3 +1,15 @@
+export const COMPANY_INFO = {
+    name: "Hadijaya Catering",
+    legalName: "PT. Hadi Jaya Citra",
+    phone: "0888-08656-200",
+    phoneRaw: "088808656200",
+    whatsapp: "6288808656200",
+    whatsappFormatted: "0888-08656-200",
+    email: "pt.hjcitra@gmail.com",
+    address: "Jl. Pos Pengumben lama RT004/05 NO.10, Jl. Sukabumi Selatan Kebon Jeruk, Jakarta Barat 11560",
+    sinceYear: "2000",
+};
+
 const RAW_MENU_DATA = [
     // Paket spesial
     { id: 1, name: 'Paket A - Nasi Uduk Ijo + Daging Semur', category: 'paket', price: 35000, desc: 'Nasi Uduk Ijo, Daging Semur, Kentang Sambel Goreng, Sambel Trasi Mangga, Krupuk & Lalapan', featured: true },
