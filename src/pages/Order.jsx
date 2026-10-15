@@ -475,9 +475,10 @@ const Order = () => {
                                                      <button
                                                          type="button"
                                                          onClick={() => addToOrder(item)}
-                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                                                         aria-label={`Tambah ${item.name} ke pesanan`}
+                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
                                                      >
-                                                         <Plus className="w-3.5 h-3.5" /> Tambah ke Pesanan
+                                                         <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Tambah ke Pesanan
                                                      </button>
                                                  </div>
                                              </div>
@@ -509,7 +510,7 @@ const Order = () => {
                                     <button
                                         type="button"
                                         onClick={() => document.getElementById('menu-selection').scrollIntoView({ behavior: 'smooth' })}
-                                        className="mt-6 text-orange-600 font-bold text-sm hover:underline"
+                                        className="mt-6 text-orange-600 font-bold text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded px-2 py-1"
                                     >
                                         Mulai Belanja &uarr;
                                     </button>
@@ -588,16 +589,16 @@ const Order = () => {
                                         type="submit"
                                         disabled={!isFormValid() || isSubmitting}
                                         title={!isFormValid() ? "Lengkapi formulir dan pastikan pesanan minimal 10 porsi" : "Kirim Pesanan"}
-                                        className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
+                                        className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${!isFormValid() || isSubmitting
                                             ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
                                             : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
                                             }`}
                                     >
                                         {isSubmitting ? (
-                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
                                         ) : (
                                             <>
-                                                Kirim Pesanan <Send className="w-4 h-4" />
+                                                Kirim Pesanan <Send className="w-4 h-4" aria-hidden="true" />
                                             </>
                                         )}
                                     </button>
