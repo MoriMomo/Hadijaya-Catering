@@ -431,7 +431,7 @@ const Order = () => {
                                             key={cat.id}
                                             type="button"
                                             onClick={() => setActiveCategory(cat.id)}
-                                            className={`px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition snap-start border-2 ${activeCategory === cat.id
+                                            className={`px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition snap-start border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${activeCategory === cat.id
                                                 ? 'bg-orange-600 text-white border-orange-600 shadow-lg scale-105'
                                                 : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-orange-50 hover:text-orange-600 hover:border-orange-200'
                                                 }`}
@@ -475,9 +475,10 @@ const Order = () => {
                                                      <button
                                                          type="button"
                                                          onClick={() => addToOrder(item)}
-                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+                                                         aria-label={"Tambah " + item.name + " ke pesanan"}
                                                      >
-                                                         <Plus className="w-3.5 h-3.5" /> Tambah ke Pesanan
+                                                         <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Tambah ke Pesanan
                                                      </button>
                                                  </div>
                                              </div>
@@ -588,16 +589,16 @@ const Order = () => {
                                         type="submit"
                                         disabled={!isFormValid() || isSubmitting}
                                         title={!isFormValid() ? "Lengkapi formulir dan pastikan pesanan minimal 10 porsi" : "Kirim Pesanan"}
-                                        className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 ${!isFormValid() || isSubmitting
+                                        className={`px-6 py-3 rounded-xl font-bold shadow-lg transition flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 ${!isFormValid() || isSubmitting
                                             ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
                                             : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
                                             }`}
                                     >
                                         {isSubmitting ? (
-                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-label="Memproses pesanan" />
                                         ) : (
                                             <>
-                                                Kirim Pesanan <Send className="w-4 h-4" />
+                                                Kirim Pesanan <Send className="w-4 h-4" aria-hidden="true" />
                                             </>
                                         )}
                                     </button>
