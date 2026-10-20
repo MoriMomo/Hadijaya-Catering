@@ -33,3 +33,7 @@
 ## 2024-07-08 - Repeated List-Action Buttons Require Item-Specific ARIA Labels
 **Learning:** Repeated buttons (like 'Tambah ke Pesanan' or '+' / '-') inside lists lack context when announced by screen readers, making it unclear which item the action applies to. Additionally, inline SVG icons within these buttons are often redundantly announced if not explicitly hidden.
 **Action:** Always provide an item-specific `aria-label` (e.g., `aria-label={"Tambah " + item.name + " ke pesanan"}`) for repeated action buttons to give complete context, and add `aria-hidden="true"` to any decorative SVG icons inside them to prevent redundant screen reader announcements.
+
+## 2024-07-25 - Expanding Hover Components Lack Keyboard Equivalents
+**Learning:** Floating action buttons that use `group-hover:max-w-xs` to visually expand and reveal text on hover are invisible to keyboard users who navigate via Tab.
+**Action:** When using Tailwind's `group-hover` to expand components, always provide an equivalent keyboard accessibility class, such as `group-focus-visible:max-w-xs`, and ensure the parent interactive element has a clear `focus-visible:ring` outline.
