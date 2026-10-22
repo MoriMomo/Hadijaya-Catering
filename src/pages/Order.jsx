@@ -475,9 +475,8 @@ const Order = () => {
                                                      <button
                                                          type="button"
                                                          onClick={() => addToOrder(item)}
-                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
-                                                     >
-                                                         <Plus className="w-3.5 h-3.5" /> Tambah ke Pesanan
+                                                         className="w-full py-2 bg-slate-900 text-white hover:bg-orange-600 rounded-lg font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-sm active:scale-98" aria-label={`Tambah ${item.name} ke pesanan`}>
+                                                         <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Tambah ke Pesanan
                                                      </button>
                                                  </div>
                                              </div>
